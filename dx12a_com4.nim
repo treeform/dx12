@@ -132,13 +132,6 @@ proc newGuid*(
     Data4: [b0, b1, b2, b3, b4, b5, b6, b7]
   )
 
-# --- GUIDs we need ---
-var
-  IID_IDXGIFactory4* = newGuid(0x1bc6ea02,0xef36,0x464f,0xbf,0x0c,0x21,0xca,0x39,0xe5,0x16,0x8a)
-  IID_ID3D12Device* = newGuid(0x189819f1'u32,0x1db6'u16,0x4b57'u16,0xbe'u8,0x54'u8,0x18'u8,0x21'u8,0x33'u8,0x9b'u8,0x85'u8,0xf7'u8)
-  IID_IDXGISwapChain1* = newGuid(0x790a45f7'u32,0x0d42'u16,0x4876'u16,0x98'u8,0x3a'u8,0x0a'u8,0x55'u8,0xcf'u8,0xe6'u8,0xf4'u8,0xaa'u8)
-  IID_IDXGISwapChain3* = newGuid(0x94d99bdb'u32,0xf1f8'u16,0x4ab0'u16,0xb2'u8,0x36'u8,0x7d'u8,0xa0'u8,0x17'u8,0x0e'u8,0xda'u8,0xb1'u8)
-
 # --- D3D12 / DXGI entry points loaded at runtime ---
 type
   D3D12CreateDevice_t = proc(
@@ -178,23 +171,23 @@ proc loadNativeSymbols() =
   if d3d12Lib == nil:
     d3d12Lib = loadLib("d3d12.dll")
     if d3d12Lib == nil:
-      quit("Could not load d3d12.dll")
+      raise newException(Exception, "Could not load d3d12.dll")
 
   if D3D12CreateDevice_Ptr == nil:
     let sym = d3d12Lib.symAddr("D3D12CreateDevice")
     if sym == nil:
-      quit("Could not find D3D12CreateDevice")
+      raise newException(Exception, "Could not find D3D12CreateDevice")
     D3D12CreateDevice_Ptr = cast[D3D12CreateDevice_t](sym)
 
   if dxgiLib == nil:
     dxgiLib = loadLib("dxgi.dll")
     if dxgiLib == nil:
-      quit("Could not load dxgi.dll")
+      raise newException(Exception, "Could not load dxgi.dll")
 
   if CreateDXGIFactory2_Ptr == nil:
     let sym = dxgiLib.symAddr("CreateDXGIFactory2")
     if sym == nil:
-      quit("Could not find CreateDXGIFactory2")
+      raise newException(Exception, "Could not find CreateDXGIFactory2")
     CreateDXGIFactory2_Ptr = cast[CreateDXGIFactory2_t](sym)
 
 proc release(obj: pointer) =
@@ -236,7 +229,10 @@ proc CreateDescriptorHeap(self: ID3D12Device, desc: ptr D3D12_DESCRIPTOR_HEAP_DE
 
 proc GetDescriptorHandleIncrementSize(self: ID3D12Device, heapType: D3D12_DESCRIPTOR_HEAP_TYPE): UINT =
   type F = proc(this: ID3D12Device, heapType: D3D12_DESCRIPTOR_HEAP_TYPE): UINT {.stdcall.}
-  callVtbl(self, 15, F, heapType)
+  let hr = callVtbl(self, 15, F, heapType)
+  if hr < 0:
+    raise newException(Exception, "GetDescriptorHandleIncrementSize failed with HRESULT " & $hr)
+  result = UINT(hr)
 
 proc CreateRenderTargetView(self: ID3D12Device, resource: ID3D12Resource, desc: pointer, handle: D3D12_CPU_DESCRIPTOR_HANDLE) =
   type F = proc(this: ID3D12Device, resource: ID3D12Resource, desc: pointer, handle: D3D12_CPU_DESCRIPTOR_HANDLE) {.stdcall.}
@@ -346,6 +342,24 @@ proc QueryInterface[T](iface: pointer, riid: ptr DXGuid): T =
     raise newException(Exception, "QueryInterface failed with HRESULT " & $hr)
   result = cast[T](tmp)
 
+# Helper functions
+
+proc UpgradeToSwapChain3(swapChain1: IDXGISwapChain1): IDXGISwapChain3 =
+  const IID_IDXGISwapChain3 = newGuid(0x94d99bdb'u32,0xf1f8'u16,0x4ab0'u16,0xb2'u8,0x36'u8,0x7d'u8,0xa0'u8,0x17'u8,0x0e'u8,0xda'u8,0xb1'u8)
+  QueryInterface[IDXGISwapChain3](swapChain1, addr IID_IDXGISwapChain3)
+
+proc CreateDXGIFactory2(flags: UINT): IDXGIFactory4 =
+  const IID_IDXGIFactory4 = newGuid(0x1bc6ea02'u32,0xef36'u16,0x464f'u16,0xbf'u8,0x0c'u8,0x21'u8,0xca'u8,0x39'u8,0xe5'u8,0x16'u8,0x8a'u8)
+  let hrFactory = CreateDXGIFactory2_Ptr(0, addr IID_IDXGIFactory4, cast[ptr pointer](addr result))
+  if hrFactory < 0:
+    raise newException(Exception, "CreateDXGIFactory2 failed with HRESULT " & $hrFactory)
+
+proc D3D12CreateDevice(pAdapter: pointer, MinimumFeatureLevel: D3D_FEATURE_LEVEL): ID3D12Device =
+  const IID_ID3D12Device = newGuid(0x189819f1'u32,0x1db6'u16,0x4b57'u16,0xbe'u8,0x54'u8,0x18'u8,0x21'u8,0x33'u8,0x9b'u8,0x85'u8,0xf7'u8)
+  let hr = D3D12CreateDevice_Ptr(nil, D3D_FEATURE_LEVEL_11_0, addr IID_ID3D12Device, cast[ptr pointer](addr result))
+  if hr < 0:
+    raise newException(Exception, "D3D12CreateDevice failed with HRESULT " & $hr)
+
 # --- Helper types ---
 type
   D3D12Context* = object
@@ -373,16 +387,10 @@ proc initDevice(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   loadNativeSymbols()
 
   # Create DXGI factory 4
-  var factory: IDXGIFactory4
-  let hrFactory = CreateDXGIFactory2_Ptr(0, addr IID_IDXGIFactory4, cast[ptr pointer](addr factory))
-  if hrFactory < 0:
-    raise newException(Exception, "CreateDXGIFactory2 failed with HRESULT " & $hrFactory)
-  # var factory = CreateDXGIFactory2_Ptr(0, addr IID_IDXGIFactory4)
+  var factory = CreateDXGIFactory2(0)
 
   # Create D3D12 device
-  let hrDevice = D3D12CreateDevice_Ptr(nil, D3D_FEATURE_LEVEL_11_0, addr IID_ID3D12Device, cast[ptr pointer](addr ctx.device))
-  if hrDevice < 0:
-    raise newException(Exception, "D3D12CreateDevice failed with HRESULT " & $hrDevice)
+  ctx.device = D3D12CreateDevice(nil, D3D_FEATURE_LEVEL_11_0)
 
   # Create command queue
   var queueDesc: D3D12_COMMAND_QUEUE_DESC
@@ -417,7 +425,7 @@ proc initDevice(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   factory.MakeWindowAssociation(hwnd, DXGI_MWA_NO_ALT_ENTER)
 
   # Upgrade to IDXGISwapChain3
-  ctx.swapChain = QueryInterface[IDXGISwapChain3](swapChain1, addr IID_IDXGISwapChain3)
+  ctx.swapChain = swapChain1.UpgradeToSwapChain3()
   swapChain1.release()
   factory.release()
 
@@ -429,13 +437,13 @@ proc initDevice(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   heapDesc.NodeMask = 0
   ctx.descriptorHeap = ctx.device.CreateDescriptorHeap(addr heapDesc)
   if ctx.descriptorHeap == nil:
-    quit("Descriptor heap creation returned nil")
+    raise newException(Exception, "Descriptor heap creation returned nil")
 
   ctx.rtvDescriptorSize = ctx.device.GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV)
   let baseHandle = ctx.descriptorHeap.GetCPUDescriptorHandleForHeapStart()
 
   # Create render target views for each swap chain buffer
-  for i in 0..<FRAME_COUNT:
+  for i in 0 ..< FRAME_COUNT:
     ctx.rtvHandles[i] = offsetHandle(baseHandle, ctx.rtvDescriptorSize, i)
     ctx.renderTargets[i] = ctx.swapChain.GetBuffer(UINT(i))
     ctx.device.CreateRenderTargetView(ctx.renderTargets[i], nil, ctx.rtvHandles[i])
@@ -450,7 +458,7 @@ proc initDevice(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   ctx.fenceValue = 1
   ctx.fenceEvent = CreateEventW(nil, 0, 0, nil)
   if ctx.fenceEvent == 0:
-    quit("Failed to create fence event")
+    raise newException(Exception, "Failed to create fence event")
 
   ctx.viewport = D3D12_VIEWPORT(
     TopLeftX: 0.0, TopLeftY: 0.0,
@@ -532,7 +540,7 @@ when isMainModule:
 
   var hwnd: HWND = window.getHWND()
   if hwnd == 0:
-    quit("Failed to acquire HWND from window")
+    raise newException(Exception, "Failed to acquire HWND from window")
 
   var ctx: D3D12Context
   ctx.initDevice(hwnd, width, height)
