@@ -250,17 +250,23 @@ proc CreateFence(self: ID3D12Device, initialValue: UINT64, flags: uint32, riid: 
   if hr < 0:
     raise newException(Exception, "CreateFence failed with HRESULT " & $hr)
 
-proc Reset(self: ID3D12CommandAllocator): HRESULT =
+proc Reset(self: ID3D12CommandAllocator) =
   type F = proc(this: ID3D12CommandAllocator): HRESULT {.stdcall.}
-  callVtbl0(self, 8, F)
+  let hr = callVtbl0(self, 8, F)
+  if hr < 0:
+    raise newException(Exception, "ID3D12CommandAllocator.Reset failed with HRESULT " & $hr)
 
-proc Reset(self: ID3D12GraphicsCommandList, allocator: ID3D12CommandAllocator, pipelineState: pointer): HRESULT =
+proc Reset(self: ID3D12GraphicsCommandList, allocator: ID3D12CommandAllocator, pipelineState: pointer) =
   type F = proc(this: ID3D12GraphicsCommandList, allocator: ID3D12CommandAllocator, pipelineState: pointer): HRESULT {.stdcall.}
-  callVtbl(self, 10, F, allocator, pipelineState)
+  let hr = callVtbl(self, 10, F, allocator, pipelineState)
+  if hr < 0:
+    raise newException(Exception, "ID3D12GraphicsCommandList.Reset failed with HRESULT " & $hr)
 
-proc Close(self: ID3D12GraphicsCommandList): HRESULT =
+proc Close(self: ID3D12GraphicsCommandList) =
   type F = proc(this: ID3D12GraphicsCommandList): HRESULT {.stdcall.}
-  callVtbl0(self, 9, F)
+  let hr = callVtbl0(self, 9, F)
+  if hr < 0:
+    raise newException(Exception, "ID3D12GraphicsCommandList.Close failed with HRESULT " & $hr)
 
 proc ResourceBarrier(self: ID3D12GraphicsCommandList, count: UINT, barriers: ptr D3D12_RESOURCE_BARRIER) =
   type F = proc(this: ID3D12GraphicsCommandList, count: UINT, barriers: ptr D3D12_RESOURCE_BARRIER) {.stdcall.}
@@ -286,23 +292,23 @@ proc ExecuteCommandLists(self: ID3D12CommandQueue, count: UINT, lists: ptr ID3D1
   type F = proc(this: ID3D12CommandQueue, count: UINT, lists: ptr ID3D12CommandList): void {.stdcall.}
   callVtbl(self, 10, F, count, lists)
 
-proc Signal(self: ID3D12CommandQueue, fence: ID3D12Fence, value: UINT64): HRESULT =
+proc Signal(self: ID3D12CommandQueue, fence: ID3D12Fence, value: UINT64) =
   type F = proc(this: ID3D12CommandQueue, fence: ID3D12Fence, value: UINT64): HRESULT {.stdcall.}
-  callVtbl(self, 14, F, fence, value)
+  let hr = callVtbl(self, 14, F, fence, value)
+  if hr < 0:
+    raise newException(Exception, "ID3D12CommandQueue.Signal failed with HRESULT " & $hr)
 
 proc GetCPUDescriptorHandleForHeapStart(self: ID3D12DescriptorHeap): D3D12_CPU_DESCRIPTOR_HANDLE =
-  when defined(vcc):
-    type F = proc(this: ID3D12DescriptorHeap): D3D12_CPU_DESCRIPTOR_HANDLE {.stdcall.}
-    result = callVtbl0(self, 9, F)
-  else:
-    type F = proc(this: ID3D12DescriptorHeap, ret: ptr D3D12_CPU_DESCRIPTOR_HANDLE): ptr D3D12_CPU_DESCRIPTOR_HANDLE {.stdcall.}
-    var handle: D3D12_CPU_DESCRIPTOR_HANDLE
-    discard callVtbl(self, 9, F, addr handle)
-    result = handle
+  type F = proc(this: ID3D12DescriptorHeap, ret: ptr D3D12_CPU_DESCRIPTOR_HANDLE): ptr D3D12_CPU_DESCRIPTOR_HANDLE {.stdcall.}
+  var handle: D3D12_CPU_DESCRIPTOR_HANDLE
+  discard callVtbl(self, 9, F, addr handle)
+  result = handle
 
-proc Present(self: IDXGISwapChain3, syncInterval: UINT, flags: UINT): HRESULT =
+proc Present(self: IDXGISwapChain3, syncInterval: UINT, flags: UINT) =
   type F = proc(this: IDXGISwapChain3, syncInterval: UINT, flags: UINT): HRESULT {.stdcall.}
-  callVtbl(self, 8, F, syncInterval, flags)
+  let hr = callVtbl(self, 8, F, syncInterval, flags)
+  if hr < 0:
+    raise newException(Exception, "IDXGISwapChain3.Present failed with HRESULT " & $hr)
 
 proc GetBuffer(self: IDXGISwapChain3, index: UINT, riid: ptr DXGuid): ID3D12Resource =
   type F = proc(this: IDXGISwapChain3, index: UINT, riid: ptr DXGuid, outBuffer: ptr pointer): HRESULT {.stdcall.}
@@ -314,9 +320,11 @@ proc GetCompletedValue(self: ID3D12Fence): UINT64 =
   type F = proc(this: ID3D12Fence): UINT64 {.stdcall.}
   callVtbl0(self, 8, F)
 
-proc SetEventOnCompletion(self: ID3D12Fence, value: UINT64, evt: HANDLE): HRESULT =
+proc SetEventOnCompletion(self: ID3D12Fence, value: UINT64, evt: HANDLE) =
   type F = proc(this: ID3D12Fence, value: UINT64, evt: HANDLE): HRESULT {.stdcall.}
-  callVtbl(self, 9, F, value, evt)
+  let hr = callVtbl(self, 9, F, value, evt)
+  if hr < 0:
+    raise newException(Exception, "ID3D12Fence.SetEventOnCompletion failed with HRESULT " & $hr)
 
 proc CreateSwapChainForHwnd(factory: IDXGIFactory4, device: pointer, hwnd: HWND, desc: ptr DXGI_SWAP_CHAIN_DESC1, fullscreenDesc: pointer, restrictOutput: IDXGIOutput): IDXGISwapChain1 =
   type F = proc(this: IDXGIFactory4, device: pointer, hwnd: HWND, desc: ptr DXGI_SWAP_CHAIN_DESC1, fullscreenDesc: pointer, restrictOutput: IDXGIOutput, outSwapChain: ptr pointer): HRESULT {.stdcall.}
@@ -324,9 +332,11 @@ proc CreateSwapChainForHwnd(factory: IDXGIFactory4, device: pointer, hwnd: HWND,
   if hr < 0:
     raise newException(Exception, "CreateSwapChainForHwnd failed with HRESULT " & $hr)
 
-proc MakeWindowAssociation(factory: IDXGIFactory4, hwnd: HWND, flags: UINT): HRESULT =
+proc MakeWindowAssociation(factory: IDXGIFactory4, hwnd: HWND, flags: UINT) =
   type F = proc(this: IDXGIFactory4, hwnd: HWND, flags: UINT): HRESULT {.stdcall.}
-  callVtbl(factory, 8, F, hwnd, flags)
+  let hr = callVtbl(factory, 8, F, hwnd, flags)
+  if hr < 0:
+    raise newException(Exception, "IDXGIFactory4.MakeWindowAssociation failed with HRESULT " & $hr)
 
 proc QueryInterface[T](iface: pointer, riid: ptr DXGuid): T =
   type F = proc(this: pointer, riid: ptr DXGuid, outObj: ptr pointer): HRESULT {.stdcall.}
@@ -382,7 +392,6 @@ proc initDevice(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   queueDesc.NodeMask = 0
   ctx.commandQueue = ctx.device.CreateCommandQueue(addr queueDesc, addr IID_ID3D12CommandQueue)
 
-
   # Create swap chain
   var swapDesc: DXGI_SWAP_CHAIN_DESC1
   swapDesc.Width = UINT(width)
@@ -405,7 +414,7 @@ proc initDevice(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
     nil
   )
 
-  discard factory.MakeWindowAssociation(hwnd, DXGI_MWA_NO_ALT_ENTER)
+  factory.MakeWindowAssociation(hwnd, DXGI_MWA_NO_ALT_ENTER)
 
   # Upgrade to IDXGISwapChain3
   ctx.swapChain = QueryInterface[IDXGISwapChain3](swapChain1, addr IID_IDXGISwapChain3)
@@ -434,7 +443,7 @@ proc initDevice(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   # Command allocator + list
   ctx.commandAllocator = ctx.device.CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, addr IID_ID3D12CommandAllocator)
   ctx.commandList = ctx.device.CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, ctx.commandAllocator, nil, addr IID_ID3D12GraphicsCommandList)
-  discard ctx.commandList.Close()
+  ctx.commandList.Close()
 
   # Fence + event
   ctx.fence = ctx.device.CreateFence(0, D3D12_FENCE_FLAG_NONE, addr IID_ID3D12Fence)
@@ -452,36 +461,24 @@ proc initDevice(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
 
 proc waitForGpu(ctx: var D3D12Context) =
   let fenceToWait = ctx.fenceValue
-  let hrSignal = ctx.commandQueue.Signal(ctx.fence, fenceToWait)
-  if hrSignal < 0:
-    raise newException(Exception, "Signal fence failed with HRESULT " & $hrSignal)
+  ctx.commandQueue.Signal(ctx.fence, fenceToWait)
   inc ctx.fenceValue
   if ctx.fence.GetCompletedValue() < fenceToWait:
-    let hrCompletion = ctx.fence.SetEventOnCompletion(fenceToWait, ctx.fenceEvent)
-    if hrCompletion < 0:
-      raise newException(Exception, "Fence.SetEventOnCompletion failed with HRESULT " & $hrCompletion)
+    ctx.fence.SetEventOnCompletion(fenceToWait, ctx.fenceEvent)
     discard WaitForSingleObject(ctx.fenceEvent, WAIT_INFINITE)
 
 proc moveToNextFrame(ctx: var D3D12Context) =
   let currentFence = ctx.fenceValue
-  let hrSignal = ctx.commandQueue.Signal(ctx.fence, currentFence)
-  if hrSignal < 0:
-    raise newException(Exception, "Signal fence failed with HRESULT " & $hrSignal)
+  ctx.commandQueue.Signal(ctx.fence, currentFence)
   inc ctx.fenceValue
   if ctx.fence.GetCompletedValue() < currentFence:
-    let hrCompletion = ctx.fence.SetEventOnCompletion(currentFence, ctx.fenceEvent)
-    if hrCompletion < 0:
-      raise newException(Exception, "Fence.SetEventOnCompletion failed with HRESULT " & $hrCompletion)
+    ctx.fence.SetEventOnCompletion(currentFence, ctx.fenceEvent)
     discard WaitForSingleObject(ctx.fenceEvent, WAIT_INFINITE)
   ctx.currentFrame = (ctx.currentFrame + 1) mod FRAME_COUNT
 
 proc recordCommandList(ctx: var D3D12Context, color: array[4, FLOAT]) =
-  let hrAllocReset = ctx.commandAllocator.Reset()
-  if hrAllocReset < 0:
-    raise newException(Exception, "CommandAllocator.Reset failed with HRESULT " & $hrAllocReset)
-  let hrListReset = ctx.commandList.Reset(ctx.commandAllocator, nil)
-  if hrListReset < 0:
-    raise newException(Exception, "CommandList.Reset failed with HRESULT " & $hrListReset)
+  ctx.commandAllocator.Reset()
+  ctx.commandList.Reset(ctx.commandAllocator, nil)
 
   var barrier = D3D12_RESOURCE_BARRIER(
     typ: D3D12_RESOURCE_BARRIER_TYPE_TRANSITION,
@@ -503,16 +500,12 @@ proc recordCommandList(ctx: var D3D12Context, color: array[4, FLOAT]) =
   barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT
   ctx.commandList.ResourceBarrier(1, addr barrier)
 
-  let hrClose = ctx.commandList.Close()
-  if hrClose < 0:
-    raise newException(Exception, "CommandList.Close failed with HRESULT " & $hrClose)
+  ctx.commandList.Close()
 
 proc executeFrame(ctx: var D3D12Context) =
   var commandListIface = cast[ID3D12CommandList](ctx.commandList)
   ctx.commandQueue.ExecuteCommandLists(1, addr commandListIface)
-  let hrPresent = ctx.swapChain.Present(1, 0)
-  if hrPresent < 0:
-    raise newException(Exception, "SwapChain.Present failed with HRESULT " & $hrPresent)
+  ctx.swapChain.Present(1, 0)
   ctx.moveToNextFrame()
 
 proc cleanup(ctx: var D3D12Context) =
