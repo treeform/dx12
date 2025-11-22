@@ -21,13 +21,23 @@ type
 const
   S_OK* = 0
 
+# Creates GUIDs from the canonical IID literal format:
+# 0xXXXXXXXX, 0xXXXX, 0xXXXX, 0xXX, ... (8 bytes total)
+proc newGuid*(
+  data1: uint32,
+  data2: uint16,
+  data3: uint16,
+  b0, b1, b2, b3, b4, b5, b6, b7: uint8
+): GUID =
+  GUID(
+    Data1: data1,
+    Data2: data2,
+    Data3: data3,
+    Data4: [b0, b1, b2, b3, b4, b5, b6, b7]
+  )
+
 # IMPORTANT: Data1 must be uint32, not int32!
-var IID_IDXGIFactory4* {.global.} = GUID(
-  Data1: 0x1bc6ea02'u32,
-  Data2: 0xef36'u16,
-  Data3: 0x464f'u16,
-  Data4: [0xbf'u8, 0x0c'u8, 0x21'u8, 0xca'u8, 0x39'u8, 0xe5'u8, 0x16'u8, 0x8a'u8]
-)
+var IID_IDXGIFactory4* {.global.} = newGuid(0x1bc6ea02,0xef36,0x464f,0xbf,0x0c,0x21,0xca,0x39,0xe5,0x16,0x8a)
 
 proc main() =
   let dxgi = loadLib("dxgi.dll")
