@@ -18,12 +18,12 @@ type
     fence: ID3D12Fence
     fenceValue: UINT64
     fenceEvent: HANDLE
-    rtvDescriptorSize: UINT
+    rtvDescriptorSize: dx12.UINT
     currentFrame: int
     viewport: D3D12_VIEWPORT
     scissor: D3D12_RECT
 
-proc offsetHandle(base: D3D12_CPU_DESCRIPTOR_HANDLE, descriptorSize: UINT, index: int): D3D12_CPU_DESCRIPTOR_HANDLE =
+proc offsetHandle(base: D3D12_CPU_DESCRIPTOR_HANDLE, descriptorSize: dx12.UINT, index: int): D3D12_CPU_DESCRIPTOR_HANDLE =
   result = base
   result.ptrValue = base.ptrValue + uint64(descriptorSize) * uint64(index)
 
@@ -46,8 +46,8 @@ proc initDevice*(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
 
   # Create swap chain
   var swapDesc: DXGI_SWAP_CHAIN_DESC1
-  swapDesc.Width = UINT(width)
-  swapDesc.Height = UINT(height)
+  swapDesc.Width = dx12.UINT(width)
+  swapDesc.Height = dx12.UINT(height)
   swapDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM
   swapDesc.Stereo = 0
   swapDesc.SampleDesc = DXGI_SAMPLE_DESC(Count: 1, Quality: 0)
@@ -89,7 +89,7 @@ proc initDevice*(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   # Create render target views for each swap chain buffer
   for i in 0 ..< FRAME_COUNT:
     ctx.rtvHandles[i] = offsetHandle(baseHandle, ctx.rtvDescriptorSize, i)
-    ctx.renderTargets[i] = ctx.swapChain.getBuffer(UINT(i))
+    ctx.renderTargets[i] = ctx.swapChain.getBuffer(dx12.UINT(i))
     ctx.device.createRenderTargetView(ctx.renderTargets[i], nil, ctx.rtvHandles[i])
 
   # Command allocator + list

@@ -1,6 +1,6 @@
 import pixie
 import vmath
-fimport windy
+import windy
 import windy/platforms/win32/windefs
 
 import dx12
