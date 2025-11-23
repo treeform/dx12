@@ -1,7 +1,6 @@
-import windy
-import windy/platforms/win32/windefs
-
-import dx12
+import 
+  windy, windy/platforms/win32/windefs,
+  dx12, dx12/context
 
 type
   TriangleRenderer = object
