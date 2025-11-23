@@ -1,6 +1,10 @@
 import 
-  std/dynlib,
-  windy/platforms/win32/windefs
+  std/[dynlib, strformat],
+  windy/platforms/win32/windefs,
+  dx12/codes
+
+template dx12Log(msg: string) =
+  echo "[dx12] " & msg
 
 # --- Basic Win32 / DirectX types ---
 type
@@ -437,6 +441,8 @@ var
   D3D12SerializeRootSignature_Ptr: D3D12SerializeRootSignature_t
   d3dCompilerLib: LibHandle
   D3DCompile_Ptr: D3DCompile_t
+  nativeSymbolsInitialized: bool
+  compilerInitialized: bool
 
 template callVtbl0(iface: pointer, index: int, typ: typedesc): untyped =
   let vtblPtr = cast[ptr ptr UncheckedArray[pointer]](iface)
@@ -532,8 +538,7 @@ proc createCommittedResource*(self: ID3D12Device, heapProps: ptr D3D12_HEAP_PROP
   const IID_ID3D12Resource = newGuid(0x696442be'u32,0xa72e'u16,0x4059'u16,0xbc'u8,0x79'u8,0x5b'u8,0x5c'u8,0x98'u8,0x04'u8,0x0f'u8,0xad'u8)
   type F = proc(this: ID3D12Device, heapProps: ptr D3D12_HEAP_PROPERTIES, heapFlags: uint32, desc: ptr D3D12_RESOURCE_DESC, initialState: D3D12_RESOURCE_STATES, clearValue: pointer, riid: ptr DXGuid, outResource: ptr pointer): HRESULT {.stdcall.}
   let hr = callVtbl(self, 27, F, heapProps, heapFlags, desc, initialState, clearValue, addr IID_ID3D12Resource, cast[ptr pointer](addr result))
-  if hr < 0:
-    raise newException(Exception, "CreateCommittedResource failed with HRESULT " & $hr)
+  checkHr(hr, "CreateCommittedResource")
 
 proc map*(self: ID3D12Resource, subresource: UINT, readRange: ptr D3D12_RANGE, data: ptr pointer) =
   type F = proc(this: ID3D12Resource, subresource: UINT, readRange: ptr D3D12_RANGE, data: ptr pointer): HRESULT {.stdcall.}
@@ -736,45 +741,71 @@ proc d3d12CreateDevice*(pAdapter: pointer, MinimumFeatureLevel: D3D_FEATURE_LEVE
     raise newException(Exception, "D3D12CreateDevice failed with HRESULT " & $hr)
 
 proc loadNativeSymbols*() =
+  if not nativeSymbolsInitialized:
+    dx12Log("Initializing native DirectX symbols")
   if d3d12Lib == nil:
+    dx12Log("Loading d3d12.dll")
     d3d12Lib = loadLib("d3d12.dll")
     if d3d12Lib == nil:
       raise newException(Exception, "Could not load d3d12.dll")
+    dx12Log("Loaded d3d12.dll")
 
   if D3D12CreateDevice_Ptr == nil:
+    dx12Log("Resolving D3D12CreateDevice")
     let sym = d3d12Lib.symAddr("D3D12CreateDevice")
     if sym == nil:
       raise newException(Exception, "Could not find D3D12CreateDevice")
     D3D12CreateDevice_Ptr = cast[D3D12CreateDevice_t](sym)
+    dx12Log("D3D12CreateDevice resolved")
 
   if dxgiLib == nil:
+    dx12Log("Loading dxgi.dll")
     dxgiLib = loadLib("dxgi.dll")
     if dxgiLib == nil:
       raise newException(Exception, "Could not load dxgi.dll")
+    dx12Log("Loaded dxgi.dll")
 
   if CreateDXGIFactory2_Ptr == nil:
+    dx12Log("Resolving CreateDXGIFactory2")
     let sym = dxgiLib.symAddr("CreateDXGIFactory2")
     if sym == nil:
       raise newException(Exception, "Could not find CreateDXGIFactory2")
     CreateDXGIFactory2_Ptr = cast[CreateDXGIFactory2_t](sym)
+    dx12Log("CreateDXGIFactory2 resolved")
 
   if D3D12SerializeRootSignature_Ptr == nil:
+    dx12Log("Resolving D3D12SerializeRootSignature")
     let sym = d3d12Lib.symAddr("D3D12SerializeRootSignature")
     if sym == nil:
       raise newException(Exception, "Could not find D3D12SerializeRootSignature")
     D3D12SerializeRootSignature_Ptr = cast[D3D12SerializeRootSignature_t](sym)
+    dx12Log("D3D12SerializeRootSignature resolved")
+
+  if not nativeSymbolsInitialized and d3d12Lib != nil and dxgiLib != nil and D3D12CreateDevice_Ptr != nil and CreateDXGIFactory2_Ptr != nil and D3D12SerializeRootSignature_Ptr != nil:
+    nativeSymbolsInitialized = true
+    dx12Log("Native DirectX symbols ready for use")
 
 proc loadCompiler() =
+  if not compilerInitialized:
+    dx12Log("Initializing shader compiler module")
   if d3dCompilerLib == nil:
+    dx12Log("Loading d3dcompiler_47.dll")
     d3dCompilerLib = loadLib("d3dcompiler_47.dll")
     if d3dCompilerLib == nil:
       raise newException(Exception, "Could not load d3dcompiler_47.dll")
+    dx12Log("Loaded d3dcompiler_47.dll")
 
   if D3DCompile_Ptr == nil:
+    dx12Log("Resolving D3DCompile")
     let sym = d3dCompilerLib.symAddr("D3DCompile")
     if sym == nil:
       raise newException(Exception, "Could not find D3DCompile")
     D3DCompile_Ptr = cast[D3DCompile_t](sym)
+    dx12Log("D3DCompile resolved")
+
+  if not compilerInitialized and d3dCompilerLib != nil and D3DCompile_Ptr != nil:
+    compilerInitialized = true
+    dx12Log("Shader compiler ready")
 
 proc getBufferPointer*(blob: ID3DBlob): pointer =
   type F = proc(this: ID3DBlob): pointer {.stdcall.}
@@ -786,6 +817,7 @@ proc getBufferSize*(blob: ID3DBlob): csize_t =
 
 proc serializeRootSignature*(desc: ptr D3D12_ROOT_SIGNATURE_DESC): ID3DBlob =
   loadNativeSymbols()
+  dx12Log("Serializing root signature description")
   var blob: ID3DBlob
   var errorBlob: ID3DBlob
   let hr = D3D12SerializeRootSignature_Ptr(desc, 1'u32, addr blob, addr errorBlob)
@@ -800,9 +832,11 @@ proc serializeRootSignature*(desc: ptr D3D12_ROOT_SIGNATURE_DESC): ID3DBlob =
   if hr < 0:
     raise newException(Exception, "D3D12SerializeRootSignature failed with HRESULT " & $hr)
   result = blob
+  dx12Log("Root signature serialization successful")
 
 proc compileShader*(source: string, entryPoint: string, target: string, flags: uint32 = 0): ID3DBlob =
   loadCompiler()
+  dx12Log("Compiling shader entry " & entryPoint & " (target " & target & ")")
   var blob: ID3DBlob
   var errorBlob: ID3DBlob
   let hr = D3DCompile_Ptr(
@@ -831,6 +865,7 @@ proc compileShader*(source: string, entryPoint: string, target: string, flags: u
   if hr < 0:
     raise newException(Exception, "D3DCompile failed with HRESULT " & $hr)
   result = blob
+  dx12Log("Shader " & entryPoint & " compiled successfully")
 
 proc shaderBytecode*(blob: ID3DBlob): D3D12_SHADER_BYTECODE =
   D3D12_SHADER_BYTECODE(
