@@ -68,6 +68,9 @@ type
   D3D12_CPU_DESCRIPTOR_HANDLE* = object
     ptrValue*: uint64
 
+  D3D12_GPU_DESCRIPTOR_HANDLE* = object
+    ptrValue*: uint64
+
   D3D12_COMMAND_QUEUE_DESC* = object
     Type*: D3D12_COMMAND_LIST_TYPE
     Priority*: int32
@@ -110,6 +113,16 @@ type
     Flags*: D3D12_RESOURCE_BARRIER_FLAGS
     Transition*: D3D12_RESOURCE_TRANSITION_BARRIER
 
+  D3D12_TEXTURE_COPY_LOCATION* = object
+    pResource*: ID3D12Resource
+    typ*: uint32
+    PlacedFootprint*: D3D12_PLACED_SUBRESOURCE_FOOTPRINT
+    SubresourceIndex*: uint32
+
+  D3D12_BOX* = object
+    left*, top*, front*: UINT
+    right*, bottom*, back*: UINT
+
   D3D12_RANGE* = object
     start*: csize_t
     finish*: csize_t
@@ -122,6 +135,17 @@ type
   D3D12_SHADER_BYTECODE* = object
     pShaderBytecode*: pointer
     BytecodeLength*: csize_t
+
+  D3D12_SUBRESOURCE_FOOTPRINT* = object
+    Format*: DXGI_FORMAT
+    Width*: UINT
+    Height*: UINT
+    Depth*: UINT
+    RowPitch*: UINT
+
+  D3D12_PLACED_SUBRESOURCE_FOOTPRINT* = object
+    Offset*: UINT64
+    Footprint*: D3D12_SUBRESOURCE_FOOTPRINT
 
   D3D12_INPUT_ELEMENT_DESC* = object
     SemanticName*: cstring
@@ -136,12 +160,69 @@ type
     pInputElementDescs*: ptr D3D12_INPUT_ELEMENT_DESC
     NumElements*: uint32
 
+  D3D12_DESCRIPTOR_RANGE* = object
+    RangeType*: uint32
+    NumDescriptors*: uint32
+    BaseShaderRegister*: uint32
+    RegisterSpace*: uint32
+    OffsetInDescriptorsFromTableStart*: uint32
+
+  D3D12_ROOT_DESCRIPTOR_TABLE* = object
+    NumDescriptorRanges*: uint32
+    pDescriptorRanges*: ptr D3D12_DESCRIPTOR_RANGE
+
+  D3D12_ROOT_DESCRIPTOR* = object
+    ShaderRegister*: uint32
+    RegisterSpace*: uint32
+
+  D3D12_ROOT_CONSTANTS* = object
+    ShaderRegister*: uint32
+    RegisterSpace*: uint32
+    Num32BitValues*: uint32
+
+  D3D12_ROOT_PARAMETER_UNION* {.union.} = object
+    DescriptorTable*: D3D12_ROOT_DESCRIPTOR_TABLE
+    Constants*: D3D12_ROOT_CONSTANTS
+    Descriptor*: D3D12_ROOT_DESCRIPTOR
+
+  D3D12_ROOT_PARAMETER* = object
+    ParameterType*: uint32
+    data*: D3D12_ROOT_PARAMETER_UNION
+    ShaderVisibility*: uint32
+
+  D3D12_STATIC_SAMPLER_DESC* = object
+    Filter*: uint32
+    AddressU*: uint32
+    AddressV*: uint32
+    AddressW*: uint32
+    MipLODBias*: FLOAT
+    MaxAnisotropy*: uint32
+    ComparisonFunc*: uint32
+    BorderColor*: uint32
+    MinLOD*: FLOAT
+    MaxLOD*: FLOAT
+    ShaderRegister*: uint32
+    RegisterSpace*: uint32
+    ShaderVisibility*: uint32
+
   D3D12_STREAM_OUTPUT_DESC* = object
     pSODeclaration*: pointer
     NumEntries*: UINT
     pBufferStrides*: pointer
     NumStrides*: UINT
     RasterizedStream*: UINT
+
+  D3D12_TEX2D_SRV* = object
+    MostDetailedMip*: uint32
+    MipLevels*: uint32
+    PlaneSlice*: uint32
+    ResourceMinLODClamp*: FLOAT
+
+  D3D12_SHADER_RESOURCE_VIEW_DESC* = object
+    Format*: DXGI_FORMAT
+    ViewDimension*: uint32
+    Shader4ComponentMapping*: uint32
+    Texture2D*: D3D12_TEX2D_SRV
 
   D3D12_RENDER_TARGET_BLEND_DESC* = object
     BlendEnable*: BOOL32
@@ -240,18 +321,24 @@ const
   D3D12_COMMAND_LIST_TYPE_DIRECT* = 0'u32
   D3D12_COMMAND_QUEUE_FLAG_NONE* = 0'u32
   D3D12_COMMAND_QUEUE_PRIORITY_NORMAL* = 0
+  D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV* = 0'u32
   D3D12_DESCRIPTOR_HEAP_TYPE_RTV* = 2'u32
   D3D12_DESCRIPTOR_HEAP_FLAG_NONE* = 0'u32
+  D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE* = 0x1'u32
   D3D12_HEAP_TYPE_DEFAULT* = 1'u32
   D3D12_HEAP_TYPE_UPLOAD* = 2'u32
   D3D12_HEAP_FLAG_NONE* = 0'u32
   D3D12_RESOURCE_DIMENSION_BUFFER* = 1'u32
+  D3D12_RESOURCE_DIMENSION_TEXTURE2D* = 3'u32
   D3D12_TEXTURE_LAYOUT_ROW_MAJOR* = 4'u32
+  D3D12_TEXTURE_LAYOUT_UNKNOWN* = 0'u32
   D3D12_RESOURCE_FLAG_NONE* = 0'u32
   D3D12_RESOURCE_STATE_PRESENT* = 0'u32
   D3D12_RESOURCE_STATE_RENDER_TARGET* = 0x4'u32
   D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER* = 0x1'u32
   D3D12_RESOURCE_STATE_GENERIC_READ* = 0x800'u32
+  D3D12_RESOURCE_STATE_COPY_DEST* = 0x400'u32
+  D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE* = 0x80'u32
   D3D12_RESOURCE_BARRIER_TYPE_TRANSITION* = 0'u32
   D3D12_RESOURCE_BARRIER_FLAG_NONE* = 0'u32
   D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES* = 0xffffffff'u32
@@ -268,6 +355,22 @@ const
   D3D12_STENCIL_OP_KEEP* = 1'u32
   D3D12_CONSERVATIVE_RASTERIZATION_MODE_OFF* = 0'u32
   D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE* = 3'u32
+  D3D12_DESCRIPTOR_RANGE_TYPE_SRV* = 0'u32
+  D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS* = 1'u32
+  D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE* = 0'u32
+  D3D12_ROOT_PARAMETER_TYPE_CBV* = 2'u32
+  D3D12_SHADER_VISIBILITY_ALL* = 0'u32
+  D3D12_SHADER_VISIBILITY_PIXEL* = 5'u32
+  D3D12_STATIC_BORDER_COLOR_TRANSPARENT_BLACK* = 0'u32
+  D3D12_STATIC_BORDER_COLOR_OPAQUE_BLACK* = 1'u32
+  D3D12_STATIC_BORDER_COLOR_OPAQUE_WHITE* = 2'u32
+  D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND* = 0xffffffff'u32
+  D3D12_FILTER_MIN_MAG_MIP_LINEAR* = 0x15'u32
+  D3D12_TEXTURE_ADDRESS_MODE_WRAP* = 1'u32
+  D3D12_SRV_DIMENSION_TEXTURE2D* = 4'u32
+  D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX* = 0'u32
+  D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT* = 1'u32
+  D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING* = 0x1688'u32
   D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST* = 4'u32
   D3D12_DEFAULT_SAMPLE_MASK* = 0xffffffff'u32
   D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT* = 0x1'u32
@@ -411,6 +514,20 @@ proc createRenderTargetView*(self: ID3D12Device, resource: ID3D12Resource, desc:
   type F = proc(this: ID3D12Device, resource: ID3D12Resource, desc: pointer, handle: D3D12_CPU_DESCRIPTOR_HANDLE) {.stdcall.}
   callVtbl(self, 20, F, resource, desc, handle)
 
+proc createShaderResourceView*(
+    self: ID3D12Device,
+    resource: ID3D12Resource,
+    desc: ptr D3D12_SHADER_RESOURCE_VIEW_DESC,
+    handle: D3D12_CPU_DESCRIPTOR_HANDLE
+  ) =
+  type F = proc(
+    this: ID3D12Device,
+    resource: ID3D12Resource,
+    desc: ptr D3D12_SHADER_RESOURCE_VIEW_DESC,
+    handle: D3D12_CPU_DESCRIPTOR_HANDLE
+  ) {.stdcall.}
+  callVtbl(self, 18, F, resource, desc, handle)
+
 proc createCommittedResource*(self: ID3D12Device, heapProps: ptr D3D12_HEAP_PROPERTIES, heapFlags: uint32, desc: ptr D3D12_RESOURCE_DESC, initialState: D3D12_RESOURCE_STATES, clearValue: pointer): ID3D12Resource =
   const IID_ID3D12Resource = newGuid(0x696442be'u32,0xa72e'u16,0x4059'u16,0xbc'u8,0x79'u8,0x5b'u8,0x5c'u8,0x98'u8,0x04'u8,0x0f'u8,0xad'u8)
   type F = proc(this: ID3D12Device, heapProps: ptr D3D12_HEAP_PROPERTIES, heapFlags: uint32, desc: ptr D3D12_RESOURCE_DESC, initialState: D3D12_RESOURCE_STATES, clearValue: pointer, riid: ptr DXGuid, outResource: ptr pointer): HRESULT {.stdcall.}
@@ -439,6 +556,20 @@ proc createFence*(self: ID3D12Device, initialValue: UINT64, flags: uint32): ID3D
   if hr < 0:
     raise newException(Exception, "CreateFence failed with HRESULT " & $hr)
 
+proc getCopyableFootprints*(self: ID3D12Device, desc: ptr D3D12_RESOURCE_DESC, firstSubresource: UINT, numSubresources: UINT, baseOffset: UINT64, layouts: ptr D3D12_PLACED_SUBRESOURCE_FOOTPRINT, numRows: ptr UINT, rowSizeInBytes: ptr UINT64, totalBytes: ptr UINT64) =
+  type F = proc(
+    this: ID3D12Device,
+    desc: ptr D3D12_RESOURCE_DESC,
+    firstSubresource: UINT,
+    numSubresources: UINT,
+    baseOffset: UINT64,
+    layouts: ptr D3D12_PLACED_SUBRESOURCE_FOOTPRINT,
+    numRows: ptr UINT,
+    rowSizeInBytes: ptr UINT64,
+    totalBytes: ptr UINT64
+  ) {.stdcall.}
+  callVtbl(self, 38, F, desc, firstSubresource, numSubresources, baseOffset, layouts, numRows, rowSizeInBytes, totalBytes)
+
 proc reset*(self: ID3D12CommandAllocator) =
   type F = proc(this: ID3D12CommandAllocator): HRESULT {.stdcall.}
   let hr = callVtbl0(self, 8, F)
@@ -456,6 +587,14 @@ proc close*(self: ID3D12GraphicsCommandList) =
   let hr = callVtbl0(self, 9, F)
   if hr < 0:
     raise newException(Exception, "ID3D12GraphicsCommandList.Close failed with HRESULT " & $hr)
+
+proc copyBufferRegion*(self: ID3D12GraphicsCommandList, dst: ID3D12Resource, dstOffset: UINT64, src: ID3D12Resource, srcOffset: UINT64, numBytes: UINT64) =
+  type F = proc(this: ID3D12GraphicsCommandList, dst: ID3D12Resource, dstOffset: UINT64, src: ID3D12Resource, srcOffset: UINT64, numBytes: UINT64): void {.stdcall.}
+  callVtbl(self, 15, F, dst, dstOffset, src, srcOffset, numBytes)
+
+proc copyTextureRegion*(self: ID3D12GraphicsCommandList, dst: ptr D3D12_TEXTURE_COPY_LOCATION, dstX, dstY, dstZ: UINT, src: ptr D3D12_TEXTURE_COPY_LOCATION, srcBox: ptr D3D12_BOX) =
+  type F = proc(this: ID3D12GraphicsCommandList, dst: ptr D3D12_TEXTURE_COPY_LOCATION, dstX, dstY, dstZ: UINT, src: ptr D3D12_TEXTURE_COPY_LOCATION, srcBox: ptr D3D12_BOX): void {.stdcall.}
+  callVtbl(self, 16, F, dst, dstX, dstY, dstZ, src, srcBox)
 
 proc resourceBarrier*(self: ID3D12GraphicsCommandList, count: UINT, barriers: ptr D3D12_RESOURCE_BARRIER) =
   type F = proc(this: ID3D12GraphicsCommandList, count: UINT, barriers: ptr D3D12_RESOURCE_BARRIER) {.stdcall.}
@@ -481,9 +620,25 @@ proc setPipelineState*(self: ID3D12GraphicsCommandList, state: ID3D12PipelineSta
   type F = proc(this: ID3D12GraphicsCommandList, state: ID3D12PipelineState): void {.stdcall.}
   callVtbl(self, 25, F, state)
 
+proc setDescriptorHeaps*(self: ID3D12GraphicsCommandList, heapCount: UINT, heaps: ptr ID3D12DescriptorHeap) =
+  type F = proc(this: ID3D12GraphicsCommandList, heapCount: UINT, heaps: ptr ID3D12DescriptorHeap): void {.stdcall.}
+  callVtbl(self, 28, F, heapCount, heaps)
+
 proc setGraphicsRootSignature*(self: ID3D12GraphicsCommandList, root: ID3D12RootSignature) =
   type F = proc(this: ID3D12GraphicsCommandList, root: ID3D12RootSignature): void {.stdcall.}
   callVtbl(self, 30, F, root)
+
+proc setGraphicsRootDescriptorTable*(self: ID3D12GraphicsCommandList, parameterIndex: UINT, baseDescriptor: D3D12_GPU_DESCRIPTOR_HANDLE) =
+  type F = proc(this: ID3D12GraphicsCommandList, parameterIndex: UINT, baseDescriptor: D3D12_GPU_DESCRIPTOR_HANDLE): void {.stdcall.}
+  callVtbl(self, 32, F, parameterIndex, baseDescriptor)
+
+proc setGraphicsRoot32BitConstants*(self: ID3D12GraphicsCommandList, parameterIndex: UINT, numValues: UINT, data: pointer, destOffset: UINT) =
+  type F = proc(this: ID3D12GraphicsCommandList, parameterIndex: UINT, numValues: UINT, data: pointer, destOffset: UINT): void {.stdcall.}
+  callVtbl(self, 36, F, parameterIndex, numValues, data, destOffset)
+
+proc setGraphicsRootConstantBufferView*(self: ID3D12GraphicsCommandList, parameterIndex: UINT, gpuAddress: UINT64) =
+  type F = proc(this: ID3D12GraphicsCommandList, parameterIndex: UINT, gpuAddress: UINT64): void {.stdcall.}
+  callVtbl(self, 38, F, parameterIndex, gpuAddress)
 
 proc iaSetPrimitiveTopology*(self: ID3D12GraphicsCommandList, topology: uint32) =
   type F = proc(this: ID3D12GraphicsCommandList, topology: uint32): void {.stdcall.}
@@ -511,6 +666,12 @@ proc getCPUDescriptorHandleForHeapStart*(self: ID3D12DescriptorHeap): D3D12_CPU_
   type F = proc(this: ID3D12DescriptorHeap, ret: ptr D3D12_CPU_DESCRIPTOR_HANDLE): ptr D3D12_CPU_DESCRIPTOR_HANDLE {.stdcall.}
   var handle: D3D12_CPU_DESCRIPTOR_HANDLE
   discard callVtbl(self, 9, F, addr handle)
+  result = handle
+
+proc getGPUDescriptorHandleForHeapStart*(self: ID3D12DescriptorHeap): D3D12_GPU_DESCRIPTOR_HANDLE =
+  type F = proc(this: ID3D12DescriptorHeap, ret: ptr D3D12_GPU_DESCRIPTOR_HANDLE): ptr D3D12_GPU_DESCRIPTOR_HANDLE {.stdcall.}
+  var handle: D3D12_GPU_DESCRIPTOR_HANDLE
+  discard callVtbl(self, 10, F, addr handle)
   result = handle
 
 proc present*(self: IDXGISwapChain3, syncInterval: UINT, flags: UINT) =
@@ -640,7 +801,7 @@ proc serializeRootSignature*(desc: ptr D3D12_ROOT_SIGNATURE_DESC): ID3DBlob =
     raise newException(Exception, "D3D12SerializeRootSignature failed with HRESULT " & $hr)
   result = blob
 
-proc compileShader*(source: string, entryPoint: string, target: string): ID3DBlob =
+proc compileShader*(source: string, entryPoint: string, target: string, flags: uint32 = 0): ID3DBlob =
   loadCompiler()
   var blob: ID3DBlob
   var errorBlob: ID3DBlob
@@ -652,7 +813,7 @@ proc compileShader*(source: string, entryPoint: string, target: string): ID3DBlo
     nil,
     entryPoint.cstring,
     target.cstring,
-    0,
+    flags,
     0,
     addr blob,
     addr errorBlob
