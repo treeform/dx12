@@ -7,7 +7,6 @@ import
 const
   Width = 1280
   Height = 800
-  D3D12CullModeNone = 1'u32
   RotateScale = 0.01'f32
   ZoomScale = 0.2'f32
   MinDistance = 1.0'f32
@@ -529,7 +528,7 @@ float4 PSMain(PSInput input) : SV_TARGET {
     SampleMask: D3D12_DEFAULT_SAMPLE_MASK,
     RasterizerState: D3D12_RASTERIZER_DESC(
       FillMode: D3D12_FILL_MODE_SOLID,
-      CullMode: D3D12CullModeNone,
+      CullMode: D3D12_CULL_MODE_NONE,
       FrontCounterClockwise: 0,
       DepthBias: 0,
       DepthBiasClamp: 0.0,

@@ -10,7 +10,6 @@ const
   Height = 800
   TextureSize = 128
   TextureMaxAnisotropy = 8'u32
-  D3D12FilterAnisotropic = 0x55'u32
   MsaaSampleCount = 4'u32
 
 type
@@ -642,7 +641,7 @@ float4 PSMain(PSInput input) : SV_TARGET {
   ]
 
   var sampler = D3D12_STATIC_SAMPLER_DESC(
-    Filter: D3D12FilterAnisotropic,
+    Filter: D3D12_FILTER_ANISOTROPIC,
     AddressU: D3D12_TEXTURE_ADDRESS_MODE_WRAP,
     AddressV: D3D12_TEXTURE_ADDRESS_MODE_WRAP,
     AddressW: D3D12_TEXTURE_ADDRESS_MODE_WRAP,

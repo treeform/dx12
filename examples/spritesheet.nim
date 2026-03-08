@@ -13,11 +13,6 @@ const
   SpriteDensity = 850.0'f32
   MinSpriteCount = 96
   TextureMaxAnisotropy = 8'u32
-  D3D12CullModeNone = 1'u32
-  D3D12FilterAnisotropic = 0x55'u32
-  D3D12TextureAddressModeClamp = 3'u32
-  D3D12BlendSrcAlpha = 5'u32
-  D3D12BlendInvSrcAlpha = 6'u32
 
 type
   SpriteSheetError = object of CatchableError
@@ -466,10 +461,10 @@ float4 PSMain(PSInput input) : SV_TARGET {
   ]
 
   var sampler = D3D12_STATIC_SAMPLER_DESC(
-    Filter: D3D12FilterAnisotropic,
-    AddressU: D3D12TextureAddressModeClamp,
-    AddressV: D3D12TextureAddressModeClamp,
-    AddressW: D3D12TextureAddressModeClamp,
+    Filter: D3D12_FILTER_ANISOTROPIC,
+    AddressU: D3D12_TEXTURE_ADDRESS_MODE_CLAMP,
+    AddressV: D3D12_TEXTURE_ADDRESS_MODE_CLAMP,
+    AddressW: D3D12_TEXTURE_ADDRESS_MODE_CLAMP,
     MipLODBias: 0.0,
     MaxAnisotropy: TextureMaxAnisotropy,
     ComparisonFunc: D3D12_COMPARISON_FUNC_ALWAYS,
@@ -523,8 +518,8 @@ float4 PSMain(PSInput input) : SV_TARGET {
   blendDesc.RenderTarget[0] = D3D12_RENDER_TARGET_BLEND_DESC(
     BlendEnable: 1,
     LogicOpEnable: 0,
-    SrcBlend: D3D12BlendSrcAlpha,
-    DestBlend: D3D12BlendInvSrcAlpha,
+    SrcBlend: D3D12_BLEND_SRC_ALPHA,
+    DestBlend: D3D12_BLEND_INV_SRC_ALPHA,
     BlendOp: D3D12_BLEND_OP_ADD,
     SrcBlendAlpha: D3D12_BLEND_ONE,
     DestBlendAlpha: D3D12_BLEND_ZERO,
@@ -549,7 +544,7 @@ float4 PSMain(PSInput input) : SV_TARGET {
     SampleMask: D3D12_DEFAULT_SAMPLE_MASK,
     RasterizerState: D3D12_RASTERIZER_DESC(
       FillMode: D3D12_FILL_MODE_SOLID,
-      CullMode: D3D12CullModeNone,
+      CullMode: D3D12_CULL_MODE_NONE,
       FrontCounterClockwise: 0,
       DepthBias: 0,
       DepthBiasClamp: 0.0,
