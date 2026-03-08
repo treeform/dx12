@@ -2,9 +2,6 @@ import
   windy/platforms/win32/windefs,
   dx12
 
-template ctxLog(msg: string) =
-  echo "[D3D12Context] " & msg
-
 # --- Helper types and context management ---
 type
   D3D12Context* = object
@@ -30,12 +27,9 @@ proc offsetHandle*(base: D3D12_CPU_DESCRIPTOR_HANDLE, descriptorSize: UINT, inde
 
 proc initDevice*(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   loadNativeSymbols()
-  ctxLog("Initializing D3D12 device for window " & $hwnd & " (" & $width & "x" & $height & ")")
 
   var factory = createDxgiFactory2(0)
-  ctxLog("DXGI factory created")
   ctx.device = d3d12CreateDevice(nil, D3D_FEATURE_LEVEL_11_0)
-  ctxLog("D3D12 device created")
 
   var queueDesc: D3D12_COMMAND_QUEUE_DESC
   queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT
@@ -43,7 +37,6 @@ proc initDevice*(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE
   queueDesc.NodeMask = 0
   ctx.commandQueue = ctx.device.createCommandQueue(addr queueDesc)
-  ctxLog("Command queue created")
 
   var swapDesc: DXGI_SWAP_CHAIN_DESC1
   swapDesc.Width = UINT(width)
@@ -66,7 +59,6 @@ proc initDevice*(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
     nil
   )
   factory.makeWindowAssociation(hwnd, DXGI_MWA_NO_ALT_ENTER)
-  ctxLog("Swap chain created and window association configured")
 
   ctx.swapChain = swapChain1.upgradeToSwapChain3()
   swapChain1.release()
@@ -80,7 +72,6 @@ proc initDevice*(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   ctx.descriptorHeap = ctx.device.createDescriptorHeap(addr heapDesc)
   if ctx.descriptorHeap == nil:
     raise newException(Exception, "Descriptor heap creation returned nil")
-  ctxLog("RTV descriptor heap ready")
 
   ctx.rtvDescriptorSize = ctx.device.getDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV)
   let baseHandle = ctx.descriptorHeap.getCPUDescriptorHandleForHeapStart()
@@ -89,19 +80,16 @@ proc initDevice*(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
     ctx.rtvHandles[i] = offsetHandle(baseHandle, ctx.rtvDescriptorSize, i)
     ctx.renderTargets[i] = ctx.swapChain.getBuffer(UINT(i))
     ctx.device.createRenderTargetView(ctx.renderTargets[i], nil, ctx.rtvHandles[i])
-  ctxLog("Render target views created for all back buffers")
 
   ctx.commandAllocator = ctx.device.createCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT)
   ctx.commandList = ctx.device.createCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, ctx.commandAllocator, nil)
   ctx.commandList.close()
-  ctxLog("Command allocator and command list initialized")
 
   ctx.fence = ctx.device.createFence(0, D3D12_FENCE_FLAG_NONE)
   ctx.fenceValue = 1
   ctx.fenceEvent = CreateEventW(nil, 0, 0, nil)
   if ctx.fenceEvent == 0:
     raise newException(Exception, "Failed to create fence event")
-  ctxLog("Fence and synchronization primitives established")
 
   ctx.viewport = D3D12_VIEWPORT(
     TopLeftX: 0.0, TopLeftY: 0.0,
@@ -109,20 +97,16 @@ proc initDevice*(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
     MinDepth: 0.0, MaxDepth: 1.0
   )
   ctx.scissor = D3D12_RECT(left: 0, top: 0, right: int32(width), bottom: int32(height))
-  ctxLog("Viewport and scissor rectangle configured")
 
 proc waitForGpu*(ctx: var D3D12Context) =
   let fenceToWait = ctx.fenceValue
-  ctxLog("Waiting for GPU fence value " & $fenceToWait)
   ctx.commandQueue.signal(ctx.fence, fenceToWait)
   inc ctx.fenceValue
   if ctx.fence.getCompletedValue() < fenceToWait:
     ctx.fence.setEventOnCompletion(fenceToWait, ctx.fenceEvent)
     discard WaitForSingleObject(ctx.fenceEvent, WAIT_INFINITE)
-  ctxLog("GPU synchronization complete for fence " & $fenceToWait)
 
 proc moveToNextFrame*(ctx: var D3D12Context) =
-  ctxLog("Moving to next frame from " & $ctx.currentFrame)
   let currentFence = ctx.fenceValue
   ctx.commandQueue.signal(ctx.fence, currentFence)
   inc ctx.fenceValue
@@ -130,10 +114,8 @@ proc moveToNextFrame*(ctx: var D3D12Context) =
     ctx.fence.setEventOnCompletion(currentFence, ctx.fenceEvent)
     discard WaitForSingleObject(ctx.fenceEvent, WAIT_INFINITE)
   ctx.currentFrame = (ctx.currentFrame + 1) mod FRAME_COUNT
-  ctxLog("Now rendering frame index " & $ctx.currentFrame)
 
 proc recordCommandList*(ctx: var D3D12Context, color: array[4, FLOAT]) =
-  ctxLog("Recording command list for frame " & $ctx.currentFrame)
   ctx.commandAllocator.reset()
   ctx.commandList.reset(ctx.commandAllocator, nil)
 
@@ -158,18 +140,14 @@ proc recordCommandList*(ctx: var D3D12Context, color: array[4, FLOAT]) =
   ctx.commandList.resourceBarrier(1, addr barrier)
 
   ctx.commandList.close()
-  ctxLog("Command list recorded and closed")
 
 proc executeFrame*(ctx: var D3D12Context) =
-  ctxLog("Executing frame " & $ctx.currentFrame)
   var commandListIface = cast[ID3D12CommandList](ctx.commandList)
   ctx.commandQueue.executeCommandLists(1, addr commandListIface)
   ctx.swapChain.present(1, 0)
   ctx.moveToNextFrame()
-  ctxLog("Frame execution submitted")
 
 proc cleanup*(ctx: var D3D12Context) =
-  ctxLog("Cleaning up D3D12 context")
   ctx.waitForGpu()
   for i in 0..<FRAME_COUNT:
     if ctx.renderTargets[i] != nil:
@@ -199,4 +177,3 @@ proc cleanup*(ctx: var D3D12Context) =
   if ctx.fenceEvent != 0:
     discard CloseHandle(ctx.fenceEvent)
     ctx.fenceEvent = 0
-  ctxLog("D3D12 context cleanup complete")
