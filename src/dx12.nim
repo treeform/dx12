@@ -794,6 +794,44 @@ proc getBuffer*(self: IDXGISwapChain3, index: UINT): ID3D12Resource =
   if hr < 0:
     raise newException(Exception, "IDXGISwapChain3.GetBuffer failed with HRESULT " & $hr)
 
+proc resizeBuffers*(
+    self: IDXGISwapChain3,
+    bufferCount,
+    width,
+    height,
+    newFormat,
+    swapChainFlags: UINT
+  ) =
+  ## Resizes the swap-chain back buffers.
+  type F = proc(
+      this: IDXGISwapChain3,
+      bufferCount,
+      width,
+      height,
+      newFormat,
+      swapChainFlags: UINT
+    ): HRESULT {.stdcall.}
+  let hr = callVtbl(
+    self,
+    13,
+    F,
+    bufferCount,
+    width,
+    height,
+    newFormat,
+    swapChainFlags
+  )
+  if hr < 0:
+    raise newException(
+      Exception,
+      "IDXGISwapChain3.ResizeBuffers failed with HRESULT " & $hr
+    )
+
+proc getCurrentBackBufferIndex*(self: IDXGISwapChain3): UINT =
+  ## Returns the current swap-chain back buffer index.
+  type F = proc(this: IDXGISwapChain3): UINT {.stdcall.}
+  callVtbl0(self, 36, F)
+
 proc getCompletedValue*(self: ID3D12Fence): UINT64 =
   type F = proc(this: ID3D12Fence): UINT64 {.stdcall.}
   callVtbl0(self, 8, F)

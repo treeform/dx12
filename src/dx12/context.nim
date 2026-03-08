@@ -25,6 +25,35 @@ proc offsetHandle*(base: D3D12_CPU_DESCRIPTOR_HANDLE, descriptorSize: UINT, inde
   result = base
   result.ptrValue = base.ptrValue + uint64(descriptorSize) * uint64(index)
 
+proc refreshRenderTargets(ctx: var D3D12Context) =
+  ## Refreshes the RTVs from the current swap-chain buffers.
+  let baseHandle = ctx.descriptorHeap.getCPUDescriptorHandleForHeapStart()
+  for i in 0 ..< FRAME_COUNT:
+    ctx.rtvHandles[i] = offsetHandle(baseHandle, ctx.rtvDescriptorSize, i)
+    ctx.renderTargets[i] = ctx.swapChain.getBuffer(UINT(i))
+    ctx.device.createRenderTargetView(
+      ctx.renderTargets[i],
+      nil,
+      ctx.rtvHandles[i]
+    )
+
+proc updateViewport(ctx: var D3D12Context, width, height: int) =
+  ## Updates the viewport and scissor to match the swap-chain size.
+  ctx.viewport = D3D12_VIEWPORT(
+    TopLeftX: 0.0,
+    TopLeftY: 0.0,
+    Width: FLOAT(width),
+    Height: FLOAT(height),
+    MinDepth: 0.0,
+    MaxDepth: 1.0
+  )
+  ctx.scissor = D3D12_RECT(
+    left: 0,
+    top: 0,
+    right: int32(width),
+    bottom: int32(height)
+  )
+
 proc initDevice*(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   loadNativeSymbols()
 
@@ -74,12 +103,7 @@ proc initDevice*(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
     raise newException(Exception, "Descriptor heap creation returned nil")
 
   ctx.rtvDescriptorSize = ctx.device.getDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV)
-  let baseHandle = ctx.descriptorHeap.getCPUDescriptorHandleForHeapStart()
-
-  for i in 0..<FRAME_COUNT:
-    ctx.rtvHandles[i] = offsetHandle(baseHandle, ctx.rtvDescriptorSize, i)
-    ctx.renderTargets[i] = ctx.swapChain.getBuffer(UINT(i))
-    ctx.device.createRenderTargetView(ctx.renderTargets[i], nil, ctx.rtvHandles[i])
+  ctx.refreshRenderTargets()
 
   ctx.commandAllocator = ctx.device.createCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT)
   ctx.commandList = ctx.device.createCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, ctx.commandAllocator, nil)
@@ -91,12 +115,8 @@ proc initDevice*(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   if ctx.fenceEvent == 0:
     raise newException(Exception, "Failed to create fence event")
 
-  ctx.viewport = D3D12_VIEWPORT(
-    TopLeftX: 0.0, TopLeftY: 0.0,
-    Width: FLOAT(width), Height: FLOAT(height),
-    MinDepth: 0.0, MaxDepth: 1.0
-  )
-  ctx.scissor = D3D12_RECT(left: 0, top: 0, right: int32(width), bottom: int32(height))
+  ctx.currentFrame = int(ctx.swapChain.getCurrentBackBufferIndex())
+  ctx.updateViewport(width, height)
 
 proc waitForGpu*(ctx: var D3D12Context) =
   let fenceToWait = ctx.fenceValue
@@ -113,7 +133,7 @@ proc moveToNextFrame*(ctx: var D3D12Context) =
   if ctx.fence.getCompletedValue() < currentFence:
     ctx.fence.setEventOnCompletion(currentFence, ctx.fenceEvent)
     discard WaitForSingleObject(ctx.fenceEvent, WAIT_INFINITE)
-  ctx.currentFrame = (ctx.currentFrame + 1) mod FRAME_COUNT
+  ctx.currentFrame = int(ctx.swapChain.getCurrentBackBufferIndex())
 
 proc recordCommandList*(ctx: var D3D12Context, color: array[4, FLOAT]) =
   ctx.commandAllocator.reset()
@@ -146,6 +166,27 @@ proc executeFrame*(ctx: var D3D12Context) =
   ctx.commandQueue.executeCommandLists(1, addr commandListIface)
   ctx.swapChain.present(1, 0)
   ctx.moveToNextFrame()
+
+proc resize*(ctx: var D3D12Context, width, height: int) =
+  ## Resizes the swap-chain buffers and refreshes dependent state.
+  let
+    safeWidth = max(1, width)
+    safeHeight = max(1, height)
+  ctx.waitForGpu()
+  for i in 0 ..< FRAME_COUNT:
+    if ctx.renderTargets[i] != nil:
+      ctx.renderTargets[i].release()
+      ctx.renderTargets[i] = nil
+  ctx.swapChain.resizeBuffers(
+    FRAME_COUNT,
+    UINT(safeWidth),
+    UINT(safeHeight),
+    DXGI_FORMAT_R8G8B8A8_UNORM,
+    0
+  )
+  ctx.currentFrame = int(ctx.swapChain.getCurrentBackBufferIndex())
+  ctx.refreshRenderTargets()
+  ctx.updateViewport(safeWidth, safeHeight)
 
 proc cleanup*(ctx: var D3D12Context) =
   ctx.waitForGpu()
