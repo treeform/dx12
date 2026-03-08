@@ -15,18 +15,19 @@ let codes = {
 }.toTable
 
 proc messageHr*(hr: int32, msg: string): string =
-  let hr = hr.uint32
   if hr < 0:
-    if hr in codes:
-      "Success: " & msg & ": " & codes[hr] 
+    let hrCode = hr.uint32
+    if hrCode in codes:
+      msg & ": " & codes[hrCode]
     else:
-      "Success: " & msg & ": " & fmt"Unknown error: {hr:0x}"
+      msg & ": " & fmt"Unknown error: {hrCode:0x}"
   else:
-    if hr in codes:
-      msg & ": " & codes[hr] 
+    let hrCode = hr.uint32
+    if hrCode in codes:
+      msg & ": " & codes[hrCode]
     else:
-      msg & ": " & fmt"Unknown success: {hr:0x}"
-    
+      msg & ": " & fmt"Unknown success: {hrCode:0x}"
+
 proc checkHr*(hr: int32, msg: string) =
   if hr < 0:
     raise newException(Exception, messageHr(hr, msg))
