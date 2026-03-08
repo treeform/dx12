@@ -39,6 +39,32 @@ The examples are intended for local development in a multi-repo workspace.
 See `examples/nim.cfg` for the extra example-only paths used during
 development.
 
+### Example Screenshots
+
+#### `basic_screen`
+
+![basic_screen](docs/basic_screen.png)
+
+#### `basic_triangle`
+
+![basic_triangle](docs/basic_triangle.png)
+
+#### `basic_quad`
+
+![basic_quad](docs/basic_quad.png)
+
+#### `basic_cube`
+
+![basic_cube](docs/basic_cube.png)
+
+#### `spritesheet`
+
+![spritesheet](docs/spritesheet.png)
+
+#### `viewer_obj`
+
+![viewer_obj](docs/viewer_obj.png)
+
 ## Notes
 
 - This project is intended to build and test on Windows.
