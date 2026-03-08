@@ -31,46 +31,46 @@ type
 const
   CubeVertices = [
     CubeVertex(position: [-1.0'f32, 1.0'f32, 1.0'f32], uv: [0.0'f32, 0.0'f32]),
+    CubeVertex(position: [1.0'f32, -1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [1.0'f32, 1.0'f32, 1.0'f32], uv: [1.0'f32, 0.0'f32]),
-    CubeVertex(position: [1.0'f32, -1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [-1.0'f32, 1.0'f32, 1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [1.0'f32, -1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [-1.0'f32, -1.0'f32, 1.0'f32], uv: [0.0'f32, 1.0'f32]),
+    CubeVertex(position: [1.0'f32, -1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
 
     CubeVertex(position: [1.0'f32, 1.0'f32, -1.0'f32], uv: [0.0'f32, 0.0'f32]),
+    CubeVertex(position: [-1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [-1.0'f32, 1.0'f32, -1.0'f32], uv: [1.0'f32, 0.0'f32]),
-    CubeVertex(position: [-1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [1.0'f32, 1.0'f32, -1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [-1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [1.0'f32, -1.0'f32, -1.0'f32], uv: [0.0'f32, 1.0'f32]),
+    CubeVertex(position: [-1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32]),
 
     CubeVertex(position: [-1.0'f32, 1.0'f32, -1.0'f32], uv: [0.0'f32, 0.0'f32]),
+    CubeVertex(position: [-1.0'f32, -1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [-1.0'f32, 1.0'f32, 1.0'f32], uv: [1.0'f32, 0.0'f32]),
-    CubeVertex(position: [-1.0'f32, -1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [-1.0'f32, 1.0'f32, -1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [-1.0'f32, -1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [-1.0'f32, -1.0'f32, -1.0'f32], uv: [0.0'f32, 1.0'f32]),
+    CubeVertex(position: [-1.0'f32, -1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
 
     CubeVertex(position: [1.0'f32, 1.0'f32, 1.0'f32], uv: [0.0'f32, 0.0'f32]),
+    CubeVertex(position: [1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [1.0'f32, 1.0'f32, -1.0'f32], uv: [1.0'f32, 0.0'f32]),
-    CubeVertex(position: [1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [1.0'f32, 1.0'f32, 1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [1.0'f32, -1.0'f32, 1.0'f32], uv: [0.0'f32, 1.0'f32]),
+    CubeVertex(position: [1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32]),
 
     CubeVertex(position: [-1.0'f32, 1.0'f32, -1.0'f32], uv: [0.0'f32, 0.0'f32]),
+    CubeVertex(position: [1.0'f32, 1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [1.0'f32, 1.0'f32, -1.0'f32], uv: [1.0'f32, 0.0'f32]),
-    CubeVertex(position: [1.0'f32, 1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [-1.0'f32, 1.0'f32, -1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [1.0'f32, 1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [-1.0'f32, 1.0'f32, 1.0'f32], uv: [0.0'f32, 1.0'f32]),
+    CubeVertex(position: [1.0'f32, 1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
 
     CubeVertex(position: [-1.0'f32, -1.0'f32, 1.0'f32], uv: [0.0'f32, 0.0'f32]),
+    CubeVertex(position: [1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [1.0'f32, -1.0'f32, 1.0'f32], uv: [1.0'f32, 0.0'f32]),
-    CubeVertex(position: [1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32]),
     CubeVertex(position: [-1.0'f32, -1.0'f32, 1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32]),
-    CubeVertex(position: [-1.0'f32, -1.0'f32, -1.0'f32], uv: [0.0'f32, 1.0'f32])
+    CubeVertex(position: [-1.0'f32, -1.0'f32, -1.0'f32], uv: [0.0'f32, 1.0'f32]),
+    CubeVertex(position: [1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32])
   ]
 
 proc texturePath(): string =
