@@ -8,6 +8,7 @@ type
     device*: ID3D12Device
     commandQueue*: ID3D12CommandQueue
     swapChain*: IDXGISwapChain3
+    allowTearing*: bool
     descriptorHeap*: ID3D12DescriptorHeap
     renderTargets*: array[FRAME_COUNT, ID3D12Resource]
     rtvHandles*: array[FRAME_COUNT, D3D12_CPU_DESCRIPTOR_HANDLE]
@@ -58,6 +59,22 @@ proc initDevice*(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   loadNativeSymbols()
 
   var factory = createDxgiFactory2(0)
+  var factory5: IDXGIFactory5
+  try:
+    factory5 = factory.upgradeToFactory5()
+    var allowTearing: BOOL32
+    factory5.checkFeatureSupport(
+      DXGI_FEATURE_PRESENT_ALLOW_TEARING,
+      addr allowTearing,
+      UINT(sizeof(allowTearing))
+    )
+    ctx.allowTearing = allowTearing != 0
+  except:
+    ctx.allowTearing = false
+  finally:
+    if factory5 != nil:
+      release(factory5)
+
   ctx.device = d3d12CreateDevice(nil, D3D_FEATURE_LEVEL_11_0)
 
   var queueDesc: D3D12_COMMAND_QUEUE_DESC
@@ -78,7 +95,11 @@ proc initDevice*(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   swapDesc.Scaling = DXGI_SCALING_STRETCH
   swapDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD
   swapDesc.AlphaMode = DXGI_ALPHA_MODE_UNSPECIFIED
-  swapDesc.Flags = 0
+  swapDesc.Flags =
+    if ctx.allowTearing:
+      DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING
+    else:
+      0
 
   var swapChain1 = factory.createSwapChainForHwnd(
     cast[pointer](ctx.commandQueue),
@@ -119,6 +140,7 @@ proc initDevice*(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   ctx.updateViewport(width, height)
 
 proc waitForGpu*(ctx: var D3D12Context) =
+  ## Waits until the GPU has finished all queued work.
   let fenceToWait = ctx.fenceValue
   ctx.commandQueue.signal(ctx.fence, fenceToWait)
   inc ctx.fenceValue
@@ -127,6 +149,7 @@ proc waitForGpu*(ctx: var D3D12Context) =
     discard WaitForSingleObject(ctx.fenceEvent, WAIT_INFINITE)
 
 proc moveToNextFrame*(ctx: var D3D12Context) =
+  ## Advances to the next frame, waiting when the back buffer is still in use.
   let currentFence = ctx.fenceValue
   ctx.commandQueue.signal(ctx.fence, currentFence)
   inc ctx.fenceValue
@@ -161,10 +184,16 @@ proc recordCommandList*(ctx: var D3D12Context, color: array[4, FLOAT]) =
 
   ctx.commandList.close()
 
-proc executeFrame*(ctx: var D3D12Context) =
+proc executeFrame*(ctx: var D3D12Context, vsync = true) =
+  ## Presents the current frame using the window vsync policy.
   var commandListIface = cast[ID3D12CommandList](ctx.commandList)
   ctx.commandQueue.executeCommandLists(1, addr commandListIface)
-  ctx.swapChain.present(1, 0)
+  let flags =
+    if not vsync and ctx.allowTearing:
+      DXGI_PRESENT_ALLOW_TEARING
+    else:
+      0
+  ctx.swapChain.present(if vsync: 1 else: 0, flags)
   ctx.moveToNextFrame()
 
 proc resize*(ctx: var D3D12Context, width, height: int) =
@@ -182,7 +211,10 @@ proc resize*(ctx: var D3D12Context, width, height: int) =
     UINT(safeWidth),
     UINT(safeHeight),
     DXGI_FORMAT_R8G8B8A8_UNORM,
-    0
+    if ctx.allowTearing:
+      DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING
+    else:
+      0
   )
   ctx.currentFrame = int(ctx.swapChain.getCurrentBackBufferIndex())
   ctx.refreshRenderTargets()

@@ -8,6 +8,7 @@ type
   UINT64* = uint64
   FLOAT* = float32
   BOOL32* = int32
+  DXGI_FEATURE* = uint32
   DXGI_FORMAT* = uint32
   D3D_FEATURE_LEVEL* = uint32
   D3D12_COMMAND_LIST_TYPE* = uint32
@@ -26,6 +27,7 @@ type
 # --- COM interface stubs (opaque pointers) ---
 type
   IDXGIFactory4* = ptr object
+  IDXGIFactory5* = ptr object
   IDXGISwapChain1* = ptr object
   IDXGISwapChain3* = ptr object
   ID3D12Device* = ptr object
@@ -349,6 +351,9 @@ const
   DXGI_USAGE_RENDER_TARGET_OUTPUT* = 0x20'u32
   DXGI_SCALING_STRETCH* = 0'u32
   DXGI_SWAP_EFFECT_FLIP_DISCARD* = 4'u32
+  DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING* = 0x800'u32
+  DXGI_PRESENT_ALLOW_TEARING* = 0x200'u32
+  DXGI_FEATURE_PRESENT_ALLOW_TEARING* = 0'u32
   DXGI_ALPHA_MODE_UNSPECIFIED* = 0'u32
   DXGI_MWA_NO_ALT_ENTER* = 0x2'u32
 
@@ -859,6 +864,32 @@ proc makeWindowAssociation*(factory: IDXGIFactory4, hwnd: HWND, flags: UINT) =
   if hr < 0:
     raise newException(Exception, "IDXGIFactory4.MakeWindowAssociation failed with HRESULT " & $hr)
 
+proc checkFeatureSupport*(
+  factory: IDXGIFactory5,
+  feature: DXGI_FEATURE,
+  supportData: pointer,
+  supportDataSize: UINT
+) =
+  type F = proc(
+    this: IDXGIFactory5,
+    feature: DXGI_FEATURE,
+    supportData: pointer,
+    supportDataSize: UINT
+  ): HRESULT {.stdcall.}
+  let hr = callVtbl(
+    factory,
+    28,
+    F,
+    feature,
+    supportData,
+    supportDataSize
+  )
+  if hr < 0:
+    raise newException(
+      Exception,
+      "IDXGIFactory5.CheckFeatureSupport failed with HRESULT " & $hr
+    )
+
 proc queryInterface*[T](iface: pointer, riid: ptr DXGuid): T =
   type F = proc(this: pointer, riid: ptr DXGuid, outObj: ptr pointer): HRESULT {.stdcall.}
   var tmp: pointer
@@ -872,6 +903,22 @@ proc queryInterface*[T](iface: pointer, riid: ptr DXGuid): T =
 proc upgradeToSwapChain3*(swapChain1: IDXGISwapChain1): IDXGISwapChain3 =
   const IID_IDXGISwapChain3 = newGuid(0x94d99bdb'u32,0xf1f8'u16,0x4ab0'u16,0xb2'u8,0x36'u8,0x7d'u8,0xa0'u8,0x17'u8,0x0e'u8,0xda'u8,0xb1'u8)
   queryInterface[IDXGISwapChain3](swapChain1, addr IID_IDXGISwapChain3)
+
+proc upgradeToFactory5*(factory4: IDXGIFactory4): IDXGIFactory5 =
+  const IID_IDXGIFactory5 = newGuid(
+    0x7632e1f5'u32,
+    0xee65'u16,
+    0x4dca'u16,
+    0x87'u8,
+    0xfd'u8,
+    0x84'u8,
+    0xcd'u8,
+    0x75'u8,
+    0xf8'u8,
+    0x83'u8,
+    0x8d'u8
+  )
+  queryInterface[IDXGIFactory5](factory4, addr IID_IDXGIFactory5)
 
 proc createDxgiFactory2*(flags: UINT): IDXGIFactory4 =
   const IID_IDXGIFactory4 = newGuid(0x1bc6ea02'u32,0xef36'u16,0x464f'u16,0xbf'u8,0x0c'u8,0x21'u8,0xca'u8,0x39'u8,0xe5'u8,0x16'u8,0x8a'u8)
