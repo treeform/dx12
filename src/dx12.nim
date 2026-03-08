@@ -113,11 +113,14 @@ type
     Flags*: D3D12_RESOURCE_BARRIER_FLAGS
     Transition*: D3D12_RESOURCE_TRANSITION_BARRIER
 
+  D3D12_TEXTURE_COPY_LOCATION_UNION* {.union.} = object
+    PlacedFootprint*: D3D12_PLACED_SUBRESOURCE_FOOTPRINT
+    SubresourceIndex*: uint32
+
   D3D12_TEXTURE_COPY_LOCATION* = object
     pResource*: ID3D12Resource
     typ*: uint32
-    PlacedFootprint*: D3D12_PLACED_SUBRESOURCE_FOOTPRINT
-    SubresourceIndex*: uint32
+    data*: D3D12_TEXTURE_COPY_LOCATION_UNION
 
   D3D12_BOX* = object
     left*, top*, front*: UINT
@@ -218,11 +221,30 @@ type
     PlaneSlice*: uint32
     ResourceMinLODClamp*: FLOAT
 
+  D3D12_BUFFER_SRV* = object
+    FirstElement*: UINT64
+    NumElements*: UINT
+    StructureByteStride*: UINT
+    Flags*: uint32
+
+  D3D12_TEX2D_ARRAY_SRV* = object
+    MostDetailedMip*: uint32
+    MipLevels*: uint32
+    FirstArraySlice*: uint32
+    ArraySize*: uint32
+    PlaneSlice*: uint32
+    ResourceMinLODClamp*: FLOAT
+
+  D3D12_SHADER_RESOURCE_VIEW_DESC_UNION* {.union.} = object
+    Buffer*: D3D12_BUFFER_SRV
+    Texture2D*: D3D12_TEX2D_SRV
+    Texture2DArray*: D3D12_TEX2D_ARRAY_SRV
+
   D3D12_SHADER_RESOURCE_VIEW_DESC* = object
     Format*: DXGI_FORMAT
     ViewDimension*: uint32
     Shader4ComponentMapping*: uint32
-    Texture2D*: D3D12_TEX2D_SRV
+    data*: D3D12_SHADER_RESOURCE_VIEW_DESC_UNION
 
   D3D12_RENDER_TARGET_BLEND_DESC* = object
     BlendEnable*: BOOL32
@@ -360,6 +382,8 @@ const
   D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS* = 1'u32
   D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE* = 0'u32
   D3D12_ROOT_PARAMETER_TYPE_CBV* = 2'u32
+  D3D12_ROOT_PARAMETER_TYPE_SRV* = 3'u32
+  D3D12_ROOT_PARAMETER_TYPE_UAV* = 4'u32
   D3D12_SHADER_VISIBILITY_ALL* = 0'u32
   D3D12_SHADER_VISIBILITY_PIXEL* = 5'u32
   D3D12_STATIC_BORDER_COLOR_TRANSPARENT_BLACK* = 0'u32
