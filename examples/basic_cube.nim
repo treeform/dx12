@@ -11,6 +11,7 @@ const
   TextureSize = 128
   TextureMaxAnisotropy = 8'u32
   D3D12FilterAnisotropic = 0x55'u32
+  MsaaSampleCount = 4'u32
 
 type
   CubeVertex = object
@@ -22,6 +23,9 @@ type
     pipelineState: ID3D12PipelineState
     vertexBuffer: ID3D12Resource
     vertexBufferView: D3D12_VERTEX_BUFFER_VIEW
+    colorBuffer: ID3D12Resource
+    colorHeap: ID3D12DescriptorHeap
+    colorHandle: D3D12_CPU_DESCRIPTOR_HANDLE
     texture: ID3D12Resource
     srvHeap: ID3D12DescriptorHeap
     srvHandleGpu: D3D12_GPU_DESCRIPTOR_HANDLE
@@ -447,6 +451,62 @@ proc uploadTexture(ctx: var D3D12Context, renderer: var CubeRenderer) =
   )
   ctx.device.createShaderResourceView(renderer.texture, addr srvDesc, srvCpuHandle)
 
+proc createColorBuffer(ctx: var D3D12Context, renderer: var CubeRenderer) =
+  ## Creates the multisampled color target and its RTV heap.
+  var colorHeapDesc = D3D12_DESCRIPTOR_HEAP_DESC(
+    typ: D3D12_DESCRIPTOR_HEAP_TYPE_RTV,
+    NumDescriptors: 1,
+    Flags: D3D12_DESCRIPTOR_HEAP_FLAG_NONE,
+    NodeMask: 0
+  )
+  renderer.colorHeap = ctx.device.createDescriptorHeap(addr colorHeapDesc)
+  renderer.colorHandle = renderer.colorHeap.getCPUDescriptorHandleForHeapStart()
+
+  var colorDesc: D3D12_RESOURCE_DESC
+  zeroMem(addr colorDesc, sizeof(colorDesc))
+  colorDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D
+  colorDesc.Alignment = 0
+  colorDesc.Width = uint64(Width)
+  colorDesc.Height = UINT(Height)
+  colorDesc.DepthOrArraySize = 1
+  colorDesc.MipLevels = 1
+  colorDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM
+  colorDesc.SampleDesc = DXGI_SAMPLE_DESC(
+    Count: MsaaSampleCount,
+    Quality: 0
+  )
+  colorDesc.Layout = D3D12_TEXTURE_LAYOUT_UNKNOWN
+  colorDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET
+
+  var defaultHeap: D3D12_HEAP_PROPERTIES
+  zeroMem(addr defaultHeap, sizeof(defaultHeap))
+  defaultHeap.typ = D3D12_HEAP_TYPE_DEFAULT
+  defaultHeap.CPUPageProperty = 0
+  defaultHeap.MemoryPoolPreference = 0
+  defaultHeap.CreationNodeMask = 1
+  defaultHeap.VisibleNodeMask = 1
+
+  let clearColor = [0.0.FLOAT, 0.0.FLOAT, 0.0.FLOAT, 1.0.FLOAT]
+  var clearValue = D3D12_CLEAR_VALUE(
+    Format: DXGI_FORMAT_R8G8B8A8_UNORM,
+    data: D3D12_CLEAR_VALUE_UNION(
+      Color: clearColor
+    )
+  )
+
+  renderer.colorBuffer = ctx.device.createCommittedResource(
+    addr defaultHeap,
+    D3D12_HEAP_FLAG_NONE,
+    addr colorDesc,
+    D3D12_RESOURCE_STATE_RENDER_TARGET,
+    addr clearValue
+  )
+  ctx.device.createRenderTargetView(
+    renderer.colorBuffer,
+    nil,
+    renderer.colorHandle
+  )
+
 proc createDepthBuffer(ctx: var D3D12Context, renderer: var CubeRenderer) =
   ## Creates a depth buffer and its descriptor heap.
   var dsvHeapDesc = D3D12_DESCRIPTOR_HEAP_DESC(
@@ -467,7 +527,10 @@ proc createDepthBuffer(ctx: var D3D12Context, renderer: var CubeRenderer) =
   depthDesc.DepthOrArraySize = 1
   depthDesc.MipLevels = 1
   depthDesc.Format = DXGI_FORMAT_D32_FLOAT
-  depthDesc.SampleDesc = DXGI_SAMPLE_DESC(Count: 1, Quality: 0)
+  depthDesc.SampleDesc = DXGI_SAMPLE_DESC(
+    Count: MsaaSampleCount,
+    Quality: 0
+  )
   depthDesc.Layout = D3D12_TEXTURE_LAYOUT_UNKNOWN
   depthDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL
 
@@ -668,7 +731,7 @@ float4 PSMain(PSInput input) : SV_TARGET {
       DepthBiasClamp: 0.0,
       SlopeScaledDepthBias: 0.0,
       DepthClipEnable: 1,
-      MultisampleEnable: 0,
+      MultisampleEnable: 1,
       AntialiasedLineEnable: 0,
       ForcedSampleCount: 0,
       ConservativeRaster: D3D12_CONSERVATIVE_RASTERIZATION_MODE_OFF
@@ -691,7 +754,10 @@ float4 PSMain(PSInput input) : SV_TARGET {
     PrimitiveTopologyType: D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE,
     NumRenderTargets: 1,
     DSVFormat: DXGI_FORMAT_D32_FLOAT,
-    SampleDesc: DXGI_SAMPLE_DESC(Count: 1, Quality: 0),
+    SampleDesc: DXGI_SAMPLE_DESC(
+      Count: MsaaSampleCount,
+      Quality: 0
+    ),
     NodeMask: 0,
     CachedPSO: D3D12_CACHED_PIPELINE_STATE(),
     Flags: 0
@@ -702,6 +768,7 @@ float4 PSMain(PSInput input) : SV_TARGET {
 
   release(vsBlob)
   release(psBlob)
+  createColorBuffer(ctx, renderer)
   createDepthBuffer(ctx, renderer)
   uploadVertexBuffer(ctx, renderer)
   uploadTexture(ctx, renderer)
@@ -724,7 +791,7 @@ proc recordCube(
       pResource: ctx.renderTargets[ctx.currentFrame],
       Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
       StateBefore: D3D12_RESOURCE_STATE_PRESENT,
-      StateAfter: D3D12_RESOURCE_STATE_RENDER_TARGET
+      StateAfter: D3D12_RESOURCE_STATE_RESOLVE_DEST
     )
   )
   ctx.commandList.resourceBarrier(1, addr barrier)
@@ -732,12 +799,12 @@ proc recordCube(
   ctx.commandList.rsSetScissorRects(1, addr ctx.scissor)
   ctx.commandList.omSetRenderTargets(
     1,
-    addr ctx.rtvHandles[ctx.currentFrame],
+    addr renderer.colorHandle,
     1,
     unsafeAddr renderer.dsvHandle
   )
   ctx.commandList.clearRenderTargetView(
-    ctx.rtvHandles[ctx.currentFrame],
+    renderer.colorHandle,
     unsafeAddr clearColor[0],
     0,
     nil
@@ -764,13 +831,41 @@ proc recordCube(
   ctx.commandList.iaSetVertexBuffers(0, 1, unsafeAddr renderer.vertexBufferView)
   ctx.commandList.drawInstanced(UINT(CubeVertices.len), 1, 0, 0)
 
-  barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET
+  var resolveBarrier = D3D12_RESOURCE_BARRIER(
+    typ: D3D12_RESOURCE_BARRIER_TYPE_TRANSITION,
+    Flags: D3D12_RESOURCE_BARRIER_FLAG_NONE,
+    Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
+      pResource: renderer.colorBuffer,
+      Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
+      StateBefore: D3D12_RESOURCE_STATE_RENDER_TARGET,
+      StateAfter: D3D12_RESOURCE_STATE_RESOLVE_SOURCE
+    )
+  )
+  ctx.commandList.resourceBarrier(1, addr resolveBarrier)
+  ctx.commandList.resolveSubresource(
+    ctx.renderTargets[ctx.currentFrame],
+    0,
+    renderer.colorBuffer,
+    0,
+    DXGI_FORMAT_R8G8B8A8_UNORM
+  )
+  resolveBarrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RESOLVE_SOURCE
+  resolveBarrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET
+  ctx.commandList.resourceBarrier(1, addr resolveBarrier)
+
+  barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RESOLVE_DEST
   barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT
   ctx.commandList.resourceBarrier(1, addr barrier)
   ctx.commandList.close()
 
 proc shutdown(renderer: var CubeRenderer) =
   ## Releases the renderer resources.
+  if renderer.colorBuffer != nil:
+    renderer.colorBuffer.release()
+    renderer.colorBuffer = nil
+  if renderer.colorHeap != nil:
+    renderer.colorHeap.release()
+    renderer.colorHeap = nil
   if renderer.depthBuffer != nil:
     renderer.depthBuffer.release()
     renderer.depthBuffer = nil

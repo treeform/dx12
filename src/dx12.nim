@@ -369,6 +369,7 @@ const
   D3D12_TEXTURE_LAYOUT_ROW_MAJOR* = 1'u32
   D3D12_TEXTURE_LAYOUT_UNKNOWN* = 0'u32
   D3D12_RESOURCE_FLAG_NONE* = 0'u32
+  D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET* = 0x1'u32
   D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL* = 0x2'u32
   D3D12_RESOURCE_STATE_PRESENT* = 0'u32
   D3D12_RESOURCE_STATE_RENDER_TARGET* = 0x4'u32
@@ -377,6 +378,8 @@ const
   D3D12_RESOURCE_STATE_GENERIC_READ* = 0x1'u32 or 0x2'u32 or
     0x40'u32 or 0x80'u32 or 0x200'u32 or 0x800'u32
   D3D12_RESOURCE_STATE_COPY_DEST* = 0x400'u32
+  D3D12_RESOURCE_STATE_RESOLVE_DEST* = 0x1000'u32
+  D3D12_RESOURCE_STATE_RESOLVE_SOURCE* = 0x2000'u32
   D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE* = 0x80'u32
   D3D12_RESOURCE_BARRIER_TYPE_TRANSITION* = 0'u32
   D3D12_RESOURCE_BARRIER_FLAG_NONE* = 0'u32
@@ -652,6 +655,33 @@ proc copyBufferRegion*(self: ID3D12GraphicsCommandList, dst: ID3D12Resource, dst
 proc copyTextureRegion*(self: ID3D12GraphicsCommandList, dst: ptr D3D12_TEXTURE_COPY_LOCATION, dstX, dstY, dstZ: UINT, src: ptr D3D12_TEXTURE_COPY_LOCATION, srcBox: ptr D3D12_BOX) =
   type F = proc(this: ID3D12GraphicsCommandList, dst: ptr D3D12_TEXTURE_COPY_LOCATION, dstX, dstY, dstZ: UINT, src: ptr D3D12_TEXTURE_COPY_LOCATION, srcBox: ptr D3D12_BOX): void {.stdcall.}
   callVtbl(self, 16, F, dst, dstX, dstY, dstZ, src, srcBox)
+
+proc resolveSubresource*(
+    self: ID3D12GraphicsCommandList,
+    dstResource: ID3D12Resource,
+    dstSubresource: UINT,
+    srcResource: ID3D12Resource,
+    srcSubresource: UINT,
+    format: DXGI_FORMAT
+  ) =
+  type F = proc(
+    this: ID3D12GraphicsCommandList,
+    dstResource: ID3D12Resource,
+    dstSubresource: UINT,
+    srcResource: ID3D12Resource,
+    srcSubresource: UINT,
+    format: DXGI_FORMAT
+  ): void {.stdcall.}
+  callVtbl(
+    self,
+    19,
+    F,
+    dstResource,
+    dstSubresource,
+    srcResource,
+    srcSubresource,
+    format
+  )
 
 proc resourceBarrier*(self: ID3D12GraphicsCommandList, count: UINT, barriers: ptr D3D12_RESOURCE_BARRIER) =
   type F = proc(this: ID3D12GraphicsCommandList, count: UINT, barriers: ptr D3D12_RESOURCE_BARRIER) {.stdcall.}
