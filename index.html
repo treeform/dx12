@@ -301,6 +301,7 @@
 <li><a class="reference" href="#D3D12_VIEWPORT" title="D3D12_VIEWPORT = object
   TopLeftX*, TopLeftY*, Width*, Height*, MinDepth*, MaxDepth*: FLOAT">D3D12_VIEWPORT</a></li>
 <li><a class="reference" href="#D3D_FEATURE_LEVEL" title="D3D_FEATURE_LEVEL = uint32">D3D_FEATURE_LEVEL</a></li>
+<li><a class="reference" href="#DXGI_FEATURE" title="DXGI_FEATURE = uint32">DXGI_FEATURE</a></li>
 <li><a class="reference" href="#DXGI_FORMAT" title="DXGI_FORMAT = uint32">DXGI_FORMAT</a></li>
 <li><a class="reference" href="#DXGI_SAMPLE_DESC" title="DXGI_SAMPLE_DESC = object
   Count*: UINT
@@ -335,6 +336,7 @@
 <li><a class="reference" href="#ID3D12RootSignature" title="ID3D12RootSignature = ptr object">ID3D12RootSignature</a></li>
 <li><a class="reference" href="#ID3DBlob" title="ID3DBlob = ptr object">ID3DBlob</a></li>
 <li><a class="reference" href="#IDXGIFactory4" title="IDXGIFactory4 = ptr object">IDXGIFactory4</a></li>
+<li><a class="reference" href="#IDXGIFactory5" title="IDXGIFactory5 = ptr object">IDXGIFactory5</a></li>
 <li><a class="reference" href="#IDXGIOutput" title="IDXGIOutput = ptr object">IDXGIOutput</a></li>
 <li><a class="reference" href="#IDXGISwapChain1" title="IDXGISwapChain1 = ptr object">IDXGISwapChain1</a></li>
 <li><a class="reference" href="#IDXGISwapChain3" title="IDXGISwapChain3 = ptr object">IDXGISwapChain3</a></li>
@@ -420,13 +422,16 @@
 <li><a class="reference" href="#D3D_FEATURE_LEVEL_11_0" title="D3D_FEATURE_LEVEL_11_0 = 0x0000B000'u32">D3D_FEATURE_LEVEL_11_0</a></li>
 <li><a class="reference" href="#D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST" title="D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST = 4'u32">D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST</a></li>
 <li><a class="reference" href="#DXGI_ALPHA_MODE_UNSPECIFIED" title="DXGI_ALPHA_MODE_UNSPECIFIED = 0'u32">DXGI_ALPHA_MODE_UNSPECIFIED</a></li>
+<li><a class="reference" href="#DXGI_FEATURE_PRESENT_ALLOW_TEARING" title="DXGI_FEATURE_PRESENT_ALLOW_TEARING = 0'u32">DXGI_FEATURE_PRESENT_ALLOW_TEARING</a></li>
 <li><a class="reference" href="#DXGI_FORMAT_D32_FLOAT" title="DXGI_FORMAT_D32_FLOAT = 40'u32">DXGI_FORMAT_D32_FLOAT</a></li>
 <li><a class="reference" href="#DXGI_FORMAT_R8G8B8A8_UNORM" title="DXGI_FORMAT_R8G8B8A8_UNORM = 28'u32">DXGI_FORMAT_R8G8B8A8_UNORM</a></li>
 <li><a class="reference" href="#DXGI_FORMAT_R32G32_FLOAT" title="DXGI_FORMAT_R32G32_FLOAT = 16'u32">DXGI_FORMAT_R32G32_FLOAT</a></li>
 <li><a class="reference" href="#DXGI_FORMAT_R32G32B32_FLOAT" title="DXGI_FORMAT_R32G32B32_FLOAT = 6'u32">DXGI_FORMAT_R32G32B32_FLOAT</a></li>
 <li><a class="reference" href="#DXGI_FORMAT_UNKNOWN" title="DXGI_FORMAT_UNKNOWN = 0'u32">DXGI_FORMAT_UNKNOWN</a></li>
 <li><a class="reference" href="#DXGI_MWA_NO_ALT_ENTER" title="DXGI_MWA_NO_ALT_ENTER = 0x00000002'u32">DXGI_MWA_NO_ALT_ENTER</a></li>
+<li><a class="reference" href="#DXGI_PRESENT_ALLOW_TEARING" title="DXGI_PRESENT_ALLOW_TEARING = 0x00000200'u32">DXGI_PRESENT_ALLOW_TEARING</a></li>
 <li><a class="reference" href="#DXGI_SCALING_STRETCH" title="DXGI_SCALING_STRETCH = 0'u32">DXGI_SCALING_STRETCH</a></li>
+<li><a class="reference" href="#DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING" title="DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING = 0x00000800'u32">DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING</a></li>
 <li><a class="reference" href="#DXGI_SWAP_EFFECT_FLIP_DISCARD" title="DXGI_SWAP_EFFECT_FLIP_DISCARD = 4'u32">DXGI_SWAP_EFFECT_FLIP_DISCARD</a></li>
 <li><a class="reference" href="#DXGI_USAGE_RENDER_TARGET_OUTPUT" title="DXGI_USAGE_RENDER_TARGET_OUTPUT = 0x00000020'u32">DXGI_USAGE_RENDER_TARGET_OUTPUT</a></li>
 <li><a class="reference" href="#FRAME_COUNT" title="FRAME_COUNT = 2">FRAME_COUNT</a></li>
@@ -440,7 +445,13 @@
   <details open>
     <summary><a class="reference reference-toplevel" href="#12" id="62">Procs</a></summary>
     <ul class="simple simple-toc-section">
-      <ul class="simple nested-toc-section">clearDepthStencilView
+      <ul class="simple nested-toc-section">checkFeatureSupport
+  <li><a class="reference" href="#checkFeatureSupport%2CIDXGIFactory5%2CDXGI_FEATURE%2Cpointer%2CUINT" title="checkFeatureSupport(factory: IDXGIFactory5; feature: DXGI_FEATURE;
+                    supportData: pointer; supportDataSize: UINT)">checkFeatureSupport(factory: IDXGIFactory5; feature: DXGI_FEATURE;
+                    supportData: pointer; supportDataSize: UINT)</a></li>
+
+</ul>
+<ul class="simple nested-toc-section">clearDepthStencilView
   <li><a class="reference" href="#clearDepthStencilView%2CID3D12GraphicsCommandList%2CD3D12_CPU_DESCRIPTOR_HANDLE%2Cuint32%2CFLOAT%2Cuint8%2CUINT%2Cpointer" title="clearDepthStencilView(self: ID3D12GraphicsCommandList;
                       handle: D3D12_CPU_DESCRIPTOR_HANDLE; flags: uint32;
                       depth: FLOAT; stencil: uint8; rectCount: UINT;
@@ -777,6 +788,10 @@
   <li><a class="reference" href="#unmap%2CID3D12Resource%2CUINT%2Cptr.D3D12_RANGE" title="unmap(self: ID3D12Resource; subresource: UINT; writtenRange: ptr D3D12_RANGE)">unmap(self: ID3D12Resource; subresource: UINT; writtenRange: ptr D3D12_RANGE)</a></li>
 
 </ul>
+<ul class="simple nested-toc-section">upgradeToFactory5
+  <li><a class="reference" href="#upgradeToFactory5%2CIDXGIFactory4" title="upgradeToFactory5(factory4: IDXGIFactory4): IDXGIFactory5">upgradeToFactory5(factory4: IDXGIFactory4): IDXGIFactory5</a></li>
+
+</ul>
 <ul class="simple nested-toc-section">upgradeToSwapChain3
   <li><a class="reference" href="#upgradeToSwapChain3%2CIDXGISwapChain1" title="upgradeToSwapChain3(swapChain1: IDXGISwapChain1): IDXGISwapChain3">upgradeToSwapChain3(swapChain1: IDXGISwapChain1): IDXGISwapChain3</a></li>
 
@@ -815,8 +830,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L456" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L456" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L461" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L461" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -828,8 +843,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L273" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L273" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L275" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L275" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -840,8 +855,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L137" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L137" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L139" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L139" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -854,8 +869,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L236" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L236" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L238" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L238" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -866,8 +881,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L307" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L307" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L309" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L309" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -878,8 +893,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L119" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L119" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L121" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L121" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -890,8 +905,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L115" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L115" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L117" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L117" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -900,8 +915,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L13" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L13" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L14" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L14" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -914,8 +929,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L74" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L74" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L76" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L76" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -924,8 +939,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L14" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L14" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L15" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L15" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -935,8 +950,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L68" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L68" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L70" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L70" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -953,8 +968,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L297" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L297" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L299" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L299" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -965,8 +980,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L111" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L111" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L113" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L113" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -979,8 +994,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L291" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L291" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L293" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L293" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -993,8 +1008,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L80" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L80" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L82" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L82" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1003,8 +1018,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L16" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L16" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L17" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L17" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1013,8 +1028,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L15" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L15" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L16" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L16" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1028,8 +1043,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L178" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L178" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L180" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L180" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1039,8 +1054,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L71" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L71" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L73" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L73" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1070,8 +1085,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L311" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L311" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L313" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L313" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1085,8 +1100,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L86" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L86" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L88" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L88" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1102,8 +1117,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L165" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L165" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L167" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L167" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1114,8 +1129,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L174" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L174" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L176" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L176" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1126,8 +1141,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L161" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L161" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L163" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L163" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1138,8 +1153,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L141" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L141" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L143" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L143" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1159,8 +1174,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L278" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L278" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L280" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L280" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1170,8 +1185,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L65" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L65" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L67" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L67" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1190,8 +1205,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L261" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L261" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L263" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L263" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1203,8 +1218,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L123" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L123" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L125" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L125" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1213,8 +1228,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L19" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L19" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L20" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L20" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1223,8 +1238,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L18" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L18" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L19" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L19" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1243,8 +1258,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L93" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L93" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L95" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L95" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1253,8 +1268,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L17" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L17" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L18" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L18" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1267,8 +1282,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L105" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L105" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L107" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L107" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1280,8 +1295,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L193" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L193" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L195" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L195" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1292,8 +1307,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L189" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L189" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L191" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L191" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1304,8 +1319,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L185" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L185" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L187" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L187" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1317,8 +1332,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L203" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L203" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L205" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L205" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1330,8 +1345,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L198" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L198" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L200" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L200" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1345,8 +1360,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L334" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L334" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L336" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L336" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1357,8 +1372,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L150" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L150" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L152" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L152" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1371,8 +1386,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L255" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L255" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L257" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L257" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1384,8 +1399,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L250" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L250" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L252" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L252" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1407,8 +1422,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L208" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L208" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L210" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L210" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1422,8 +1437,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L223" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L223" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L225" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L225" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1437,8 +1452,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L154" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L154" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L156" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L156" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1453,8 +1468,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L242" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L242" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L244" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L244" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1467,8 +1482,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L230" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L230" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L232" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L232" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1480,8 +1495,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L132" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L132" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L134" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L134" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1492,8 +1507,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L128" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L128" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L130" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L130" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1505,8 +1520,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L145" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L145" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L147" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L147" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1516,8 +1531,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L62" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L62" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L64" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L64" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1526,8 +1541,18 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L12" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L12" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L13" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L13" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+
+  </dd>
+</div>
+<div id="DXGI_FEATURE">
+  <dt><pre><a href="dx12.html#DXGI_FEATURE"><span class="Identifier">DXGI_FEATURE</span></a> <span class="Other">=</span> <span class="Identifier">uint32</span></pre></dt>
+  <dd>
+    
+    
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L11" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L11" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1536,8 +1561,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L11" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L11" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L12" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L12" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1548,8 +1573,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L46" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L46" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L48" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L48" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1568,8 +1593,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L50" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L50" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L52" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L52" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1582,8 +1607,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L20" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L20" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L21" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L21" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1612,8 +1637,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L34" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L34" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L36" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L36" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1622,8 +1647,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L35" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L35" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L37" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L37" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1632,8 +1657,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L33" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L33" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L35" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L35" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1642,8 +1667,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L37" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L37" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L39" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L39" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1652,8 +1677,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L31" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L31" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L33" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L33" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1662,8 +1687,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L38" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L38" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L40" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L40" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1672,8 +1697,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L36" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L36" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L38" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L38" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1682,8 +1707,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L41" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L41" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L43" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L43" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1692,8 +1717,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L32" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L32" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L34" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L34" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1702,8 +1727,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L40" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L40" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L42" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L42" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1712,8 +1737,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L42" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L42" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L44" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L44" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1722,8 +1747,18 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L28" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L28" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L29" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L29" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+
+  </dd>
+</div>
+<div id="IDXGIFactory5">
+  <dt><pre><a href="dx12.html#IDXGIFactory5"><span class="Identifier">IDXGIFactory5</span></a> <span class="Other">=</span> <span class="Keyword">ptr</span> <span class="Keyword">object</span></pre></dt>
+  <dd>
+    
+    
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L30" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L30" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1732,8 +1767,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L39" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L39" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L41" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L41" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1742,8 +1777,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L29" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L29" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L31" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L31" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1752,8 +1787,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L30" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L30" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L32" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L32" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1778,8 +1813,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L395" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L395" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L400" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L400" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1788,8 +1823,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L393" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L393" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L398" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L398" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1798,8 +1833,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L396" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L396" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L401" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L401" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1808,8 +1843,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L394" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L394" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L399" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L399" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1818,8 +1853,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L392" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L392" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L397" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L397" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1828,8 +1863,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L420" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L420" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L425" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L425" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1838,8 +1873,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L397" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L397" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L402" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L402" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1848,8 +1883,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L356" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L356" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L361" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L361" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1858,8 +1893,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L357" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L357" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L362" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L362" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1868,8 +1903,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L358" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L358" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L363" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L363" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1878,8 +1913,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L400" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L400" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L405" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L405" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1888,8 +1923,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L399" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L399" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L404" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L404" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1898,8 +1933,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L402" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L402" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L407" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L407" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1908,8 +1943,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L391" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L391" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L396" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L396" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1918,8 +1953,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L390" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L390" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L395" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L395" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1928,8 +1963,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L426" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L426" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L431" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L431" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1938,8 +1973,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L424" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L424" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L429" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L429" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1948,8 +1983,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L398" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L398" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L403" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L403" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1958,8 +1993,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L362" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L362" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L367" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L367" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1968,8 +2003,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L363" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L363" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L368" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L368" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1978,8 +2013,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L359" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L359" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L364" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L364" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1988,8 +2023,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L361" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L361" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L366" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L366" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -1998,8 +2033,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L360" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L360" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L365" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L365" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2008,8 +2043,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L415" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L415" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L420" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L420" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2018,8 +2053,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L404" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L404" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L409" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L409" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2028,8 +2063,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L387" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L387" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L392" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L392" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2038,8 +2073,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L389" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L389" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L394" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L394" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2048,8 +2083,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L416" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L416" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L421" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L421" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2058,8 +2093,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L417" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L417" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L422" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L422" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2068,8 +2103,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L366" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L366" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L371" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L371" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2078,8 +2113,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L364" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L364" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L369" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L369" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2088,8 +2123,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L365" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L365" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L370" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L370" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2098,8 +2133,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L388" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L388" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L393" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L393" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2108,8 +2143,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L403" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L403" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L408" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L408" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2118,8 +2153,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L386" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L386" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L391" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L391" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2128,8 +2163,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L385" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L385" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L390" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L390" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2138,8 +2173,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L384" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L384" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L389" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L389" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2148,8 +2183,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L367" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L367" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L372" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L372" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2158,8 +2193,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L368" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L368" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L373" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L373" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2168,8 +2203,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L373" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L373" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L378" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L378" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2178,8 +2213,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L372" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L372" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L377" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L377" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2188,8 +2223,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L371" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L371" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L376" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L376" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2198,8 +2233,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L380" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L380" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L385" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L385" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2208,8 +2243,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L376" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L376" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L381" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L381" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2218,8 +2253,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L378" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L378" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L383" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L383" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2228,8 +2263,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L383" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L383" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L388" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L388" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2238,8 +2273,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L374" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L374" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L379" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L379" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2248,8 +2283,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L375" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L375" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L380" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L380" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2258,8 +2293,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L381" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L381" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L386" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L386" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2268,8 +2303,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L382" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L382" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L387" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L387" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2278,8 +2313,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L377" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L377" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L382" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L382" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2288,8 +2323,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L405" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L405" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L410" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L410" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2298,8 +2333,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L407" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L407" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L412" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L412" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2308,8 +2343,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L406" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L406" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L411" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L411" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2318,8 +2353,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L408" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L408" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L413" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L413" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2328,8 +2363,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L409" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L409" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L414" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L414" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2338,8 +2373,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L427" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L427" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L432" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L432" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2348,8 +2383,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L410" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L410" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L415" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L415" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2358,8 +2393,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L411" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L411" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L416" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L416" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2368,8 +2403,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L421" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L421" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L426" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L426" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2378,8 +2413,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L413" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L413" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L418" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L418" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2388,8 +2423,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L414" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L414" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L419" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L419" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2398,8 +2433,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L412" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L412" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L417" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L417" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2408,8 +2443,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L401" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L401" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L406" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L406" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2418,8 +2453,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L418" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L418" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L423" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L423" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2428,8 +2463,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L419" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L419" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L424" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L424" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2438,8 +2473,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L423" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L423" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L428" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L428" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2448,8 +2483,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L422" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L422" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L427" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L427" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2458,8 +2493,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L369" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L369" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L374" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L374" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2468,8 +2503,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L370" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L370" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L375" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L375" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2478,8 +2513,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L355" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L355" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L360" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L360" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2488,8 +2523,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L425" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L425" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L430" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L430" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2498,8 +2533,18 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L352" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L352" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L357" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L357" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+
+  </dd>
+</div>
+<div id="DXGI_FEATURE_PRESENT_ALLOW_TEARING">
+  <dt><pre><a href="dx12.html#DXGI_FEATURE_PRESENT_ALLOW_TEARING"><span class="Identifier">DXGI_FEATURE_PRESENT_ALLOW_TEARING</span></a> <span class="Other">=</span> <span class="DecNumber">0'u32</span></pre></dt>
+  <dd>
+    
+    
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L356" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L356" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2508,8 +2553,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L345" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L345" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L347" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L347" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2518,8 +2563,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L344" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L344" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L346" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L346" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2528,8 +2573,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L347" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L347" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L349" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L349" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2538,8 +2583,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L346" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L346" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L348" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L348" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2548,8 +2593,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L348" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L348" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L350" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L350" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2558,8 +2603,18 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L353" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L353" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L358" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L358" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+
+  </dd>
+</div>
+<div id="DXGI_PRESENT_ALLOW_TEARING">
+  <dt><pre><a href="dx12.html#DXGI_PRESENT_ALLOW_TEARING"><span class="Identifier">DXGI_PRESENT_ALLOW_TEARING</span></a> <span class="Other">=</span> <span class="DecNumber">0x00000200'u32</span></pre></dt>
+  <dd>
+    
+    
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L355" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L355" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2568,8 +2623,18 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L350" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L350" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L352" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L352" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+
+  </dd>
+</div>
+<div id="DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING">
+  <dt><pre><a href="dx12.html#DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING"><span class="Identifier">DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING</span></a> <span class="Other">=</span> <span class="DecNumber">0x00000800'u32</span></pre></dt>
+  <dd>
+    
+    
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L354" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L354" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2578,8 +2643,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L351" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L351" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L353" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L353" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2588,8 +2653,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L349" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L349" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L351" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L351" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2598,8 +2663,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L343" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L343" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L345" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L345" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2608,8 +2673,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L430" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L430" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L435" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L435" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2618,8 +2683,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L428" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L428" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L433" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L433" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2629,7 +2694,22 @@
 <div class="section" id="12">
   <h1><a class="toc-backref" href="#12">Procs</a></h1>
   <dl class="item">
-    <div id="clearDepthStencilView-procs-all">
+    <div id="checkFeatureSupport-procs-all">
+  <div id="checkFeatureSupport,IDXGIFactory5,DXGI_FEATURE,pointer,UINT">
+  <dt><pre><span class="Keyword">proc</span> <a href="#checkFeatureSupport%2CIDXGIFactory5%2CDXGI_FEATURE%2Cpointer%2CUINT"><span class="Identifier">checkFeatureSupport</span></a><span class="Other">(</span><span class="Identifier">factory</span><span class="Other">:</span> <a href="dx12.html#IDXGIFactory5"><span class="Identifier">IDXGIFactory5</span></a><span class="Other">;</span> <span class="Identifier">feature</span><span class="Other">:</span> <a href="dx12.html#DXGI_FEATURE"><span class="Identifier">DXGI_FEATURE</span></a><span class="Other">;</span>
+                         <span class="Identifier">supportData</span><span class="Other">:</span> <span class="Identifier">pointer</span><span class="Other">;</span> <span class="Identifier">supportDataSize</span><span class="Other">:</span> <span class="Identifier">UINT</span><span class="Other">)</span> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L867" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L867" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+
+  </dd>
+</div>
+
+</div>
+<div id="clearDepthStencilView-procs-all">
   <div id="clearDepthStencilView,ID3D12GraphicsCommandList,D3D12_CPU_DESCRIPTOR_HANDLE,uint32,FLOAT,uint8,UINT,pointer">
   <dt><pre><span class="Keyword">proc</span> <a href="#clearDepthStencilView%2CID3D12GraphicsCommandList%2CD3D12_CPU_DESCRIPTOR_HANDLE%2Cuint32%2CFLOAT%2Cuint8%2CUINT%2Cpointer"><span class="Identifier">clearDepthStencilView</span></a><span class="Other">(</span><span class="Identifier">self</span><span class="Other">:</span> <a href="dx12.html#ID3D12GraphicsCommandList"><span class="Identifier">ID3D12GraphicsCommandList</span></a><span class="Other">;</span>
                            <span class="Identifier">handle</span><span class="Other">:</span> <a href="dx12.html#D3D12_CPU_DESCRIPTOR_HANDLE"><span class="Identifier">D3D12_CPU_DESCRIPTOR_HANDLE</span></a><span class="Other">;</span> <span class="Identifier">flags</span><span class="Other">:</span> <span class="Identifier">uint32</span><span class="Other">;</span>
@@ -2639,8 +2719,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L707" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L707" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L712" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L712" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2655,8 +2735,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L727" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L727" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L732" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L732" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2669,8 +2749,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L650" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L650" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L655" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L655" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2684,8 +2764,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L954" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L954" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L1001" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L1001" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2700,8 +2780,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L656" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L656" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L661" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L661" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2718,8 +2798,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L660" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L660" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L665" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L665" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2732,8 +2812,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L522" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L522" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L527" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L527" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2748,8 +2828,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L529" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L529" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L534" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L534" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2762,8 +2842,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L515" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L515" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L520" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L520" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2780,8 +2860,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L596" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L596" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L601" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L601" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2795,8 +2875,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L568" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L568" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L573" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L573" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2810,8 +2890,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L536" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L536" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L541" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L541" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2824,8 +2904,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L876" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L876" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L923" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L923" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2838,8 +2918,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L617" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L617" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L622" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L622" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2853,8 +2933,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L557" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L557" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L562" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L562" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2868,8 +2948,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L564" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L564" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L569" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L569" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2883,8 +2963,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L543" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L543" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L548" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L548" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2899,8 +2979,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L582" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L582" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L587" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L587" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2915,8 +2995,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L850" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L850" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L855" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L855" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2929,8 +3009,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L882" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L882" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L929" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L929" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2944,8 +3024,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L763" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L763" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L768" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L768" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2959,8 +3039,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L767" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L767" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L772" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L772" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2973,8 +3053,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L795" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L795" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L800" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L800" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -2987,8 +3067,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L929" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L929" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L976" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L976" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3001,8 +3081,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L933" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L933" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L980" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L980" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3015,8 +3095,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L840" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L840" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L845" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L845" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3034,8 +3114,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L624" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L624" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L629" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L629" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3048,8 +3128,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L777" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L777" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L782" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L782" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3062,8 +3142,8 @@
   <dd>
     
     Returns the current swap-chain back buffer index.
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L835" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L835" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L840" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L840" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3077,8 +3157,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L550" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L550" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L555" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L555" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3091,8 +3171,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L783" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L783" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L788" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L788" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3105,8 +3185,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L613" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L613" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L618" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L618" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3119,8 +3199,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L755" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L755" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L760" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L760" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3134,8 +3214,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L759" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L759" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L764" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L764" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3147,8 +3227,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L888" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L888" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L935" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L935" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3161,8 +3241,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L856" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L856" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L861" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L861" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3176,8 +3256,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L603" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L603" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L608" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L608" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3191,8 +3271,8 @@
   <dd>
     
     Creates GUIDs from the canonical IID literal format: 0xXXXXXXXX, 0xXXXX, 0xXXXX, 0xXX, ... (8 bytes total)
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L432" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L432" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L437" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L437" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3207,8 +3287,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L703" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L703" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L708" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L708" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3221,8 +3301,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L789" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L789" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L794" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L794" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3234,8 +3314,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L862" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L862" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L893" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L893" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3248,8 +3328,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L506" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L506" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L511" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L511" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3262,8 +3342,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L638" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L638" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L643" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L643" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3274,8 +3354,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L644" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L644" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L649" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L649" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3289,8 +3369,8 @@
   <dd>
     
     Resizes the swap-chain back buffers.
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L802" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L802" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L807" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L807" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3306,8 +3386,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L664" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L664" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L669" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L669" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3321,8 +3401,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L691" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L691" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L696" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L696" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3336,8 +3416,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L699" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L699" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L704" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L704" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3351,8 +3431,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L695" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L695" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L700" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L700" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3365,8 +3445,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L937" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L937" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L984" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L984" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3380,8 +3460,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L735" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L735" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L740" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L740" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3394,8 +3474,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L844" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L844" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L849" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L849" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3410,8 +3490,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L747" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L747" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L752" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L752" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3425,8 +3505,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L751" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L751" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L756" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L756" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3441,8 +3521,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L743" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L743" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L748" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L748" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3456,8 +3536,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L739" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L739" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L744" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L744" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3471,8 +3551,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L731" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L731" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L736" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L736" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3485,8 +3565,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L985" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L985" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L1032" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L1032" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3499,8 +3579,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L771" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L771" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L776" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L776" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3514,8 +3594,22 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L609" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L609" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L614" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L614" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+
+  </dd>
+</div>
+
+</div>
+<div id="upgradeToFactory5-procs-all">
+  <div id="upgradeToFactory5,IDXGIFactory4">
+  <dt><pre><span class="Keyword">proc</span> <a href="#upgradeToFactory5%2CIDXGIFactory4"><span class="Identifier">upgradeToFactory5</span></a><span class="Other">(</span><span class="Identifier">factory4</span><span class="Other">:</span> <a href="dx12.html#IDXGIFactory4"><span class="Identifier">IDXGIFactory4</span></a><span class="Other">)</span><span class="Other">:</span> <a href="dx12.html#IDXGIFactory5"><span class="Identifier">IDXGIFactory5</span></a> {.
+    <span><span class="Other pragmadots">...</span></span><span class="pragmawrap"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">forbids</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span>.}</pre></dt>
+  <dd>
+    
+    
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L907" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L907" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3528,8 +3622,8 @@
   <dd>
     
     
-    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L872" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
-<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L872" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
+    <a href="https://github.com/treeform/dx12/tree/master/src/dx12.nim#L903" class="link-seesrc" target="_blank">Source</a>&nbsp;&nbsp;
+<a href="https://github.com/treeform/dx12/edit/devel/src/dx12.nim#L903" class="link-seesrc" target="_blank" >Edit</a>&nbsp;&nbsp;
 
   </dd>
 </div>
@@ -3545,7 +3639,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-03-08 18:16:30 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-03-08 19:27:26 UTC</small>
       </div>
     </div>
   </div>
