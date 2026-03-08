@@ -9,6 +9,8 @@ const
   Width = 1280
   Height = 800
   TextureSize = 128
+  TextureMaxAnisotropy = 8'u32
+  D3D12FilterAnisotropic = 0x55'u32
 
 type
   CubeVertex = object
@@ -257,6 +259,14 @@ proc ensureTextureFile() =
   )
   writeFile(path, encoded)
 
+proc buildMipChain(image: Image): seq[Image] =
+  ## Builds a full mip chain from the base level down to 1x1.
+  result.add(image)
+  var current = image
+  while current.width > 1 or current.height > 1:
+    current = current.minifyBy2()
+    result.add(current)
+
 proc uploadTexture(ctx: var D3D12Context, renderer: var CubeRenderer) =
   ## Loads the texture with Pixie and uploads it to GPU memory.
   ensureTextureFile()
@@ -268,10 +278,11 @@ proc uploadTexture(ctx: var D3D12Context, renderer: var CubeRenderer) =
     raise newException(Exception, "Failed to load texture: " & e.msg)
 
   let
-    texWidth = image.width
-    texHeight = image.height
+    mipImages = buildMipChain(image)
+    texWidth = mipImages[0].width
+    texHeight = mipImages[0].height
+    mipCount = mipImages.len
     bytesPerPixel = 4
-    rowSize = texWidth * bytesPerPixel
 
   var texDesc: D3D12_RESOURCE_DESC
   zeroMem(addr texDesc, sizeof(texDesc))
@@ -280,7 +291,7 @@ proc uploadTexture(ctx: var D3D12Context, renderer: var CubeRenderer) =
   texDesc.Width = uint64(texWidth)
   texDesc.Height = uint32(texHeight)
   texDesc.DepthOrArraySize = 1
-  texDesc.MipLevels = 1
+  texDesc.MipLevels = uint16(mipCount)
   texDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM
   texDesc.SampleDesc = DXGI_SAMPLE_DESC(Count: 1, Quality: 0)
   texDesc.Layout = D3D12_TEXTURE_LAYOUT_UNKNOWN
@@ -302,21 +313,20 @@ proc uploadTexture(ctx: var D3D12Context, renderer: var CubeRenderer) =
     nil
   )
 
-  var footprint: D3D12_PLACED_SUBRESOURCE_FOOTPRINT
-  var numRows: UINT
-  var rowSizeInBytes: UINT64
+  var footprints = newSeq[D3D12_PLACED_SUBRESOURCE_FOOTPRINT](mipCount)
+  var numRows = newSeq[UINT](mipCount)
+  var rowSizes = newSeq[UINT64](mipCount)
   var totalBytes: UINT64
   ctx.device.getCopyableFootprints(
     addr texDesc,
     UINT(0),
-    UINT(1),
+    UINT(mipCount),
     0'u64,
-    addr footprint,
-    addr numRows,
-    addr rowSizeInBytes,
+    addr footprints[0],
+    addr numRows[0],
+    addr rowSizes[0],
     addr totalBytes
   )
-  let rowPitch = int(footprint.Footprint.RowPitch)
 
   var uploadDesc: D3D12_RESOURCE_DESC
   zeroMem(addr uploadDesc, sizeof(uploadDesc))
@@ -349,44 +359,50 @@ proc uploadTexture(ctx: var D3D12Context, renderer: var CubeRenderer) =
 
   var uploadPtr: pointer
   uploadBuffer.map(0, nil, addr uploadPtr)
-  var dst = cast[ptr uint8](uploadPtr)
-  for y in 0 ..< texHeight:
-    let srcIdx = image.dataIndex(0, y)
-    let srcPtr = cast[ptr uint8](image.data[srcIdx].addr)
-    copyMem(dst, srcPtr, rowSize)
-    if rowPitch > rowSize:
-      zeroMem(
-        cast[pointer](cast[uint](dst) + uint(rowSize)),
-        rowPitch - rowSize
-      )
-    dst = cast[ptr uint8](cast[uint](dst) + uint(rowPitch))
+  let uploadBase = cast[uint](uploadPtr)
+  for i, mipImage in mipImages:
+    let
+      footprint = footprints[i]
+      rowPitch = int(footprint.Footprint.RowPitch)
+      rowSize = mipImage.width * bytesPerPixel
+    var dst = cast[ptr uint8](uploadBase + uint(footprint.Offset))
+    for y in 0 ..< mipImage.height:
+      let srcIdx = mipImage.dataIndex(0, y)
+      let srcPtr = cast[ptr uint8](mipImage.data[srcIdx].addr)
+      copyMem(dst, srcPtr, rowSize)
+      if rowPitch > rowSize:
+        zeroMem(
+          cast[pointer](cast[uint](dst) + uint(rowSize)),
+          rowPitch - rowSize
+        )
+      dst = cast[ptr uint8](cast[uint](dst) + uint(rowPitch))
   uploadBuffer.unmap(0, nil)
-
-  var dstLocation = D3D12_TEXTURE_COPY_LOCATION(
-    pResource: renderer.texture,
-    typ: D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX,
-    data: D3D12_TEXTURE_COPY_LOCATION_UNION(
-      SubresourceIndex: 0
-    )
-  )
-  var srcLocation = D3D12_TEXTURE_COPY_LOCATION(
-    pResource: uploadBuffer,
-    typ: D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT,
-    data: D3D12_TEXTURE_COPY_LOCATION_UNION(
-      PlacedFootprint: footprint
-    )
-  )
 
   ctx.commandAllocator.reset()
   ctx.commandList.reset(ctx.commandAllocator, nil)
-  ctx.commandList.copyTextureRegion(
-    addr dstLocation,
-    0,
-    0,
-    0,
-    addr srcLocation,
-    nil
-  )
+  for i in 0 ..< mipCount:
+    var dstLocation = D3D12_TEXTURE_COPY_LOCATION(
+      pResource: renderer.texture,
+      typ: D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX,
+      data: D3D12_TEXTURE_COPY_LOCATION_UNION(
+        SubresourceIndex: uint32(i)
+      )
+    )
+    var srcLocation = D3D12_TEXTURE_COPY_LOCATION(
+      pResource: uploadBuffer,
+      typ: D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT,
+      data: D3D12_TEXTURE_COPY_LOCATION_UNION(
+        PlacedFootprint: footprints[i]
+      )
+    )
+    ctx.commandList.copyTextureRegion(
+      addr dstLocation,
+      0,
+      0,
+      0,
+      addr srcLocation,
+      nil
+    )
 
   var barrier = D3D12_RESOURCE_BARRIER(
     typ: D3D12_RESOURCE_BARRIER_TYPE_TRANSITION,
@@ -423,7 +439,7 @@ proc uploadTexture(ctx: var D3D12Context, renderer: var CubeRenderer) =
     data: D3D12_SHADER_RESOURCE_VIEW_DESC_UNION(
       Texture2D: D3D12_TEX2D_SRV(
         MostDetailedMip: 0,
-        MipLevels: 1,
+        MipLevels: uint32(mipCount),
         PlaneSlice: 0,
         ResourceMinLODClamp: 0.0
       )
@@ -563,12 +579,12 @@ float4 PSMain(PSInput input) : SV_TARGET {
   ]
 
   var sampler = D3D12_STATIC_SAMPLER_DESC(
-    Filter: D3D12_FILTER_MIN_MAG_MIP_LINEAR,
+    Filter: D3D12FilterAnisotropic,
     AddressU: D3D12_TEXTURE_ADDRESS_MODE_WRAP,
     AddressV: D3D12_TEXTURE_ADDRESS_MODE_WRAP,
     AddressW: D3D12_TEXTURE_ADDRESS_MODE_WRAP,
     MipLODBias: 0.0,
-    MaxAnisotropy: 0,
+    MaxAnisotropy: TextureMaxAnisotropy,
     ComparisonFunc: D3D12_COMPARISON_FUNC_ALWAYS,
     BorderColor: D3D12_STATIC_BORDER_COLOR_OPAQUE_BLACK,
     MinLOD: 0.0,
