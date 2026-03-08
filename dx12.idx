@@ -1,0 +1,224 @@
+nimTitle	dx12	dx12.html	module src/dx12		0
+nim	HRESULT	dx12.html#HRESULT	type HRESULT		7
+nim	UINT64	dx12.html#UINT64	type UINT64		8
+nim	FLOAT	dx12.html#FLOAT	type FLOAT		9
+nim	BOOL32	dx12.html#BOOL32	type BOOL32		10
+nim	DXGI_FORMAT	dx12.html#DXGI_FORMAT	type DXGI_FORMAT		11
+nim	D3D_FEATURE_LEVEL	dx12.html#D3D_FEATURE_LEVEL	type D3D_FEATURE_LEVEL		12
+nim	D3D12_COMMAND_LIST_TYPE	dx12.html#D3D12_COMMAND_LIST_TYPE	type D3D12_COMMAND_LIST_TYPE		13
+nim	D3D12_COMMAND_QUEUE_FLAGS	dx12.html#D3D12_COMMAND_QUEUE_FLAGS	type D3D12_COMMAND_QUEUE_FLAGS		14
+nim	D3D12_DESCRIPTOR_HEAP_TYPE	dx12.html#D3D12_DESCRIPTOR_HEAP_TYPE	type D3D12_DESCRIPTOR_HEAP_TYPE		15
+nim	D3D12_DESCRIPTOR_HEAP_FLAGS	dx12.html#D3D12_DESCRIPTOR_HEAP_FLAGS	type D3D12_DESCRIPTOR_HEAP_FLAGS		16
+nim	D3D12_RESOURCE_STATES	dx12.html#D3D12_RESOURCE_STATES	type D3D12_RESOURCE_STATES		17
+nim	D3D12_RESOURCE_BARRIER_TYPE	dx12.html#D3D12_RESOURCE_BARRIER_TYPE	type D3D12_RESOURCE_BARRIER_TYPE		18
+nim	D3D12_RESOURCE_BARRIER_FLAGS	dx12.html#D3D12_RESOURCE_BARRIER_FLAGS	type D3D12_RESOURCE_BARRIER_FLAGS		19
+nim	DXGuid	dx12.html#DXGuid	object DXGuid		20
+nim	IDXGIFactory4	dx12.html#IDXGIFactory4	type IDXGIFactory4		28
+nim	IDXGISwapChain1	dx12.html#IDXGISwapChain1	type IDXGISwapChain1		29
+nim	IDXGISwapChain3	dx12.html#IDXGISwapChain3	type IDXGISwapChain3		30
+nim	ID3D12Device	dx12.html#ID3D12Device	type ID3D12Device		31
+nim	ID3D12Resource	dx12.html#ID3D12Resource	type ID3D12Resource		32
+nim	ID3D12CommandQueue	dx12.html#ID3D12CommandQueue	type ID3D12CommandQueue		33
+nim	ID3D12CommandAllocator	dx12.html#ID3D12CommandAllocator	type ID3D12CommandAllocator		34
+nim	ID3D12CommandList	dx12.html#ID3D12CommandList	type ID3D12CommandList		35
+nim	ID3D12GraphicsCommandList	dx12.html#ID3D12GraphicsCommandList	type ID3D12GraphicsCommandList		36
+nim	ID3D12DescriptorHeap	dx12.html#ID3D12DescriptorHeap	type ID3D12DescriptorHeap		37
+nim	ID3D12Fence	dx12.html#ID3D12Fence	type ID3D12Fence		38
+nim	IDXGIOutput	dx12.html#IDXGIOutput	type IDXGIOutput		39
+nim	ID3D12RootSignature	dx12.html#ID3D12RootSignature	type ID3D12RootSignature		40
+nim	ID3D12PipelineState	dx12.html#ID3D12PipelineState	type ID3D12PipelineState		41
+nim	ID3DBlob	dx12.html#ID3DBlob	type ID3DBlob		42
+nim	DXGI_SAMPLE_DESC	dx12.html#DXGI_SAMPLE_DESC	object DXGI_SAMPLE_DESC		46
+nim	DXGI_SWAP_CHAIN_DESC1	dx12.html#DXGI_SWAP_CHAIN_DESC1	object DXGI_SWAP_CHAIN_DESC1		50
+nim	D3D12_VIEWPORT	dx12.html#D3D12_VIEWPORT	object D3D12_VIEWPORT		62
+nim	D3D12_RECT	dx12.html#D3D12_RECT	object D3D12_RECT		65
+nim	D3D12_CPU_DESCRIPTOR_HANDLE	dx12.html#D3D12_CPU_DESCRIPTOR_HANDLE	object D3D12_CPU_DESCRIPTOR_HANDLE		68
+nim	D3D12_GPU_DESCRIPTOR_HANDLE	dx12.html#D3D12_GPU_DESCRIPTOR_HANDLE	object D3D12_GPU_DESCRIPTOR_HANDLE		71
+nim	D3D12_COMMAND_QUEUE_DESC	dx12.html#D3D12_COMMAND_QUEUE_DESC	object D3D12_COMMAND_QUEUE_DESC		74
+nim	D3D12_DESCRIPTOR_HEAP_DESC	dx12.html#D3D12_DESCRIPTOR_HEAP_DESC	object D3D12_DESCRIPTOR_HEAP_DESC		80
+nim	D3D12_HEAP_PROPERTIES	dx12.html#D3D12_HEAP_PROPERTIES	object D3D12_HEAP_PROPERTIES		86
+nim	D3D12_RESOURCE_DESC	dx12.html#D3D12_RESOURCE_DESC	object D3D12_RESOURCE_DESC		93
+nim	D3D12_RESOURCE_TRANSITION_BARRIER	dx12.html#D3D12_RESOURCE_TRANSITION_BARRIER	object D3D12_RESOURCE_TRANSITION_BARRIER		105
+nim	D3D12_DEPTH_STENCIL_VALUE	dx12.html#D3D12_DEPTH_STENCIL_VALUE	object D3D12_DEPTH_STENCIL_VALUE		111
+nim	D3D12_CLEAR_VALUE_UNION	dx12.html#D3D12_CLEAR_VALUE_UNION	object D3D12_CLEAR_VALUE_UNION		115
+nim	D3D12_CLEAR_VALUE	dx12.html#D3D12_CLEAR_VALUE	object D3D12_CLEAR_VALUE		119
+nim	D3D12_RESOURCE_BARRIER	dx12.html#D3D12_RESOURCE_BARRIER	object D3D12_RESOURCE_BARRIER		123
+nim	D3D12_TEXTURE_COPY_LOCATION_UNION	dx12.html#D3D12_TEXTURE_COPY_LOCATION_UNION	object D3D12_TEXTURE_COPY_LOCATION_UNION		128
+nim	D3D12_TEXTURE_COPY_LOCATION	dx12.html#D3D12_TEXTURE_COPY_LOCATION	object D3D12_TEXTURE_COPY_LOCATION		132
+nim	D3D12_BOX	dx12.html#D3D12_BOX	object D3D12_BOX		137
+nim	D3D12_RANGE	dx12.html#D3D12_RANGE	object D3D12_RANGE		141
+nim	D3D12_VERTEX_BUFFER_VIEW	dx12.html#D3D12_VERTEX_BUFFER_VIEW	object D3D12_VERTEX_BUFFER_VIEW		145
+nim	D3D12_SHADER_BYTECODE	dx12.html#D3D12_SHADER_BYTECODE	object D3D12_SHADER_BYTECODE		150
+nim	D3D12_SUBRESOURCE_FOOTPRINT	dx12.html#D3D12_SUBRESOURCE_FOOTPRINT	object D3D12_SUBRESOURCE_FOOTPRINT		154
+nim	D3D12_PLACED_SUBRESOURCE_FOOTPRINT	dx12.html#D3D12_PLACED_SUBRESOURCE_FOOTPRINT	object D3D12_PLACED_SUBRESOURCE_FOOTPRINT		161
+nim	D3D12_INPUT_ELEMENT_DESC	dx12.html#D3D12_INPUT_ELEMENT_DESC	object D3D12_INPUT_ELEMENT_DESC		165
+nim	D3D12_INPUT_LAYOUT_DESC	dx12.html#D3D12_INPUT_LAYOUT_DESC	object D3D12_INPUT_LAYOUT_DESC		174
+nim	D3D12_DESCRIPTOR_RANGE	dx12.html#D3D12_DESCRIPTOR_RANGE	object D3D12_DESCRIPTOR_RANGE		178
+nim	D3D12_ROOT_DESCRIPTOR_TABLE	dx12.html#D3D12_ROOT_DESCRIPTOR_TABLE	object D3D12_ROOT_DESCRIPTOR_TABLE		185
+nim	D3D12_ROOT_DESCRIPTOR	dx12.html#D3D12_ROOT_DESCRIPTOR	object D3D12_ROOT_DESCRIPTOR		189
+nim	D3D12_ROOT_CONSTANTS	dx12.html#D3D12_ROOT_CONSTANTS	object D3D12_ROOT_CONSTANTS		193
+nim	D3D12_ROOT_PARAMETER_UNION	dx12.html#D3D12_ROOT_PARAMETER_UNION	object D3D12_ROOT_PARAMETER_UNION		198
+nim	D3D12_ROOT_PARAMETER	dx12.html#D3D12_ROOT_PARAMETER	object D3D12_ROOT_PARAMETER		203
+nim	D3D12_STATIC_SAMPLER_DESC	dx12.html#D3D12_STATIC_SAMPLER_DESC	object D3D12_STATIC_SAMPLER_DESC		208
+nim	D3D12_STREAM_OUTPUT_DESC	dx12.html#D3D12_STREAM_OUTPUT_DESC	object D3D12_STREAM_OUTPUT_DESC		223
+nim	D3D12_TEX2D_SRV	dx12.html#D3D12_TEX2D_SRV	object D3D12_TEX2D_SRV		230
+nim	D3D12_BUFFER_SRV	dx12.html#D3D12_BUFFER_SRV	object D3D12_BUFFER_SRV		236
+nim	D3D12_TEX2D_ARRAY_SRV	dx12.html#D3D12_TEX2D_ARRAY_SRV	object D3D12_TEX2D_ARRAY_SRV		242
+nim	D3D12_SHADER_RESOURCE_VIEW_DESC_UNION	dx12.html#D3D12_SHADER_RESOURCE_VIEW_DESC_UNION	object D3D12_SHADER_RESOURCE_VIEW_DESC_UNION		250
+nim	D3D12_SHADER_RESOURCE_VIEW_DESC	dx12.html#D3D12_SHADER_RESOURCE_VIEW_DESC	object D3D12_SHADER_RESOURCE_VIEW_DESC		255
+nim	D3D12_RENDER_TARGET_BLEND_DESC	dx12.html#D3D12_RENDER_TARGET_BLEND_DESC	object D3D12_RENDER_TARGET_BLEND_DESC		261
+nim	D3D12_BLEND_DESC	dx12.html#D3D12_BLEND_DESC	object D3D12_BLEND_DESC		273
+nim	D3D12_RASTERIZER_DESC	dx12.html#D3D12_RASTERIZER_DESC	object D3D12_RASTERIZER_DESC		278
+nim	D3D12_DEPTH_STENCILOP_DESC	dx12.html#D3D12_DEPTH_STENCILOP_DESC	object D3D12_DEPTH_STENCILOP_DESC		291
+nim	D3D12_DEPTH_STENCIL_DESC	dx12.html#D3D12_DEPTH_STENCIL_DESC	object D3D12_DEPTH_STENCIL_DESC		297
+nim	D3D12_CACHED_PIPELINE_STATE	dx12.html#D3D12_CACHED_PIPELINE_STATE	object D3D12_CACHED_PIPELINE_STATE		307
+nim	D3D12_GRAPHICS_PIPELINE_STATE_DESC	dx12.html#D3D12_GRAPHICS_PIPELINE_STATE_DESC	object D3D12_GRAPHICS_PIPELINE_STATE_DESC		311
+nim	D3D12_ROOT_SIGNATURE_DESC	dx12.html#D3D12_ROOT_SIGNATURE_DESC	object D3D12_ROOT_SIGNATURE_DESC		334
+nim	FRAME_COUNT	dx12.html#FRAME_COUNT	const FRAME_COUNT		343
+nim	DXGI_FORMAT_R8G8B8A8_UNORM	dx12.html#DXGI_FORMAT_R8G8B8A8_UNORM	const DXGI_FORMAT_R8G8B8A8_UNORM		344
+nim	DXGI_FORMAT_D32_FLOAT	dx12.html#DXGI_FORMAT_D32_FLOAT	const DXGI_FORMAT_D32_FLOAT		345
+nim	DXGI_FORMAT_R32G32B32_FLOAT	dx12.html#DXGI_FORMAT_R32G32B32_FLOAT	const DXGI_FORMAT_R32G32B32_FLOAT		346
+nim	DXGI_FORMAT_R32G32_FLOAT	dx12.html#DXGI_FORMAT_R32G32_FLOAT	const DXGI_FORMAT_R32G32_FLOAT		347
+nim	DXGI_FORMAT_UNKNOWN	dx12.html#DXGI_FORMAT_UNKNOWN	const DXGI_FORMAT_UNKNOWN		348
+nim	DXGI_USAGE_RENDER_TARGET_OUTPUT	dx12.html#DXGI_USAGE_RENDER_TARGET_OUTPUT	const DXGI_USAGE_RENDER_TARGET_OUTPUT		349
+nim	DXGI_SCALING_STRETCH	dx12.html#DXGI_SCALING_STRETCH	const DXGI_SCALING_STRETCH		350
+nim	DXGI_SWAP_EFFECT_FLIP_DISCARD	dx12.html#DXGI_SWAP_EFFECT_FLIP_DISCARD	const DXGI_SWAP_EFFECT_FLIP_DISCARD		351
+nim	DXGI_ALPHA_MODE_UNSPECIFIED	dx12.html#DXGI_ALPHA_MODE_UNSPECIFIED	const DXGI_ALPHA_MODE_UNSPECIFIED		352
+nim	DXGI_MWA_NO_ALT_ENTER	dx12.html#DXGI_MWA_NO_ALT_ENTER	const DXGI_MWA_NO_ALT_ENTER		353
+nim	D3D_FEATURE_LEVEL_11_0	dx12.html#D3D_FEATURE_LEVEL_11_0	const D3D_FEATURE_LEVEL_11_0		355
+nim	D3D12_COMMAND_LIST_TYPE_DIRECT	dx12.html#D3D12_COMMAND_LIST_TYPE_DIRECT	const D3D12_COMMAND_LIST_TYPE_DIRECT		356
+nim	D3D12_COMMAND_QUEUE_FLAG_NONE	dx12.html#D3D12_COMMAND_QUEUE_FLAG_NONE	const D3D12_COMMAND_QUEUE_FLAG_NONE		357
+nim	D3D12_COMMAND_QUEUE_PRIORITY_NORMAL	dx12.html#D3D12_COMMAND_QUEUE_PRIORITY_NORMAL	const D3D12_COMMAND_QUEUE_PRIORITY_NORMAL		358
+nim	D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV	dx12.html#D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV	const D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV		359
+nim	D3D12_DESCRIPTOR_HEAP_TYPE_RTV	dx12.html#D3D12_DESCRIPTOR_HEAP_TYPE_RTV	const D3D12_DESCRIPTOR_HEAP_TYPE_RTV		360
+nim	D3D12_DESCRIPTOR_HEAP_TYPE_DSV	dx12.html#D3D12_DESCRIPTOR_HEAP_TYPE_DSV	const D3D12_DESCRIPTOR_HEAP_TYPE_DSV		361
+nim	D3D12_DESCRIPTOR_HEAP_FLAG_NONE	dx12.html#D3D12_DESCRIPTOR_HEAP_FLAG_NONE	const D3D12_DESCRIPTOR_HEAP_FLAG_NONE		362
+nim	D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE	dx12.html#D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE	const D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE		363
+nim	D3D12_HEAP_TYPE_DEFAULT	dx12.html#D3D12_HEAP_TYPE_DEFAULT	const D3D12_HEAP_TYPE_DEFAULT		364
+nim	D3D12_HEAP_TYPE_UPLOAD	dx12.html#D3D12_HEAP_TYPE_UPLOAD	const D3D12_HEAP_TYPE_UPLOAD		365
+nim	D3D12_HEAP_FLAG_NONE	dx12.html#D3D12_HEAP_FLAG_NONE	const D3D12_HEAP_FLAG_NONE		366
+nim	D3D12_RESOURCE_DIMENSION_BUFFER	dx12.html#D3D12_RESOURCE_DIMENSION_BUFFER	const D3D12_RESOURCE_DIMENSION_BUFFER		367
+nim	D3D12_RESOURCE_DIMENSION_TEXTURE2D	dx12.html#D3D12_RESOURCE_DIMENSION_TEXTURE2D	const D3D12_RESOURCE_DIMENSION_TEXTURE2D		368
+nim	D3D12_TEXTURE_LAYOUT_ROW_MAJOR	dx12.html#D3D12_TEXTURE_LAYOUT_ROW_MAJOR	const D3D12_TEXTURE_LAYOUT_ROW_MAJOR		369
+nim	D3D12_TEXTURE_LAYOUT_UNKNOWN	dx12.html#D3D12_TEXTURE_LAYOUT_UNKNOWN	const D3D12_TEXTURE_LAYOUT_UNKNOWN		370
+nim	D3D12_RESOURCE_FLAG_NONE	dx12.html#D3D12_RESOURCE_FLAG_NONE	const D3D12_RESOURCE_FLAG_NONE		371
+nim	D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET	dx12.html#D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET	const D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET		372
+nim	D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL	dx12.html#D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL	const D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL		373
+nim	D3D12_RESOURCE_STATE_PRESENT	dx12.html#D3D12_RESOURCE_STATE_PRESENT	const D3D12_RESOURCE_STATE_PRESENT		374
+nim	D3D12_RESOURCE_STATE_RENDER_TARGET	dx12.html#D3D12_RESOURCE_STATE_RENDER_TARGET	const D3D12_RESOURCE_STATE_RENDER_TARGET		375
+nim	D3D12_RESOURCE_STATE_DEPTH_WRITE	dx12.html#D3D12_RESOURCE_STATE_DEPTH_WRITE	const D3D12_RESOURCE_STATE_DEPTH_WRITE		376
+nim	D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER	dx12.html#D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER	const D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER		377
+nim	D3D12_RESOURCE_STATE_GENERIC_READ	dx12.html#D3D12_RESOURCE_STATE_GENERIC_READ	const D3D12_RESOURCE_STATE_GENERIC_READ		378
+nim	D3D12_RESOURCE_STATE_COPY_DEST	dx12.html#D3D12_RESOURCE_STATE_COPY_DEST	const D3D12_RESOURCE_STATE_COPY_DEST		380
+nim	D3D12_RESOURCE_STATE_RESOLVE_DEST	dx12.html#D3D12_RESOURCE_STATE_RESOLVE_DEST	const D3D12_RESOURCE_STATE_RESOLVE_DEST		381
+nim	D3D12_RESOURCE_STATE_RESOLVE_SOURCE	dx12.html#D3D12_RESOURCE_STATE_RESOLVE_SOURCE	const D3D12_RESOURCE_STATE_RESOLVE_SOURCE		382
+nim	D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE	dx12.html#D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE	const D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE		383
+nim	D3D12_RESOURCE_BARRIER_TYPE_TRANSITION	dx12.html#D3D12_RESOURCE_BARRIER_TYPE_TRANSITION	const D3D12_RESOURCE_BARRIER_TYPE_TRANSITION		384
+nim	D3D12_RESOURCE_BARRIER_FLAG_NONE	dx12.html#D3D12_RESOURCE_BARRIER_FLAG_NONE	const D3D12_RESOURCE_BARRIER_FLAG_NONE		385
+nim	D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES	dx12.html#D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES	const D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES		386
+nim	D3D12_FENCE_FLAG_NONE	dx12.html#D3D12_FENCE_FLAG_NONE	const D3D12_FENCE_FLAG_NONE		387
+nim	D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA	dx12.html#D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA	const D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA		388
+nim	D3D12_FILL_MODE_SOLID	dx12.html#D3D12_FILL_MODE_SOLID	const D3D12_FILL_MODE_SOLID		389
+nim	D3D12_CULL_MODE_NONE	dx12.html#D3D12_CULL_MODE_NONE	const D3D12_CULL_MODE_NONE		390
+nim	D3D12_CULL_MODE_BACK	dx12.html#D3D12_CULL_MODE_BACK	const D3D12_CULL_MODE_BACK		391
+nim	D3D12_BLEND_ZERO	dx12.html#D3D12_BLEND_ZERO	const D3D12_BLEND_ZERO		392
+nim	D3D12_BLEND_ONE	dx12.html#D3D12_BLEND_ONE	const D3D12_BLEND_ONE		393
+nim	D3D12_BLEND_SRC_ALPHA	dx12.html#D3D12_BLEND_SRC_ALPHA	const D3D12_BLEND_SRC_ALPHA		394
+nim	D3D12_BLEND_INV_SRC_ALPHA	dx12.html#D3D12_BLEND_INV_SRC_ALPHA	const D3D12_BLEND_INV_SRC_ALPHA		395
+nim	D3D12_BLEND_OP_ADD	dx12.html#D3D12_BLEND_OP_ADD	const D3D12_BLEND_OP_ADD		396
+nim	D3D12_COLOR_WRITE_ENABLE_ALL	dx12.html#D3D12_COLOR_WRITE_ENABLE_ALL	const D3D12_COLOR_WRITE_ENABLE_ALL		397
+nim	D3D12_DEPTH_WRITE_MASK_ALL	dx12.html#D3D12_DEPTH_WRITE_MASK_ALL	const D3D12_DEPTH_WRITE_MASK_ALL		398
+nim	D3D12_COMPARISON_FUNC_LESS	dx12.html#D3D12_COMPARISON_FUNC_LESS	const D3D12_COMPARISON_FUNC_LESS		399
+nim	D3D12_COMPARISON_FUNC_ALWAYS	dx12.html#D3D12_COMPARISON_FUNC_ALWAYS	const D3D12_COMPARISON_FUNC_ALWAYS		400
+nim	D3D12_STENCIL_OP_KEEP	dx12.html#D3D12_STENCIL_OP_KEEP	const D3D12_STENCIL_OP_KEEP		401
+nim	D3D12_CONSERVATIVE_RASTERIZATION_MODE_OFF	dx12.html#D3D12_CONSERVATIVE_RASTERIZATION_MODE_OFF	const D3D12_CONSERVATIVE_RASTERIZATION_MODE_OFF		402
+nim	D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE	dx12.html#D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE	const D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE		403
+nim	D3D12_DESCRIPTOR_RANGE_TYPE_SRV	dx12.html#D3D12_DESCRIPTOR_RANGE_TYPE_SRV	const D3D12_DESCRIPTOR_RANGE_TYPE_SRV		404
+nim	D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS	dx12.html#D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS	const D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS		405
+nim	D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE	dx12.html#D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE	const D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE		406
+nim	D3D12_ROOT_PARAMETER_TYPE_CBV	dx12.html#D3D12_ROOT_PARAMETER_TYPE_CBV	const D3D12_ROOT_PARAMETER_TYPE_CBV		407
+nim	D3D12_ROOT_PARAMETER_TYPE_SRV	dx12.html#D3D12_ROOT_PARAMETER_TYPE_SRV	const D3D12_ROOT_PARAMETER_TYPE_SRV		408
+nim	D3D12_ROOT_PARAMETER_TYPE_UAV	dx12.html#D3D12_ROOT_PARAMETER_TYPE_UAV	const D3D12_ROOT_PARAMETER_TYPE_UAV		409
+nim	D3D12_SHADER_VISIBILITY_ALL	dx12.html#D3D12_SHADER_VISIBILITY_ALL	const D3D12_SHADER_VISIBILITY_ALL		410
+nim	D3D12_SHADER_VISIBILITY_PIXEL	dx12.html#D3D12_SHADER_VISIBILITY_PIXEL	const D3D12_SHADER_VISIBILITY_PIXEL		411
+nim	D3D12_STATIC_BORDER_COLOR_TRANSPARENT_BLACK	dx12.html#D3D12_STATIC_BORDER_COLOR_TRANSPARENT_BLACK	const D3D12_STATIC_BORDER_COLOR_TRANSPARENT_BLACK		412
+nim	D3D12_STATIC_BORDER_COLOR_OPAQUE_BLACK	dx12.html#D3D12_STATIC_BORDER_COLOR_OPAQUE_BLACK	const D3D12_STATIC_BORDER_COLOR_OPAQUE_BLACK		413
+nim	D3D12_STATIC_BORDER_COLOR_OPAQUE_WHITE	dx12.html#D3D12_STATIC_BORDER_COLOR_OPAQUE_WHITE	const D3D12_STATIC_BORDER_COLOR_OPAQUE_WHITE		414
+nim	D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND	dx12.html#D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND	const D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND		415
+nim	D3D12_FILTER_ANISOTROPIC	dx12.html#D3D12_FILTER_ANISOTROPIC	const D3D12_FILTER_ANISOTROPIC		416
+nim	D3D12_FILTER_MIN_MAG_MIP_LINEAR	dx12.html#D3D12_FILTER_MIN_MAG_MIP_LINEAR	const D3D12_FILTER_MIN_MAG_MIP_LINEAR		417
+nim	D3D12_TEXTURE_ADDRESS_MODE_CLAMP	dx12.html#D3D12_TEXTURE_ADDRESS_MODE_CLAMP	const D3D12_TEXTURE_ADDRESS_MODE_CLAMP		418
+nim	D3D12_TEXTURE_ADDRESS_MODE_WRAP	dx12.html#D3D12_TEXTURE_ADDRESS_MODE_WRAP	const D3D12_TEXTURE_ADDRESS_MODE_WRAP		419
+nim	D3D12_CLEAR_FLAG_DEPTH	dx12.html#D3D12_CLEAR_FLAG_DEPTH	const D3D12_CLEAR_FLAG_DEPTH		420
+nim	D3D12_SRV_DIMENSION_TEXTURE2D	dx12.html#D3D12_SRV_DIMENSION_TEXTURE2D	const D3D12_SRV_DIMENSION_TEXTURE2D		421
+nim	D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX	dx12.html#D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX	const D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX		422
+nim	D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT	dx12.html#D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT	const D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT		423
+nim	D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING	dx12.html#D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING	const D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING		424
+nim	D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST	dx12.html#D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST	const D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST		425
+nim	D3D12_DEFAULT_SAMPLE_MASK	dx12.html#D3D12_DEFAULT_SAMPLE_MASK	const D3D12_DEFAULT_SAMPLE_MASK		426
+nim	D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT	dx12.html#D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT	const D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT		427
+nim	WAIT_INFINITE	dx12.html#WAIT_INFINITE	const WAIT_INFINITE		428
+nim	S_OK	dx12.html#S_OK	const S_OK		430
+nim	newGuid	dx12.html#newGuid,uint32,uint16,uint16,uint8,uint8,uint8,uint8,uint8,uint8,uint8,uint8	proc newGuid(data1: uint32; data2: uint16; data3: uint16;\n        b0, b1, b2, b3, b4, b5, b6, b7: uint8): DXGuid		432
+nim	CreateDXGIFactory2_t	dx12.html#CreateDXGIFactory2_t	type CreateDXGIFactory2_t		456
+nim	release	dx12.html#release,pointer	proc release(obj: pointer)		506
+nim	createCommandQueue	dx12.html#createCommandQueue,ID3D12Device,ptr.D3D12_COMMAND_QUEUE_DESC	proc createCommandQueue(self: ID3D12Device; desc: ptr D3D12_COMMAND_QUEUE_DESC): ID3D12CommandQueue		515
+nim	createCommandAllocator	dx12.html#createCommandAllocator,ID3D12Device,D3D12_COMMAND_LIST_TYPE	proc createCommandAllocator(self: ID3D12Device; typ: D3D12_COMMAND_LIST_TYPE): ID3D12CommandAllocator		522
+nim	createCommandList	dx12.html#createCommandList,ID3D12Device,UINT,D3D12_COMMAND_LIST_TYPE,ID3D12CommandAllocator,pointer	proc createCommandList(self: ID3D12Device; nodeMask: UINT;\n                  typ: D3D12_COMMAND_LIST_TYPE;\n                  allocator: ID3D12CommandAllocator; initialState: pointer): ID3D12GraphicsCommandList		529
+nim	createDescriptorHeap	dx12.html#createDescriptorHeap,ID3D12Device,ptr.D3D12_DESCRIPTOR_HEAP_DESC	proc createDescriptorHeap(self: ID3D12Device; desc: ptr D3D12_DESCRIPTOR_HEAP_DESC): ID3D12DescriptorHeap		536
+nim	createRootSignature	dx12.html#createRootSignature,ID3D12Device,UINT,pointer,csize_t	proc createRootSignature(self: ID3D12Device; nodeMask: UINT; bytecode: pointer;\n                    bytecodeLength: csize_t): ID3D12RootSignature		543
+nim	getDescriptorHandleIncrementSize	dx12.html#getDescriptorHandleIncrementSize,ID3D12Device,D3D12_DESCRIPTOR_HEAP_TYPE	proc getDescriptorHandleIncrementSize(self: ID3D12Device;\n                                 heapType: D3D12_DESCRIPTOR_HEAP_TYPE): UINT		550
+nim	createGraphicsPipelineState	dx12.html#createGraphicsPipelineState,ID3D12Device,ptr.D3D12_GRAPHICS_PIPELINE_STATE_DESC	proc createGraphicsPipelineState(self: ID3D12Device;\n                            desc: ptr D3D12_GRAPHICS_PIPELINE_STATE_DESC): ID3D12PipelineState		557
+nim	createRenderTargetView	dx12.html#createRenderTargetView,ID3D12Device,ID3D12Resource,pointer,D3D12_CPU_DESCRIPTOR_HANDLE	proc createRenderTargetView(self: ID3D12Device; resource: ID3D12Resource;\n                       desc: pointer; handle: D3D12_CPU_DESCRIPTOR_HANDLE)		564
+nim	createDepthStencilView	dx12.html#createDepthStencilView,ID3D12Device,ID3D12Resource,pointer,D3D12_CPU_DESCRIPTOR_HANDLE	proc createDepthStencilView(self: ID3D12Device; resource: ID3D12Resource;\n                       desc: pointer; handle: D3D12_CPU_DESCRIPTOR_HANDLE)		568
+nim	createShaderResourceView	dx12.html#createShaderResourceView,ID3D12Device,ID3D12Resource,ptr.D3D12_SHADER_RESOURCE_VIEW_DESC,D3D12_CPU_DESCRIPTOR_HANDLE	proc createShaderResourceView(self: ID3D12Device; resource: ID3D12Resource;\n                         desc: ptr D3D12_SHADER_RESOURCE_VIEW_DESC;\n                         handle: D3D12_CPU_DESCRIPTOR_HANDLE)		582
+nim	createCommittedResource	dx12.html#createCommittedResource,ID3D12Device,ptr.D3D12_HEAP_PROPERTIES,uint32,ptr.D3D12_RESOURCE_DESC,D3D12_RESOURCE_STATES,pointer	proc createCommittedResource(self: ID3D12Device;\n                        heapProps: ptr D3D12_HEAP_PROPERTIES; heapFlags: uint32;\n                        desc: ptr D3D12_RESOURCE_DESC;\n                        initialState: D3D12_RESOURCE_STATES; clearValue: pointer): ID3D12Resource		596
+nim	map	dx12.html#map,ID3D12Resource,UINT,ptr.D3D12_RANGE,ptr.pointer	proc map(self: ID3D12Resource; subresource: UINT; readRange: ptr D3D12_RANGE;\n    data: ptr pointer)		603
+nim	unmap	dx12.html#unmap,ID3D12Resource,UINT,ptr.D3D12_RANGE	proc unmap(self: ID3D12Resource; subresource: UINT; writtenRange: ptr D3D12_RANGE)		609
+nim	getGPUVirtualAddress	dx12.html#getGPUVirtualAddress,ID3D12Resource	proc getGPUVirtualAddress(self: ID3D12Resource): UINT64		613
+nim	createFence	dx12.html#createFence,ID3D12Device,UINT64,uint32	proc createFence(self: ID3D12Device; initialValue: UINT64; flags: uint32): ID3D12Fence		617
+nim	getCopyableFootprints	dx12.html#getCopyableFootprints,ID3D12Device,ptr.D3D12_RESOURCE_DESC,UINT,UINT,UINT64,ptr.D3D12_PLACED_SUBRESOURCE_FOOTPRINT,ptr.UINT,ptr.UINT64,ptr.UINT64	proc getCopyableFootprints(self: ID3D12Device; desc: ptr D3D12_RESOURCE_DESC;\n                      firstSubresource: UINT; numSubresources: UINT;\n                      baseOffset: UINT64;\n                      layouts: ptr D3D12_PLACED_SUBRESOURCE_FOOTPRINT;\n                      numRows: ptr UINT; rowSizeInBytes: ptr UINT64;\n                      totalBytes: ptr UINT64)		624
+nim	reset	dx12.html#reset,ID3D12CommandAllocator	proc reset(self: ID3D12CommandAllocator)		638
+nim	reset	dx12.html#reset,ID3D12GraphicsCommandList,ID3D12CommandAllocator,pointer	proc reset(self: ID3D12GraphicsCommandList; allocator: ID3D12CommandAllocator;\n      pipelineState: pointer)		644
+nim	close	dx12.html#close,ID3D12GraphicsCommandList	proc close(self: ID3D12GraphicsCommandList)		650
+nim	copyBufferRegion	dx12.html#copyBufferRegion,ID3D12GraphicsCommandList,ID3D12Resource,UINT64,ID3D12Resource,UINT64,UINT64	proc copyBufferRegion(self: ID3D12GraphicsCommandList; dst: ID3D12Resource;\n                 dstOffset: UINT64; src: ID3D12Resource; srcOffset: UINT64;\n                 numBytes: UINT64)		656
+nim	copyTextureRegion	dx12.html#copyTextureRegion,ID3D12GraphicsCommandList,ptr.D3D12_TEXTURE_COPY_LOCATION,UINT,UINT,UINT,ptr.D3D12_TEXTURE_COPY_LOCATION,ptr.D3D12_BOX	proc copyTextureRegion(self: ID3D12GraphicsCommandList;\n                  dst: ptr D3D12_TEXTURE_COPY_LOCATION; dstX, dstY, dstZ: UINT;\n                  src: ptr D3D12_TEXTURE_COPY_LOCATION; srcBox: ptr D3D12_BOX)		660
+nim	resolveSubresource	dx12.html#resolveSubresource,ID3D12GraphicsCommandList,ID3D12Resource,UINT,ID3D12Resource,UINT,DXGI_FORMAT	proc resolveSubresource(self: ID3D12GraphicsCommandList; dstResource: ID3D12Resource;\n                   dstSubresource: UINT; srcResource: ID3D12Resource;\n                   srcSubresource: UINT; format: DXGI_FORMAT)		664
+nim	resourceBarrier	dx12.html#resourceBarrier,ID3D12GraphicsCommandList,UINT,ptr.D3D12_RESOURCE_BARRIER	proc resourceBarrier(self: ID3D12GraphicsCommandList; count: UINT;\n                barriers: ptr D3D12_RESOURCE_BARRIER)		691
+nim	rsSetViewports	dx12.html#rsSetViewports,ID3D12GraphicsCommandList,UINT,ptr.D3D12_VIEWPORT	proc rsSetViewports(self: ID3D12GraphicsCommandList; count: UINT;\n               viewports: ptr D3D12_VIEWPORT)		695
+nim	rsSetScissorRects	dx12.html#rsSetScissorRects,ID3D12GraphicsCommandList,UINT,ptr.D3D12_RECT	proc rsSetScissorRects(self: ID3D12GraphicsCommandList; count: UINT;\n                  rects: ptr D3D12_RECT)		699
+nim	omSetRenderTargets	dx12.html#omSetRenderTargets,ID3D12GraphicsCommandList,UINT,ptr.D3D12_CPU_DESCRIPTOR_HANDLE,BOOL32,pointer	proc omSetRenderTargets(self: ID3D12GraphicsCommandList; numTargets: UINT;\n                   handles: ptr D3D12_CPU_DESCRIPTOR_HANDLE;\n                   singleHandle: BOOL32; depthStencil: pointer)		703
+nim	clearDepthStencilView	dx12.html#clearDepthStencilView,ID3D12GraphicsCommandList,D3D12_CPU_DESCRIPTOR_HANDLE,uint32,FLOAT,uint8,UINT,pointer	proc clearDepthStencilView(self: ID3D12GraphicsCommandList;\n                      handle: D3D12_CPU_DESCRIPTOR_HANDLE; flags: uint32;\n                      depth: FLOAT; stencil: uint8; rectCount: UINT;\n                      rects: pointer)		707
+nim	clearRenderTargetView	dx12.html#clearRenderTargetView,ID3D12GraphicsCommandList,D3D12_CPU_DESCRIPTOR_HANDLE,ptr.FLOAT,UINT,pointer	proc clearRenderTargetView(self: ID3D12GraphicsCommandList;\n                      handle: D3D12_CPU_DESCRIPTOR_HANDLE; color: ptr FLOAT;\n                      rectCount: UINT; rects: pointer)		727
+nim	setPipelineState	dx12.html#setPipelineState,ID3D12GraphicsCommandList,ID3D12PipelineState	proc setPipelineState(self: ID3D12GraphicsCommandList; state: ID3D12PipelineState)		731
+nim	setDescriptorHeaps	dx12.html#setDescriptorHeaps,ID3D12GraphicsCommandList,UINT,ptr.ID3D12DescriptorHeap	proc setDescriptorHeaps(self: ID3D12GraphicsCommandList; heapCount: UINT;\n                   heaps: ptr ID3D12DescriptorHeap)		735
+nim	setGraphicsRootSignature	dx12.html#setGraphicsRootSignature,ID3D12GraphicsCommandList,ID3D12RootSignature	proc setGraphicsRootSignature(self: ID3D12GraphicsCommandList;\n                         root: ID3D12RootSignature)		739
+nim	setGraphicsRootDescriptorTable	dx12.html#setGraphicsRootDescriptorTable,ID3D12GraphicsCommandList,UINT,D3D12_GPU_DESCRIPTOR_HANDLE	proc setGraphicsRootDescriptorTable(self: ID3D12GraphicsCommandList;\n                               parameterIndex: UINT;\n                               baseDescriptor: D3D12_GPU_DESCRIPTOR_HANDLE)		743
+nim	setGraphicsRoot32BitConstants	dx12.html#setGraphicsRoot32BitConstants,ID3D12GraphicsCommandList,UINT,UINT,pointer,UINT	proc setGraphicsRoot32BitConstants(self: ID3D12GraphicsCommandList;\n                              parameterIndex: UINT; numValues: UINT;\n                              data: pointer; destOffset: UINT)		747
+nim	setGraphicsRootConstantBufferView	dx12.html#setGraphicsRootConstantBufferView,ID3D12GraphicsCommandList,UINT,UINT64	proc setGraphicsRootConstantBufferView(self: ID3D12GraphicsCommandList;\n                                  parameterIndex: UINT; gpuAddress: UINT64)		751
+nim	iaSetPrimitiveTopology	dx12.html#iaSetPrimitiveTopology,ID3D12GraphicsCommandList,uint32	proc iaSetPrimitiveTopology(self: ID3D12GraphicsCommandList; topology: uint32)		755
+nim	iaSetVertexBuffers	dx12.html#iaSetVertexBuffers,ID3D12GraphicsCommandList,UINT,UINT,ptr.D3D12_VERTEX_BUFFER_VIEW	proc iaSetVertexBuffers(self: ID3D12GraphicsCommandList; startSlot: UINT;\n                   viewCount: UINT; views: ptr D3D12_VERTEX_BUFFER_VIEW)		759
+nim	drawInstanced	dx12.html#drawInstanced,ID3D12GraphicsCommandList,UINT,UINT,UINT,UINT	proc drawInstanced(self: ID3D12GraphicsCommandList; vertexCount: UINT;\n              instanceCount: UINT; startVertex: UINT; startInstance: UINT)		763
+nim	executeCommandLists	dx12.html#executeCommandLists,ID3D12CommandQueue,UINT,ptr.ID3D12CommandList	proc executeCommandLists(self: ID3D12CommandQueue; count: UINT;\n                    lists: ptr ID3D12CommandList)		767
+nim	signal	dx12.html#signal,ID3D12CommandQueue,ID3D12Fence,UINT64	proc signal(self: ID3D12CommandQueue; fence: ID3D12Fence; value: UINT64)		771
+nim	getCPUDescriptorHandleForHeapStart	dx12.html#getCPUDescriptorHandleForHeapStart,ID3D12DescriptorHeap	proc getCPUDescriptorHandleForHeapStart(self: ID3D12DescriptorHeap): D3D12_CPU_DESCRIPTOR_HANDLE		777
+nim	getGPUDescriptorHandleForHeapStart	dx12.html#getGPUDescriptorHandleForHeapStart,ID3D12DescriptorHeap	proc getGPUDescriptorHandleForHeapStart(self: ID3D12DescriptorHeap): D3D12_GPU_DESCRIPTOR_HANDLE		783
+nim	present	dx12.html#present,IDXGISwapChain3,UINT,UINT	proc present(self: IDXGISwapChain3; syncInterval: UINT; flags: UINT)		789
+nim	getBuffer	dx12.html#getBuffer,IDXGISwapChain3,UINT	proc getBuffer(self: IDXGISwapChain3; index: UINT): ID3D12Resource		795
+nim	resizeBuffers	dx12.html#resizeBuffers,IDXGISwapChain3,UINT,UINT,UINT,UINT,UINT	proc resizeBuffers(self: IDXGISwapChain3;\n              bufferCount, width, height, newFormat, swapChainFlags: UINT)		802
+nim	getCurrentBackBufferIndex	dx12.html#getCurrentBackBufferIndex,IDXGISwapChain3	proc getCurrentBackBufferIndex(self: IDXGISwapChain3): UINT		835
+nim	getCompletedValue	dx12.html#getCompletedValue,ID3D12Fence	proc getCompletedValue(self: ID3D12Fence): UINT64		840
+nim	setEventOnCompletion	dx12.html#setEventOnCompletion,ID3D12Fence,UINT64,HANDLE	proc setEventOnCompletion(self: ID3D12Fence; value: UINT64; evt: HANDLE)		844
+nim	createSwapChainForHwnd	dx12.html#createSwapChainForHwnd,IDXGIFactory4,pointer,HWND,ptr.DXGI_SWAP_CHAIN_DESC1,pointer,IDXGIOutput	proc createSwapChainForHwnd(factory: IDXGIFactory4; device: pointer; hwnd: HWND;\n                       desc: ptr DXGI_SWAP_CHAIN_DESC1; fullscreenDesc: pointer;\n                       restrictOutput: IDXGIOutput): IDXGISwapChain1		850
+nim	makeWindowAssociation	dx12.html#makeWindowAssociation,IDXGIFactory4,HWND,UINT	proc makeWindowAssociation(factory: IDXGIFactory4; hwnd: HWND; flags: UINT)		856
+nim	queryInterface	dx12.html#queryInterface,pointer,ptr.DXGuid	proc queryInterface[T](iface: pointer; riid: ptr DXGuid): T		862
+nim	upgradeToSwapChain3	dx12.html#upgradeToSwapChain3,IDXGISwapChain1	proc upgradeToSwapChain3(swapChain1: IDXGISwapChain1): IDXGISwapChain3		872
+nim	createDxgiFactory2	dx12.html#createDxgiFactory2,UINT	proc createDxgiFactory2(flags: UINT): IDXGIFactory4		876
+nim	d3d12CreateDevice	dx12.html#d3d12CreateDevice,pointer,D3D_FEATURE_LEVEL	proc d3d12CreateDevice(pAdapter: pointer; MinimumFeatureLevel: D3D_FEATURE_LEVEL): ID3D12Device		882
+nim	loadNativeSymbols	dx12.html#loadNativeSymbols	proc loadNativeSymbols()		888
+nim	getBufferPointer	dx12.html#getBufferPointer,ID3DBlob	proc getBufferPointer(blob: ID3DBlob): pointer		929
+nim	getBufferSize	dx12.html#getBufferSize,ID3DBlob	proc getBufferSize(blob: ID3DBlob): csize_t		933
+nim	serializeRootSignature	dx12.html#serializeRootSignature,ptr.D3D12_ROOT_SIGNATURE_DESC	proc serializeRootSignature(desc: ptr D3D12_ROOT_SIGNATURE_DESC): ID3DBlob		937
+nim	compileShader	dx12.html#compileShader,string,string,string,uint32	proc compileShader(source: string; entryPoint: string; target: string;\n              flags: uint32 = 0): ID3DBlob		954
+nim	shaderBytecode	dx12.html#shaderBytecode,ID3DBlob	proc shaderBytecode(blob: ID3DBlob): D3D12_SHADER_BYTECODE		985
+nimgrp	reset	dx12.html#reset-procs-all	proc		638
