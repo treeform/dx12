@@ -108,6 +108,18 @@ type
     StateBefore*: D3D12_RESOURCE_STATES
     StateAfter*: D3D12_RESOURCE_STATES
 
+  D3D12_DEPTH_STENCIL_VALUE* = object
+    Depth*: FLOAT
+    Stencil*: uint8
+
+  D3D12_CLEAR_VALUE_UNION* {.union.} = object
+    Color*: array[4, FLOAT]
+    DepthStencil*: D3D12_DEPTH_STENCIL_VALUE
+
+  D3D12_CLEAR_VALUE* = object
+    Format*: DXGI_FORMAT
+    data*: D3D12_CLEAR_VALUE_UNION
+
   D3D12_RESOURCE_BARRIER* = object
     typ*: D3D12_RESOURCE_BARRIER_TYPE
     Flags*: D3D12_RESOURCE_BARRIER_FLAGS
@@ -330,6 +342,7 @@ type
 const
   FRAME_COUNT* = 2
   DXGI_FORMAT_R8G8B8A8_UNORM* = 28'u32
+  DXGI_FORMAT_D32_FLOAT* = 40'u32
   DXGI_FORMAT_R32G32B32_FLOAT* = 6'u32
   DXGI_FORMAT_R32G32_FLOAT* = 16'u32
   DXGI_FORMAT_UNKNOWN* = 0'u32
@@ -345,6 +358,7 @@ const
   D3D12_COMMAND_QUEUE_PRIORITY_NORMAL* = 0
   D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV* = 0'u32
   D3D12_DESCRIPTOR_HEAP_TYPE_RTV* = 2'u32
+  D3D12_DESCRIPTOR_HEAP_TYPE_DSV* = 3'u32
   D3D12_DESCRIPTOR_HEAP_FLAG_NONE* = 0'u32
   D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE* = 0x1'u32
   D3D12_HEAP_TYPE_DEFAULT* = 1'u32
@@ -355,8 +369,10 @@ const
   D3D12_TEXTURE_LAYOUT_ROW_MAJOR* = 1'u32
   D3D12_TEXTURE_LAYOUT_UNKNOWN* = 0'u32
   D3D12_RESOURCE_FLAG_NONE* = 0'u32
+  D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL* = 0x2'u32
   D3D12_RESOURCE_STATE_PRESENT* = 0'u32
   D3D12_RESOURCE_STATE_RENDER_TARGET* = 0x4'u32
+  D3D12_RESOURCE_STATE_DEPTH_WRITE* = 0x10'u32
   D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER* = 0x1'u32
   D3D12_RESOURCE_STATE_GENERIC_READ* = 0x1'u32 or 0x2'u32 or
     0x40'u32 or 0x80'u32 or 0x200'u32 or 0x800'u32
@@ -374,6 +390,7 @@ const
   D3D12_BLEND_OP_ADD* = 1'u32
   D3D12_COLOR_WRITE_ENABLE_ALL* = 0x0f'u32
   D3D12_DEPTH_WRITE_MASK_ALL* = 1'u32
+  D3D12_COMPARISON_FUNC_LESS* = 2'u32
   D3D12_COMPARISON_FUNC_ALWAYS* = 8'u32
   D3D12_STENCIL_OP_KEEP* = 1'u32
   D3D12_CONSERVATIVE_RASTERIZATION_MODE_OFF* = 0'u32
@@ -392,6 +409,7 @@ const
   D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND* = 0xffffffff'u32
   D3D12_FILTER_MIN_MAG_MIP_LINEAR* = 0x15'u32
   D3D12_TEXTURE_ADDRESS_MODE_WRAP* = 1'u32
+  D3D12_CLEAR_FLAG_DEPTH* = 0x1'u32
   D3D12_SRV_DIMENSION_TEXTURE2D* = 4'u32
   D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX* = 0'u32
   D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT* = 1'u32
@@ -539,6 +557,20 @@ proc createRenderTargetView*(self: ID3D12Device, resource: ID3D12Resource, desc:
   type F = proc(this: ID3D12Device, resource: ID3D12Resource, desc: pointer, handle: D3D12_CPU_DESCRIPTOR_HANDLE) {.stdcall.}
   callVtbl(self, 20, F, resource, desc, handle)
 
+proc createDepthStencilView*(
+    self: ID3D12Device,
+    resource: ID3D12Resource,
+    desc: pointer,
+    handle: D3D12_CPU_DESCRIPTOR_HANDLE
+  ) =
+  type F = proc(
+    this: ID3D12Device,
+    resource: ID3D12Resource,
+    desc: pointer,
+    handle: D3D12_CPU_DESCRIPTOR_HANDLE
+  ) {.stdcall.}
+  callVtbl(self, 21, F, resource, desc, handle)
+
 proc createShaderResourceView*(
     self: ID3D12Device,
     resource: ID3D12Resource,
@@ -636,6 +668,26 @@ proc rsSetScissorRects*(self: ID3D12GraphicsCommandList, count: UINT, rects: ptr
 proc omSetRenderTargets*(self: ID3D12GraphicsCommandList, numTargets: UINT, handles: ptr D3D12_CPU_DESCRIPTOR_HANDLE, singleHandle: BOOL32, depthStencil: pointer) =
   type F = proc(this: ID3D12GraphicsCommandList, numTargets: UINT, handles: ptr D3D12_CPU_DESCRIPTOR_HANDLE, singleHandle: BOOL32, depthStencil: pointer): void {.stdcall.}
   callVtbl(self, 46, F, numTargets, handles, singleHandle, depthStencil)
+
+proc clearDepthStencilView*(
+    self: ID3D12GraphicsCommandList,
+    handle: D3D12_CPU_DESCRIPTOR_HANDLE,
+    flags: uint32,
+    depth: FLOAT,
+    stencil: uint8,
+    rectCount: UINT,
+    rects: pointer
+  ) =
+  type F = proc(
+    this: ID3D12GraphicsCommandList,
+    handle: D3D12_CPU_DESCRIPTOR_HANDLE,
+    flags: uint32,
+    depth: FLOAT,
+    stencil: uint8,
+    rectCount: UINT,
+    rects: pointer
+  ): void {.stdcall.}
+  callVtbl(self, 47, F, handle, flags, depth, stencil, rectCount, rects)
 
 proc clearRenderTargetView*(self: ID3D12GraphicsCommandList, handle: D3D12_CPU_DESCRIPTOR_HANDLE, color: ptr FLOAT, rectCount: UINT, rects: pointer) =
   type F = proc(this: ID3D12GraphicsCommandList, handle: D3D12_CPU_DESCRIPTOR_HANDLE, color: ptr FLOAT, rectCount: UINT, rects: pointer): void {.stdcall.}
