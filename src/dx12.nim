@@ -780,16 +780,14 @@ proc signal*(self: ID3D12CommandQueue, fence: ID3D12Fence, value: UINT64) =
     raise newException(Exception, "ID3D12CommandQueue.Signal failed with HRESULT " & $hr)
 
 proc getCPUDescriptorHandleForHeapStart*(self: ID3D12DescriptorHeap): D3D12_CPU_DESCRIPTOR_HANDLE =
+  ## Returns the CPU descriptor handle for the start of the heap.
   type F = proc(this: ID3D12DescriptorHeap, ret: ptr D3D12_CPU_DESCRIPTOR_HANDLE): ptr D3D12_CPU_DESCRIPTOR_HANDLE {.stdcall.}
-  var handle: D3D12_CPU_DESCRIPTOR_HANDLE
-  discard callVtbl(self, 9, F, addr handle)
-  result = handle
+  discard callVtbl(self, 9, F, addr result)
 
 proc getGPUDescriptorHandleForHeapStart*(self: ID3D12DescriptorHeap): D3D12_GPU_DESCRIPTOR_HANDLE =
+  ## Returns the GPU descriptor handle for the start of the heap.
   type F = proc(this: ID3D12DescriptorHeap, ret: ptr D3D12_GPU_DESCRIPTOR_HANDLE): ptr D3D12_GPU_DESCRIPTOR_HANDLE {.stdcall.}
-  var handle: D3D12_GPU_DESCRIPTOR_HANDLE
-  discard callVtbl(self, 10, F, addr handle)
-  result = handle
+  discard callVtbl(self, 10, F, addr result)
 
 proc present*(self: IDXGISwapChain3, syncInterval: UINT, flags: UINT) =
   type F = proc(this: IDXGISwapChain3, syncInterval: UINT, flags: UINT): HRESULT {.stdcall.}
@@ -891,12 +889,11 @@ proc checkFeatureSupport*(
     )
 
 proc queryInterface*[T](iface: pointer, riid: ptr DXGuid): T =
+  ## Queries for a COM interface by GUID.
   type F = proc(this: pointer, riid: ptr DXGuid, outObj: ptr pointer): HRESULT {.stdcall.}
-  var tmp: pointer
-  let hr = callVtbl(iface, 0, F, riid, addr tmp)
+  let hr = callVtbl(iface, 0, F, riid, cast[ptr pointer](addr result))
   if hr < 0:
     raise newException(Exception, "QueryInterface failed with HRESULT " & $hr)
-  result = cast[T](tmp)
 
 # Helper functions
 
@@ -982,10 +979,10 @@ proc getBufferSize*(blob: ID3DBlob): csize_t =
   callVtbl0(blob, 4, F)
 
 proc serializeRootSignature*(desc: ptr D3D12_ROOT_SIGNATURE_DESC): ID3DBlob =
+  ## Serializes a root signature description into a blob.
   loadNativeSymbols()
-  var blob: ID3DBlob
   var errorBlob: ID3DBlob
-  let hr = D3D12SerializeRootSignature_Ptr(desc, 1'u32, addr blob, addr errorBlob)
+  let hr = D3D12SerializeRootSignature_Ptr(desc, 1'u32, addr result, addr errorBlob)
   if errorBlob != nil:
     let msgPtr = cast[cstring](getBufferPointer(errorBlob))
     var msg = ""
@@ -996,11 +993,10 @@ proc serializeRootSignature*(desc: ptr D3D12_ROOT_SIGNATURE_DESC): ID3DBlob =
       raise newException(Exception, "D3D12SerializeRootSignature failed: " & msg)
   if hr < 0:
     raise newException(Exception, "D3D12SerializeRootSignature failed with HRESULT " & $hr)
-  result = blob
 
 proc compileShader*(source: string, entryPoint: string, target: string, flags: uint32 = 0): ID3DBlob =
+  ## Compiles HLSL source into a shader blob.
   loadCompiler()
-  var blob: ID3DBlob
   var errorBlob: ID3DBlob
   let hr = D3DCompile_Ptr(
     cast[pointer](source.cstring),
@@ -1012,7 +1008,7 @@ proc compileShader*(source: string, entryPoint: string, target: string, flags: u
     target.cstring,
     flags,
     0,
-    addr blob,
+    addr result,
     addr errorBlob
   )
   if errorBlob != nil:
@@ -1022,12 +1018,11 @@ proc compileShader*(source: string, entryPoint: string, target: string, flags: u
       msg = $msgPtr
     release(errorBlob)
     if hr < 0:
-      if blob != nil:
-        release(blob)
+      if result != nil:
+        release(result)
       raise newException(Exception, "D3DCompile failed: " & msg)
   if hr < 0:
     raise newException(Exception, "D3DCompile failed with HRESULT " & $hr)
-  result = blob
 
 proc shaderBytecode*(blob: ID3DBlob): D3D12_SHADER_BYTECODE =
   D3D12_SHADER_BYTECODE(
