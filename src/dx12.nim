@@ -1,4 +1,4 @@
-import 
+import
   std/dynlib,
   windy/platforms/win32/windefs
 
@@ -508,63 +508,74 @@ template callVtbl(iface: pointer, index: int, typ: typedesc, args: varargs[untyp
   let fn = cast[typ](funcPtr)
   fn(iface, args)
 
+template callVtbl0Err(iface: pointer, index: int, typ: typedesc, msg: string): untyped =
+  ## Calls a zero-arg vtable method and raises on negative HRESULT.
+  let vtblPtr = cast[ptr ptr UncheckedArray[pointer]](iface)
+  let vtbl = vtblPtr[]
+  let funcPtr = vtbl[index]
+  let fn = cast[typ](funcPtr)
+  let hr = fn(iface)
+  if hr < 0:
+    raise newException(Exception, msg & " HRESULT " & $hr)
+
+template callVtblErr(iface: pointer, index: int, typ: typedesc, msg: string, args: varargs[untyped]): untyped =
+  ## Calls a vtable method and raises on negative HRESULT.
+  let vtblPtr = cast[ptr ptr UncheckedArray[pointer]](iface)
+  let vtbl = vtblPtr[]
+  let funcPtr = vtbl[index]
+  let fn = cast[typ](funcPtr)
+  let hr = fn(iface, args)
+  if hr < 0:
+    raise newException(Exception, msg & " HRESULT " & $hr)
+
 proc release*(obj: pointer) =
+  ## Releases a COM object reference.
   if obj == nil:
     raise newException(Exception, "COM object is nil")
-  type ReleaseProc = proc(this: pointer): uint32 {.stdcall.}
-  let hr = callVtbl0(obj, 2, ReleaseProc)
-  if hr < 0:
-    raise newException(Exception, "COM object release failed with HRESULT " & $hr)
+  type F = proc(this: pointer): uint32 {.stdcall.}
+  discard callVtbl0(obj, 2, F)
 
 # --- Thin wrappers for the specific methods we need ---
 proc createCommandQueue*(self: ID3D12Device, desc: ptr D3D12_COMMAND_QUEUE_DESC): ID3D12CommandQueue =
+  ## Creates a command queue.
   const IID_ID3D12CommandQueue = newGuid(0x0ec870a6'u32,0x5d7e'u16,0x4c22'u16,0x8c'u8,0xfc'u8,0x5b'u8,0xaa'u8,0xe0'u8,0x76'u8,0x16'u8,0xed'u8)
   type F = proc(this: ID3D12Device, desc: ptr D3D12_COMMAND_QUEUE_DESC, riid: ptr DXGuid, outQueue: ptr ID3D12CommandQueue): HRESULT {.stdcall.}
-  let hr = callVtbl(self, 8, F, desc, addr IID_ID3D12CommandQueue, addr result)
-  if hr < 0:
-    raise newException(Exception, "CreateCommandQueue failed with HRESULT " & $hr)
+  callVtblErr(self, 8, F, "CreateCommandQueue", desc, addr IID_ID3D12CommandQueue, addr result)
 
 proc createCommandAllocator*(self: ID3D12Device, typ: D3D12_COMMAND_LIST_TYPE): ID3D12CommandAllocator =
+  ## Creates a command allocator.
   const IID_ID3D12CommandAllocator = newGuid(0x6102dee4'u32,0xaf59'u16,0x4b09'u16,0xb9'u8,0x99'u8,0xb4'u8,0x4d'u8,0x73'u8,0xf0'u8,0x9b'u8,0x24'u8)
   type F = proc(this: ID3D12Device, typ: D3D12_COMMAND_LIST_TYPE, riid: ptr DXGuid, outAlloc: ptr pointer): HRESULT {.stdcall.}
-  let hr = callVtbl(self, 9, F, typ, addr IID_ID3D12CommandAllocator, cast[ptr pointer](addr result))
-  if hr < 0:
-    raise newException(Exception, "CreateCommandAllocator failed with HRESULT " & $hr)
+  callVtblErr(self, 9, F, "CreateCommandAllocator", typ, addr IID_ID3D12CommandAllocator, cast[ptr pointer](addr result))
 
 proc createCommandList*(self: ID3D12Device, nodeMask: UINT, typ: D3D12_COMMAND_LIST_TYPE, allocator: ID3D12CommandAllocator, initialState: pointer): ID3D12GraphicsCommandList =
+  ## Creates a command list.
   const IID_ID3D12GraphicsCommandList = newGuid(0x5b160d0f'u32,0xac1b'u16,0x4185'u16,0x8b'u8,0xa8'u8,0xb3'u8,0xae'u8,0x42'u8,0xa5'u8,0xa4'u8,0x55'u8)
   type F = proc(this: ID3D12Device, nodeMask: UINT, typ: D3D12_COMMAND_LIST_TYPE, allocator: ID3D12CommandAllocator, initialState: pointer, riid: ptr DXGuid, outList: ptr pointer): HRESULT {.stdcall.}
-  let hr = callVtbl(self, 12, F, nodeMask, typ, allocator, initialState, addr IID_ID3D12GraphicsCommandList, cast[ptr pointer](addr result))
-  if hr < 0:
-    raise newException(Exception, "CreateCommandList failed with HRESULT " & $hr)
+  callVtblErr(self, 12, F, "CreateCommandList", nodeMask, typ, allocator, initialState, addr IID_ID3D12GraphicsCommandList, cast[ptr pointer](addr result))
 
 proc createDescriptorHeap*(self: ID3D12Device, desc: ptr D3D12_DESCRIPTOR_HEAP_DESC): ID3D12DescriptorHeap =
+  ## Creates a descriptor heap.
   const IID_ID3D12DescriptorHeap = newGuid(0x8efb471d'u32,0x616c'u16,0x4f49'u16,0x90'u8,0xf7'u8,0x12'u8,0x7b'u8,0xb7'u8,0x63'u8,0xfa'u8,0x51'u8)
   type F = proc(this: ID3D12Device, desc: ptr D3D12_DESCRIPTOR_HEAP_DESC, riid: ptr DXGuid, outHeap: ptr pointer): HRESULT {.stdcall.}
-  let hr = callVtbl(self, 14, F, desc, addr IID_ID3D12DescriptorHeap, cast[ptr pointer](addr result))
-  if hr < 0:
-    raise newException(Exception, "CreateDescriptorHeap failed with HRESULT " & $hr)
+  callVtblErr(self, 14, F, "CreateDescriptorHeap", desc, addr IID_ID3D12DescriptorHeap, cast[ptr pointer](addr result))
 
 proc createRootSignature*(self: ID3D12Device, nodeMask: UINT, bytecode: pointer, bytecodeLength: csize_t): ID3D12RootSignature =
+  ## Creates a root signature from serialized bytecode.
   const IID_ID3D12RootSignature = newGuid(0xc54a6b66'u32,0x72df'u16,0x4ee8'u16,0x8b'u8,0xe5'u8,0xa9'u8,0x46'u8,0xa1'u8,0x42'u8,0x92'u8,0x14'u8)
   type F = proc(this: ID3D12Device, nodeMask: UINT, bytecode: pointer, bytecodeLength: csize_t, riid: ptr DXGuid, outSignature: ptr pointer): HRESULT {.stdcall.}
-  let hr = callVtbl(self, 16, F, nodeMask, bytecode, bytecodeLength, addr IID_ID3D12RootSignature, cast[ptr pointer](addr result))
-  if hr < 0:
-    raise newException(Exception, "CreateRootSignature failed with HRESULT " & $hr)
+  callVtblErr(self, 16, F, "CreateRootSignature", nodeMask, bytecode, bytecodeLength, addr IID_ID3D12RootSignature, cast[ptr pointer](addr result))
 
 proc getDescriptorHandleIncrementSize*(self: ID3D12Device, heapType: D3D12_DESCRIPTOR_HEAP_TYPE): UINT =
+  ## Returns the size of a descriptor handle increment for a heap type.
   type F = proc(this: ID3D12Device, heapType: D3D12_DESCRIPTOR_HEAP_TYPE): UINT {.stdcall.}
-  let hr = callVtbl(self, 15, F, heapType)
-  if hr < 0:
-    raise newException(Exception, "GetDescriptorHandleIncrementSize failed with HRESULT " & $hr)
-  result = UINT(hr)
+  callVtbl(self, 15, F, heapType)
 
 proc createGraphicsPipelineState*(self: ID3D12Device, desc: ptr D3D12_GRAPHICS_PIPELINE_STATE_DESC): ID3D12PipelineState =
+  ## Creates a graphics pipeline state object.
   const IID_ID3D12PipelineState = newGuid(0x765a30f3'u32,0xf624'u16,0x4c6f'u16,0xa8'u8,0x28'u8,0xac'u8,0xe9'u8,0x48'u8,0x62'u8,0x24'u8,0x45'u8)
   type F = proc(this: ID3D12Device, desc: ptr D3D12_GRAPHICS_PIPELINE_STATE_DESC, riid: ptr DXGuid, outState: ptr pointer): HRESULT {.stdcall.}
-  let hr = callVtbl(self, 10, F, desc, addr IID_ID3D12PipelineState, cast[ptr pointer](addr result))
-  if hr < 0:
-    raise newException(Exception, "CreateGraphicsPipelineState failed with HRESULT " & $hr)
+  callVtblErr(self, 10, F, "CreateGraphicsPipelineState", desc, addr IID_ID3D12PipelineState, cast[ptr pointer](addr result))
 
 proc createRenderTargetView*(self: ID3D12Device, resource: ID3D12Resource, desc: pointer, handle: D3D12_CPU_DESCRIPTOR_HANDLE) =
   type F = proc(this: ID3D12Device, resource: ID3D12Resource, desc: pointer, handle: D3D12_CPU_DESCRIPTOR_HANDLE) {.stdcall.}
@@ -599,17 +610,15 @@ proc createShaderResourceView*(
   callVtbl(self, 18, F, resource, desc, handle)
 
 proc createCommittedResource*(self: ID3D12Device, heapProps: ptr D3D12_HEAP_PROPERTIES, heapFlags: uint32, desc: ptr D3D12_RESOURCE_DESC, initialState: D3D12_RESOURCE_STATES, clearValue: pointer): ID3D12Resource =
+  ## Creates a committed resource with an implicit heap.
   const IID_ID3D12Resource = newGuid(0x696442be'u32,0xa72e'u16,0x4059'u16,0xbc'u8,0x79'u8,0x5b'u8,0x5c'u8,0x98'u8,0x04'u8,0x0f'u8,0xad'u8)
   type F = proc(this: ID3D12Device, heapProps: ptr D3D12_HEAP_PROPERTIES, heapFlags: uint32, desc: ptr D3D12_RESOURCE_DESC, initialState: D3D12_RESOURCE_STATES, clearValue: pointer, riid: ptr DXGuid, outResource: ptr pointer): HRESULT {.stdcall.}
-  let hr = callVtbl(self, 27, F, heapProps, heapFlags, desc, initialState, clearValue, addr IID_ID3D12Resource, cast[ptr pointer](addr result))
-  if hr < 0:
-    raise newException(Exception, "CreateCommittedResource failed with HRESULT " & $hr)
+  callVtblErr(self, 27, F, "CreateCommittedResource", heapProps, heapFlags, desc, initialState, clearValue, addr IID_ID3D12Resource, cast[ptr pointer](addr result))
 
 proc map*(self: ID3D12Resource, subresource: UINT, readRange: ptr D3D12_RANGE, data: ptr pointer) =
+  ## Maps a resource subresource into CPU address space.
   type F = proc(this: ID3D12Resource, subresource: UINT, readRange: ptr D3D12_RANGE, data: ptr pointer): HRESULT {.stdcall.}
-  let hr = callVtbl(self, 8, F, subresource, readRange, data)
-  if hr < 0:
-    raise newException(Exception, "ID3D12Resource.Map failed with HRESULT " & $hr)
+  callVtblErr(self, 8, F, "Map", subresource, readRange, data)
 
 proc unmap*(self: ID3D12Resource, subresource: UINT, writtenRange: ptr D3D12_RANGE) =
   type F = proc(this: ID3D12Resource, subresource: UINT, writtenRange: ptr D3D12_RANGE): void {.stdcall.}
@@ -620,11 +629,10 @@ proc getGPUVirtualAddress*(self: ID3D12Resource): UINT64 =
   callVtbl0(self, 11, F)
 
 proc createFence*(self: ID3D12Device, initialValue: UINT64, flags: uint32): ID3D12Fence =
+  ## Creates a GPU fence for synchronization.
   const IID_ID3D12Fence = newGuid(0x0a753dcf'u32,0xc4d8'u16,0x4b91'u16,0xad'u8,0xf6'u8,0xbe'u8,0x5a'u8,0x60'u8,0xd9'u8,0x5a'u8,0x76'u8)
   type F = proc(this: ID3D12Device, initialValue: UINT64, flags: uint32, riid: ptr DXGuid, outFence: ptr pointer): HRESULT {.stdcall.}
-  let hr = callVtbl(self, 36, F, initialValue, flags, addr IID_ID3D12Fence, cast[ptr pointer](addr result))
-  if hr < 0:
-    raise newException(Exception, "CreateFence failed with HRESULT " & $hr)
+  callVtblErr(self, 36, F, "CreateFence", initialValue, flags, addr IID_ID3D12Fence, cast[ptr pointer](addr result))
 
 proc getCopyableFootprints*(self: ID3D12Device, desc: ptr D3D12_RESOURCE_DESC, firstSubresource: UINT, numSubresources: UINT, baseOffset: UINT64, layouts: ptr D3D12_PLACED_SUBRESOURCE_FOOTPRINT, numRows: ptr UINT, rowSizeInBytes: ptr UINT64, totalBytes: ptr UINT64) =
   type F = proc(
@@ -641,22 +649,19 @@ proc getCopyableFootprints*(self: ID3D12Device, desc: ptr D3D12_RESOURCE_DESC, f
   callVtbl(self, 38, F, desc, firstSubresource, numSubresources, baseOffset, layouts, numRows, rowSizeInBytes, totalBytes)
 
 proc reset*(self: ID3D12CommandAllocator) =
+  ## Resets the command allocator.
   type F = proc(this: ID3D12CommandAllocator): HRESULT {.stdcall.}
-  let hr = callVtbl0(self, 8, F)
-  if hr < 0:
-    raise newException(Exception, "ID3D12CommandAllocator.Reset failed with HRESULT " & $hr)
+  callVtbl0Err(self, 8, F, "CommandAllocator.Reset")
 
 proc reset*(self: ID3D12GraphicsCommandList, allocator: ID3D12CommandAllocator, pipelineState: pointer) =
+  ## Resets the command list with a new allocator and pipeline state.
   type F = proc(this: ID3D12GraphicsCommandList, allocator: ID3D12CommandAllocator, pipelineState: pointer): HRESULT {.stdcall.}
-  let hr = callVtbl(self, 10, F, allocator, pipelineState)
-  if hr < 0:
-    raise newException(Exception, "ID3D12GraphicsCommandList.Reset failed with HRESULT " & $hr)
+  callVtblErr(self, 10, F, "CommandList.Reset", allocator, pipelineState)
 
 proc close*(self: ID3D12GraphicsCommandList) =
+  ## Closes the command list for submission.
   type F = proc(this: ID3D12GraphicsCommandList): HRESULT {.stdcall.}
-  let hr = callVtbl0(self, 9, F)
-  if hr < 0:
-    raise newException(Exception, "ID3D12GraphicsCommandList.Close failed with HRESULT " & $hr)
+  callVtbl0Err(self, 9, F, "CommandList.Close")
 
 proc copyBufferRegion*(self: ID3D12GraphicsCommandList, dst: ID3D12Resource, dstOffset: UINT64, src: ID3D12Resource, srcOffset: UINT64, numBytes: UINT64) =
   type F = proc(this: ID3D12GraphicsCommandList, dst: ID3D12Resource, dstOffset: UINT64, src: ID3D12Resource, srcOffset: UINT64, numBytes: UINT64): void {.stdcall.}
@@ -774,10 +779,9 @@ proc executeCommandLists*(self: ID3D12CommandQueue, count: UINT, lists: ptr ID3D
   callVtbl(self, 10, F, count, lists)
 
 proc signal*(self: ID3D12CommandQueue, fence: ID3D12Fence, value: UINT64) =
+  ## Signals a fence from the GPU.
   type F = proc(this: ID3D12CommandQueue, fence: ID3D12Fence, value: UINT64): HRESULT {.stdcall.}
-  let hr = callVtbl(self, 14, F, fence, value)
-  if hr < 0:
-    raise newException(Exception, "ID3D12CommandQueue.Signal failed with HRESULT " & $hr)
+  callVtblErr(self, 14, F, "CommandQueue.Signal", fence, value)
 
 proc getCPUDescriptorHandleForHeapStart*(self: ID3D12DescriptorHeap): D3D12_CPU_DESCRIPTOR_HANDLE =
   ## Returns the CPU descriptor handle for the start of the heap.
@@ -790,17 +794,15 @@ proc getGPUDescriptorHandleForHeapStart*(self: ID3D12DescriptorHeap): D3D12_GPU_
   discard callVtbl(self, 10, F, addr result)
 
 proc present*(self: IDXGISwapChain3, syncInterval: UINT, flags: UINT) =
+  ## Presents the swap chain.
   type F = proc(this: IDXGISwapChain3, syncInterval: UINT, flags: UINT): HRESULT {.stdcall.}
-  let hr = callVtbl(self, 8, F, syncInterval, flags)
-  if hr < 0:
-    raise newException(Exception, "IDXGISwapChain3.Present failed with HRESULT " & $hr)
+  callVtblErr(self, 8, F, "SwapChain.Present", syncInterval, flags)
 
 proc getBuffer*(self: IDXGISwapChain3, index: UINT): ID3D12Resource =
+  ## Returns a swap-chain back buffer by index.
   const IID_ID3D12Resource = newGuid(0x696442be'u32,0xa72e'u16,0x4059'u16,0xbc'u8,0x79'u8,0x5b'u8,0x5c'u8,0x98'u8,0x04'u8,0x0f'u8,0xad'u8)
   type F = proc(this: IDXGISwapChain3, index: UINT, riid: ptr DXGuid, outBuffer: ptr pointer): HRESULT {.stdcall.}
-  let hr = callVtbl(self, 9, F, index, addr IID_ID3D12Resource, cast[ptr pointer](addr result))
-  if hr < 0:
-    raise newException(Exception, "IDXGISwapChain3.GetBuffer failed with HRESULT " & $hr)
+  callVtblErr(self, 9, F, "SwapChain.GetBuffer", index, addr IID_ID3D12Resource, cast[ptr pointer](addr result))
 
 proc resizeBuffers*(
     self: IDXGISwapChain3,
@@ -819,21 +821,17 @@ proc resizeBuffers*(
       newFormat,
       swapChainFlags: UINT
     ): HRESULT {.stdcall.}
-  let hr = callVtbl(
+  callVtblErr(
     self,
     13,
     F,
+    "SwapChain.ResizeBuffers",
     bufferCount,
     width,
     height,
     newFormat,
     swapChainFlags
   )
-  if hr < 0:
-    raise newException(
-      Exception,
-      "IDXGISwapChain3.ResizeBuffers failed with HRESULT " & $hr
-    )
 
 proc getCurrentBackBufferIndex*(self: IDXGISwapChain3): UINT =
   ## Returns the current swap-chain back buffer index.
@@ -845,55 +843,47 @@ proc getCompletedValue*(self: ID3D12Fence): UINT64 =
   callVtbl0(self, 8, F)
 
 proc setEventOnCompletion*(self: ID3D12Fence, value: UINT64, evt: HANDLE) =
+  ## Sets an event to fire when the fence reaches a value.
   type F = proc(this: ID3D12Fence, value: UINT64, evt: HANDLE): HRESULT {.stdcall.}
-  let hr = callVtbl(self, 9, F, value, evt)
-  if hr < 0:
-    raise newException(Exception, "ID3D12Fence.SetEventOnCompletion failed with HRESULT " & $hr)
+  callVtblErr(self, 9, F, "Fence.SetEventOnCompletion", value, evt)
 
 proc createSwapChainForHwnd*(factory: IDXGIFactory4, device: pointer, hwnd: HWND, desc: ptr DXGI_SWAP_CHAIN_DESC1, fullscreenDesc: pointer, restrictOutput: IDXGIOutput): IDXGISwapChain1 =
+  ## Creates a swap chain bound to an HWND.
   type F = proc(this: IDXGIFactory4, device: pointer, hwnd: HWND, desc: ptr DXGI_SWAP_CHAIN_DESC1, fullscreenDesc: pointer, restrictOutput: IDXGIOutput, outSwapChain: ptr pointer): HRESULT {.stdcall.}
-  let hr = callVtbl(factory, 15, F, device, hwnd, desc, fullscreenDesc, restrictOutput, cast[ptr pointer](addr result))
-  if hr < 0:
-    raise newException(Exception, "CreateSwapChainForHwnd failed with HRESULT " & $hr)
+  callVtblErr(factory, 15, F, "CreateSwapChainForHwnd", device, hwnd, desc, fullscreenDesc, restrictOutput, cast[ptr pointer](addr result))
 
 proc makeWindowAssociation*(factory: IDXGIFactory4, hwnd: HWND, flags: UINT) =
+  ## Associates a window with the DXGI factory.
   type F = proc(this: IDXGIFactory4, hwnd: HWND, flags: UINT): HRESULT {.stdcall.}
-  let hr = callVtbl(factory, 8, F, hwnd, flags)
-  if hr < 0:
-    raise newException(Exception, "IDXGIFactory4.MakeWindowAssociation failed with HRESULT " & $hr)
+  callVtblErr(factory, 8, F, "MakeWindowAssociation", hwnd, flags)
 
 proc checkFeatureSupport*(
-  factory: IDXGIFactory5,
-  feature: DXGI_FEATURE,
-  supportData: pointer,
-  supportDataSize: UINT
-) =
+    factory: IDXGIFactory5,
+    feature: DXGI_FEATURE,
+    supportData: pointer,
+    supportDataSize: UINT
+  ) =
+  ## Queries feature support from the DXGI factory.
   type F = proc(
     this: IDXGIFactory5,
     feature: DXGI_FEATURE,
     supportData: pointer,
     supportDataSize: UINT
   ): HRESULT {.stdcall.}
-  let hr = callVtbl(
+  callVtblErr(
     factory,
     28,
     F,
+    "CheckFeatureSupport",
     feature,
     supportData,
     supportDataSize
   )
-  if hr < 0:
-    raise newException(
-      Exception,
-      "IDXGIFactory5.CheckFeatureSupport failed with HRESULT " & $hr
-    )
 
 proc queryInterface*[T](iface: pointer, riid: ptr DXGuid): T =
   ## Queries for a COM interface by GUID.
   type F = proc(this: pointer, riid: ptr DXGuid, outObj: ptr pointer): HRESULT {.stdcall.}
-  let hr = callVtbl(iface, 0, F, riid, cast[ptr pointer](addr result))
-  if hr < 0:
-    raise newException(Exception, "QueryInterface failed with HRESULT " & $hr)
+  callVtblErr(iface, 0, F, "QueryInterface", riid, cast[ptr pointer](addr result))
 
 # Helper functions
 
