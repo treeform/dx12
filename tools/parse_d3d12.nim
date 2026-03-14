@@ -1,5 +1,3 @@
-
-
 import std/[strutils, os]
 
 type

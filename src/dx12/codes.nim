@@ -31,4 +31,3 @@ proc messageHr*(hr: int32, msg: string): string =
 proc checkHr*(hr: int32, msg: string) =
   if hr < 0:
     raise newException(Exception, messageHr(hr, msg))
-

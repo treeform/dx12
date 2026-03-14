@@ -1,4 +1,4 @@
-import 
+import
   windy/platforms/win32/windefs,
   dx12
 

@@ -173,20 +173,20 @@ var IID_ID3D11Texture2D* = GUID(
 # --- Example Application ---
 when isMainModule:
   import math
-  
+
   # Initialize DirectX
   initDirectX()
-  
+
   # Create window
   let window = newWindow("DirectX Example", ivec2(1280, 800))
-  
+
   # Get HWND from the window
   var hWnd: HWND
   hWnd = window.getHWND()
   # Ensure window is visible before creating DirectX device
   if hWnd == 0:
     quit("Failed to get window handle")
-  
+
   # Create swap chain description
   var swapChainDesc: DXGI_SWAP_CHAIN_DESC
   swapChainDesc.BufferDesc.Width = 1280
@@ -203,31 +203,31 @@ when isMainModule:
   swapChainDesc.Windowed = 1 # TRUE
   swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD
   swapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_NONE
-  
+
   # Create device and swap chain
   var swapChain: IDXGISwapChain
   var device: ID3D11Device
   var context: ID3D11DeviceContext
-  
+
   let hr = createDeviceAndSwapChain(swapChainDesc, swapChain, device, context)
   if hr != S_OK:
     quit("Failed to create DirectX device and swap chain: " & $hr)
-  
+
   # Get back buffer
   var backBuffer: pointer
   let hr2 = swapChain.GetBuffer(0, addr IID_ID3D11Texture2D, addr backBuffer)
   if hr2 != S_OK:
     quit("Failed to get back buffer: " & $hr2)
-  
+
   # Create render target view
   var renderTargetView: ID3D11RenderTargetView
   let hr3 = device.CreateRenderTargetView(cast[ID3D11Resource](backBuffer), nil, addr renderTargetView)
   if hr3 != S_OK:
     quit("Failed to create render target view: " & $hr3)
-  
+
   # Set render target
   context.OMSetRenderTargets(1, addr renderTargetView, nil)
-  
+
   # Set viewport
   var viewport: D3D11_VIEWPORT
   viewport.TopLeftX = 0.0
@@ -237,25 +237,25 @@ when isMainModule:
   viewport.MinDepth = 0.0
   viewport.MaxDepth = 1.0
   context.RSSetViewports(1, addr viewport)
-  
+
   # Animation variables
   var time = 0.0
-  
+
   # Main loop
   while not window.closeRequested:
     pollEvents()
-    
+
     # Update time
     time += 0.016 # ~60 FPS
-    
+
     # Calculate animated color (cycling through RGB)
     let r = (sin(time * 0.5) * 0.5 + 0.5).float32
     let g = (sin(time * 0.5 + 2.094) * 0.5 + 0.5).float32  # 2π/3 phase
     let b = (sin(time * 0.5 + 4.189) * 0.5 + 0.5).float32  # 4π/3 phase
     let color = [r, g, b, 1.0'f32]
-    
+
     # Clear render target with animated color
     context.ClearRenderTargetView(renderTargetView, color)
-    
+
     # Present the frame
     discard swapChain.Present(1, 0) # VSync on, no flags
