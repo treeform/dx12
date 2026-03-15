@@ -4,10 +4,11 @@
 
 `nimby install dx12`
 
-![Build](https://img.shields.io/badge/build-Github%20Actions-blue)
-![Language](https://img.shields.io/badge/language-Nim-ffc200)
-![Platform](https://img.shields.io/badge/platform-Windows-0078d4)
-![License](https://img.shields.io/badge/license-MIT-green)
+![Github Actions](https://github.com/treeform/dx12/workflows/Github%20Actions/badge.svg)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/treeform/dx12)
+![GitHub Repo stars](https://img.shields.io/github/stars/treeform/dx12)
+![GitHub](https://img.shields.io/github/license/treeform/dx12)
+![GitHub issues](https://img.shields.io/github/issues/treeform/dx12)
 
 [API reference](https://treeform.github.io/dx12)
 
