@@ -27,6 +27,53 @@ The library package itself depends on `windy` for Win32 handle types. Some
 examples also depend on sibling graphics libraries such as `pixie` and `vmath`,
 which are not required to import the core `dx12` module.
 
+## Documentation
+
+API docs are generated from `src/dx12.nim` by `.github/workflows/docs.yml`.
+
+## Examples
+
+The `examples/` directory contains six working DirectX 12 applications that
+exercise different parts of the generated API:
+
+| Example | What it tests |
+|---------|--------------|
+| `basic_screen` | Device init, swap chain, clear color, present |
+| `basic_triangle` | Vertex buffers, shader compilation, graphics pipeline, draw calls |
+| `basic_quad` | Texture loading, SRV descriptors, texture copy, sampler state |
+| `basic_cube` | 3D transforms, depth buffer, MSAA, constant buffers, mip-mapped textures |
+| `sprite_sheet` | Sprite batching, animated texture atlas, instanced drawing |
+| `viewer_obj` | OBJ model loading, indexed drawing, lighting shaders |
+
+These examples serve as integration tests for the generated bindings. When the
+generator or IDL parser is modified, recompiling the examples verifies that the
+generated types, constants, and method wrappers are correct and that the vtable
+indices match the actual COM interfaces.
+
+### `basic_screen`
+
+![basic_screen](docs/basic_screen.png)
+
+### `basic_triangle`
+
+![basic_triangle](docs/basic_triangle.png)
+
+### `basic_quad`
+
+![basic_quad](docs/basic_quad.png)
+
+### `basic_cube`
+
+![basic_cube](docs/basic_cube.png)
+
+### `sprite_sheet`
+
+![sprite_sheet](docs/sprite_sheet.png)
+
+### `viewer_obj`
+
+![viewer_obj](docs/viewer_obj.png)
+
 ## How the API is Generated
 
 The Nim bindings are not written by hand. They are generated from Microsoft's
@@ -202,24 +249,36 @@ helper that manages device initialization, swap chain setup, command list
 recording, fence synchronization, and window resizing. This is used by all the
 examples but is not part of the generated API.
 
-### Step 5: Testing with Examples
+### Summary of the Pipeline
 
-The `examples/` directory contains six working DirectX 12 applications that
-exercise different parts of the generated API:
+```
+Wine GitLab (upstream IDL)
+        |
+        v
+   tools/download_idl.nim       -- fetches 12 .idl files into idl/
+        |
+        v
+   tools/idl.nim                -- generic IDL parser (data structures only)
+        |
+        v
+   tools/generate_api.nim       -- generates 12 .nim files + switchboard
+        |
+        v
+   src/dx12/*.nim               -- generated Nim modules (constants, enums,
+        |                          structs, COM stubs, vtable methods)
+        |
+   src/dx12/extras.nim          -- hand-written: DLL loading, IID wrappers,
+   src/dx12/context.nim            COM helpers, device management
+   src/dx12/vtable.nim
+        |
+        v
+   src/dx12.nim                 -- switchboard: imports and re-exports everything
+        |
+        v
+   examples/*.nim               -- working D3D12 applications that test the API
+```
 
-| Example | What it tests |
-|---------|--------------|
-| `basic_screen` | Device init, swap chain, clear color, present |
-| `basic_triangle` | Vertex buffers, shader compilation, graphics pipeline, draw calls |
-| `basic_quad` | Texture loading, SRV descriptors, texture copy, sampler state |
-| `basic_cube` | 3D transforms, depth buffer, MSAA, constant buffers, mip-mapped textures |
-| `sprite_sheet` | Sprite batching, animated texture atlas, instanced drawing |
-| `viewer_obj` | OBJ model loading, indexed drawing, lighting shaders |
-
-These examples serve as integration tests for the generated bindings. When the
-generator or IDL parser is modified, recompiling the examples verifies that the
-generated types, constants, and method wrappers are correct and that the vtable
-indices match the actual COM interfaces.
+### Capturing Example Screenshots
 
 Screenshots of the examples can be captured automatically using the Nim-based
 capture tool:
@@ -233,39 +292,6 @@ This launches the executable, waits for its window to appear, waits a specified
 delay (default 3 seconds) for content to render, captures a screenshot via
 Win32 API (`BitBlt` from the desktop DC), saves it as PNG using Pixie, and then
 kills the process.
-
-
-## Documentation
-
-API docs are generated from `src/dx12.nim` by `.github/workflows/docs.yml`.
-
-## Examples
-
-### Example Screenshots
-
-#### `basic_screen`
-
-![basic_screen](docs/basic_screen.png)
-
-#### `basic_triangle`
-
-![basic_triangle](docs/basic_triangle.png)
-
-#### `basic_quad`
-
-![basic_quad](docs/basic_quad.png)
-
-#### `basic_cube`
-
-![basic_cube](docs/basic_cube.png)
-
-#### `sprite_sheet`
-
-![sprite_sheet](docs/sprite_sheet.png)
-
-#### `viewer_obj`
-
-![viewer_obj](docs/viewer_obj.png)
 
 ## Notes
 
