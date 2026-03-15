@@ -1,6 +1,6 @@
 ## IDL-based Nim code generator for DirectX 12 bindings.
-## Reads all .idl files from idl/ and generates one .nim file per .idl in src/dx12/.
-## Also generates the src/dx12.nim switchboard.
+## Reads all .idl files from idl/ and generates one .nim file per .idl in
+## src/dx12/.
 ##
 ## Usage: nim r tools/generate_api.nim
 
@@ -231,7 +231,6 @@ proc buildVtableInfo(files: seq[IdlFile]): VtableInfo =
 
 proc generateNimFile(f: IdlFile, reg: TypeRegistry, vtable: VtableInfo): string =
   var lines: seq[string]
-  let modName = idlToNimModule(f.filename)
 
   lines.add &"# Auto-generated from {f.filename} — do not edit manually."
   lines.add "# Regenerate with: nim r tools/generate_api.nim"
@@ -455,27 +454,10 @@ proc generateNimFile(f: IdlFile, reg: TypeRegistry, vtable: VtableInfo): string 
 
   result = lines.join("\n") & "\n"
 
-proc generateSwitchboard(modules: seq[string]): string =
-  var lines: seq[string]
-  lines.add "# Auto-generated — do not edit manually."
-  lines.add "# Regenerate with: nim r tools/generate_api.nim"
-  lines.add ""
-
-  let genMods = modules.join(", ")
-  lines.add &"import dx12/[{genMods}]"
-  lines.add &"export {genMods}"
-  lines.add ""
-  lines.add "import dx12/[vtable, extras, context, codes]"
-  lines.add "export vtable, extras, context, codes"
-  lines.add ""
-
-  result = lines.join("\n") & "\n"
-
 proc main() =
   let scriptDir = parentDir(currentSourcePath())
   let idlDir = normalizedPath(scriptDir / ".." / "idl")
   let outDir = normalizedPath(scriptDir / ".." / "src" / "dx12")
-  let dx12Path = normalizedPath(scriptDir / ".." / "src" / "dx12.nim")
 
   # Parse all IDL files in dependency order
   echo "Parsing IDL files..."
@@ -508,10 +490,6 @@ proc main() =
     writeFile(outPath, content)
     generatedModules.add modName
 
-  # Generate switchboard
-  echo &"Generating: {dx12Path}"
-  writeFile(dx12Path, generateSwitchboard(generatedModules))
-
   # Summary
   var totalConsts, totalEnumMembers, totalStructs, totalIfaces, totalMethods = 0
   for f in allFiles:
@@ -523,7 +501,7 @@ proc main() =
 
   echo ""
   echo "Done!"
-  echo &"  Generated {generatedModules.len} modules + switchboard"
+  echo &"  Generated {generatedModules.len} modules"
   echo &"  Constants:  {totalConsts}"
   echo &"  Enums:      {totalEnumMembers} values"
   echo &"  Structs:    {totalStructs}"

@@ -156,9 +156,9 @@ Each generated `.nim` file in `src/dx12/` mirrors its corresponding `.idl`:
 - `d3d12.idl` produces `src/dx12/d3d12_api.nim`
 - ... and so on for all 12 files.
 
-The generator also produces `src/dx12.nim`, a switchboard module that imports
-and re-exports every generated module plus the hand-written modules. This means
-users just write `import dx12` and get everything.
+The package also includes `src/dx12.nim`, a hand-written switchboard module
+that imports and re-exports every generated module plus the hand-written
+modules. This means users just write `import dx12` and get everything.
 
 Within each generated file, the content follows this order:
 
@@ -261,7 +261,7 @@ Wine GitLab (upstream IDL)
    tools/idl.nim                -- generic IDL parser (data structures only)
         |
         v
-   tools/generate_api.nim       -- generates 12 .nim files + switchboard
+   tools/generate_api.nim       -- generates 12 .nim files
         |
         v
    src/dx12/*.nim               -- generated Nim modules (constants, enums,
@@ -272,7 +272,7 @@ Wine GitLab (upstream IDL)
    src/dx12/vtable.nim
         |
         v
-   src/dx12.nim                 -- switchboard: imports and re-exports everything
+   src/dx12.nim                 -- hand-written umbrella module
         |
         v
    examples/*.nim               -- working D3D12 applications that test the API
