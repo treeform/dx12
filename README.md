@@ -1,4 +1,4 @@
-<img src="docs/dx12Banner.svg">
+<img src="docs/dx12.png">
 
 # dx12 - DirectX 12 wrapper for Nim on Windows.
 
