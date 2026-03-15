@@ -1830,6 +1830,112 @@ type
   ID3D12GraphicsCommandList7* = ptr object
 
 type
+  D3D12_CLEAR_VALUE_union* {.union.} = object
+    Color*: array[4, float32]
+    DepthStencil*: D3D12_DEPTH_STENCIL_VALUE
+
+  D3D12_RESOURCE_BARRIER_union* {.union.} = object
+    Transition*: D3D12_RESOURCE_TRANSITION_BARRIER
+    Aliasing*: D3D12_RESOURCE_ALIASING_BARRIER
+    UAV*: D3D12_RESOURCE_UAV_BARRIER
+
+  D3D12_TEXTURE_COPY_LOCATION_union* {.union.} = object
+    PlacedFootprint*: D3D12_PLACED_SUBRESOURCE_FOOTPRINT
+    SubresourceIndex*: uint32
+
+  D3D12_ROOT_PARAMETER_union* {.union.} = object
+    DescriptorTable*: D3D12_ROOT_DESCRIPTOR_TABLE
+    Constants*: D3D12_ROOT_CONSTANTS
+    Descriptor*: D3D12_ROOT_DESCRIPTOR
+
+  D3D12_ROOT_PARAMETER1_union* {.union.} = object
+    DescriptorTable*: D3D12_ROOT_DESCRIPTOR_TABLE1
+    Constants*: D3D12_ROOT_CONSTANTS
+    Descriptor*: D3D12_ROOT_DESCRIPTOR1
+
+  D3D12_VERSIONED_ROOT_SIGNATURE_DESC_union* {.union.} = object
+    Desc_1_0*: D3D12_ROOT_SIGNATURE_DESC
+    Desc_1_1*: D3D12_ROOT_SIGNATURE_DESC1
+
+  D3D12_SHADER_RESOURCE_VIEW_DESC_union* {.union.} = object
+    Buffer*: D3D12_BUFFER_SRV
+    Texture1D*: D3D12_TEX1D_SRV
+    Texture1DArray*: D3D12_TEX1D_ARRAY_SRV
+    Texture2D*: D3D12_TEX2D_SRV
+    Texture2DArray*: D3D12_TEX2D_ARRAY_SRV
+    Texture2DMS*: D3D12_TEX2DMS_SRV
+    Texture2DMSArray*: D3D12_TEX2DMS_ARRAY_SRV
+    Texture3D*: D3D12_TEX3D_SRV
+    TextureCube*: D3D12_TEXCUBE_SRV
+    TextureCubeArray*: D3D12_TEXCUBE_ARRAY_SRV
+    RaytracingAccelerationStructure*: D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV
+
+  D3D12_UNORDERED_ACCESS_VIEW_DESC_union* {.union.} = object
+    Buffer*: D3D12_BUFFER_UAV
+    Texture1D*: D3D12_TEX1D_UAV
+    Texture1DArray*: D3D12_TEX1D_ARRAY_UAV
+    Texture2D*: D3D12_TEX2D_UAV
+    Texture2DArray*: D3D12_TEX2D_ARRAY_UAV
+    Texture3D*: D3D12_TEX3D_UAV
+
+  D3D12_RENDER_TARGET_VIEW_DESC_union* {.union.} = object
+    Buffer*: D3D12_BUFFER_RTV
+    Texture1D*: D3D12_TEX1D_RTV
+    Texture1DArray*: D3D12_TEX1D_ARRAY_RTV
+    Texture2D*: D3D12_TEX2D_RTV
+    Texture2DArray*: D3D12_TEX2D_ARRAY_RTV
+    Texture2DMS*: D3D12_TEX2DMS_RTV
+    Texture2DMSArray*: D3D12_TEX2DMS_ARRAY_RTV
+    Texture3D*: D3D12_TEX3D_RTV
+
+  D3D12_DEPTH_STENCIL_VIEW_DESC_union* {.union.} = object
+    Texture1D*: D3D12_TEX1D_DSV
+    Texture1DArray*: D3D12_TEX1D_ARRAY_DSV
+    Texture2D*: D3D12_TEX2D_DSV
+    Texture2DArray*: D3D12_TEX2D_ARRAY_DSV
+    Texture2DMS*: D3D12_TEX2DMS_DSV
+    Texture2DMSArray*: D3D12_TEX2DMS_ARRAY_DSV
+
+  D3D12_INDIRECT_ARGUMENT_DESC_union* {.union.} = object
+    Slot*: uint32
+    VertexBuffer*: pointer
+    RootParameterIndex*: uint32
+    DestOffsetIn32BitValues*: uint32
+    Num32BitValuesToSet*: uint32
+    Constant*: pointer
+    RootParameterIndex2*: uint32
+    ConstantBufferView*: pointer
+    RootParameterIndex3*: uint32
+    ShaderResourceView*: pointer
+    RootParameterIndex4*: uint32
+    UnorderedAccessView*: pointer
+
+  D3D12_RAYTRACING_GEOMETRY_DESC_union* {.union.} = object
+    Triangles*: D3D12_RAYTRACING_GEOMETRY_TRIANGLES_DESC
+    AABBs*: D3D12_RAYTRACING_GEOMETRY_AABBS_DESC
+
+  D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS_union* {.union.} = object
+    InstanceDescs*: uint64
+    pGeometryDescs*: ptr D3D12_RAYTRACING_GEOMETRY_DESC
+    ppGeometryDescs*: pointer
+
+  D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA_union* {.union.} = object
+    Dred_1_0*: D3D12_DEVICE_REMOVED_EXTENDED_DATA
+    Dred_1_1*: D3D12_DEVICE_REMOVED_EXTENDED_DATA1
+    Dred_1_2*: D3D12_DEVICE_REMOVED_EXTENDED_DATA2
+    Dred_1_3*: D3D12_DEVICE_REMOVED_EXTENDED_DATA3
+
+  D3D12_RENDER_PASS_BEGINNING_ACCESS_union* {.union.} = object
+    Clear*: D3D12_RENDER_PASS_BEGINNING_ACCESS_CLEAR_PARAMETERS
+
+  D3D12_RENDER_PASS_ENDING_ACCESS_union* {.union.} = object
+    Resolve*: D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS
+
+  D3D12_BARRIER_GROUP_union* {.union.} = object
+    pGlobalBarriers*: ptr D3D12_GLOBAL_BARRIER
+    pTextureBarriers*: ptr D3D12_TEXTURE_BARRIER
+    pBufferBarriers*: ptr D3D12_BUFFER_BARRIER
+
   D3D12_FEATURE_DATA_DISPLAYABLE* = object
     DisplayableTexture*: int32
     SharedResourceCompatibilityTier*: uint32
@@ -1969,8 +2075,7 @@ type
 
   D3D12_CLEAR_VALUE* = object
     Format*: uint32
-    Color*: array[4, float32]
-    DepthStencil*: D3D12_DEPTH_STENCIL_VALUE
+    data*: D3D12_CLEAR_VALUE_union
 
   D3D12_PACKED_MIP_INFO* = object
     NumStandardMips*: uint8
@@ -1994,9 +2099,7 @@ type
   D3D12_RESOURCE_BARRIER* = object
     typ*: uint32
     Flags*: uint32
-    Transition*: D3D12_RESOURCE_TRANSITION_BARRIER
-    Aliasing*: D3D12_RESOURCE_ALIASING_BARRIER
-    UAV*: D3D12_RESOURCE_UAV_BARRIER
+    data*: D3D12_RESOURCE_BARRIER_union
 
   D3D12_MIP_REGION* = object
     Width*: uint32
@@ -2046,8 +2149,7 @@ type
   D3D12_TEXTURE_COPY_LOCATION* = object
     pResource*: ID3D12Resource
     typ*: uint32
-    PlacedFootprint*: D3D12_PLACED_SUBRESOURCE_FOOTPRINT
-    SubresourceIndex*: uint32
+    data*: D3D12_TEXTURE_COPY_LOCATION_union
 
   D3D12_DESCRIPTOR_RANGE* = object
     RangeType*: uint32
@@ -2088,16 +2190,12 @@ type
 
   D3D12_ROOT_PARAMETER* = object
     ParameterType*: uint32
-    DescriptorTable*: D3D12_ROOT_DESCRIPTOR_TABLE
-    Constants*: D3D12_ROOT_CONSTANTS
-    Descriptor*: D3D12_ROOT_DESCRIPTOR
+    data*: D3D12_ROOT_PARAMETER_union
     ShaderVisibility*: uint32
 
   D3D12_ROOT_PARAMETER1* = object
     ParameterType*: uint32
-    DescriptorTable*: D3D12_ROOT_DESCRIPTOR_TABLE1
-    Constants*: D3D12_ROOT_CONSTANTS
-    Descriptor*: D3D12_ROOT_DESCRIPTOR1
+    data*: D3D12_ROOT_PARAMETER1_union
     ShaderVisibility*: uint32
 
   D3D12_STATIC_SAMPLER_DESC* = object
@@ -2131,8 +2229,7 @@ type
 
   D3D12_VERSIONED_ROOT_SIGNATURE_DESC* = object
     Version*: uint32
-    Desc_1_0*: D3D12_ROOT_SIGNATURE_DESC
-    Desc_1_1*: D3D12_ROOT_SIGNATURE_DESC1
+    data*: D3D12_VERSIONED_ROOT_SIGNATURE_DESC_union
 
   D3D12_DESCRIPTOR_HEAP_DESC* = object
     typ*: uint32
@@ -2207,17 +2304,7 @@ type
     Format*: uint32
     ViewDimension*: uint32
     Shader4ComponentMapping*: uint32
-    Buffer*: D3D12_BUFFER_SRV
-    Texture1D*: D3D12_TEX1D_SRV
-    Texture1DArray*: D3D12_TEX1D_ARRAY_SRV
-    Texture2D*: D3D12_TEX2D_SRV
-    Texture2DArray*: D3D12_TEX2D_ARRAY_SRV
-    Texture2DMS*: D3D12_TEX2DMS_SRV
-    Texture2DMSArray*: D3D12_TEX2DMS_ARRAY_SRV
-    Texture3D*: D3D12_TEX3D_SRV
-    TextureCube*: D3D12_TEXCUBE_SRV
-    TextureCubeArray*: D3D12_TEXCUBE_ARRAY_SRV
-    RaytracingAccelerationStructure*: D3D12_RAYTRACING_ACCELERATION_STRUCTURE_SRV
+    data*: D3D12_SHADER_RESOURCE_VIEW_DESC_union
 
   D3D12_BUFFER_UAV* = object
     FirstElement*: uint64
@@ -2252,12 +2339,7 @@ type
   D3D12_UNORDERED_ACCESS_VIEW_DESC* = object
     Format*: uint32
     ViewDimension*: uint32
-    Buffer*: D3D12_BUFFER_UAV
-    Texture1D*: D3D12_TEX1D_UAV
-    Texture1DArray*: D3D12_TEX1D_ARRAY_UAV
-    Texture2D*: D3D12_TEX2D_UAV
-    Texture2DArray*: D3D12_TEX2D_ARRAY_UAV
-    Texture3D*: D3D12_TEX3D_UAV
+    data*: D3D12_UNORDERED_ACCESS_VIEW_DESC_union
 
   D3D12_BUFFER_RTV* = object
     FirstElement*: uint64
@@ -2296,14 +2378,7 @@ type
   D3D12_RENDER_TARGET_VIEW_DESC* = object
     Format*: uint32
     ViewDimension*: uint32
-    Buffer*: D3D12_BUFFER_RTV
-    Texture1D*: D3D12_TEX1D_RTV
-    Texture1DArray*: D3D12_TEX1D_ARRAY_RTV
-    Texture2D*: D3D12_TEX2D_RTV
-    Texture2DArray*: D3D12_TEX2D_ARRAY_RTV
-    Texture2DMS*: D3D12_TEX2DMS_RTV
-    Texture2DMSArray*: D3D12_TEX2DMS_ARRAY_RTV
-    Texture3D*: D3D12_TEX3D_RTV
+    data*: D3D12_RENDER_TARGET_VIEW_DESC_union
 
   D3D12_TEX1D_DSV* = object
     MipSlice*: uint32
@@ -2332,12 +2407,7 @@ type
     Format*: uint32
     ViewDimension*: uint32
     Flags*: uint32
-    Texture1D*: D3D12_TEX1D_DSV
-    Texture1DArray*: D3D12_TEX1D_ARRAY_DSV
-    Texture2D*: D3D12_TEX2D_DSV
-    Texture2DArray*: D3D12_TEX2D_ARRAY_DSV
-    Texture2DMS*: D3D12_TEX2DMS_DSV
-    Texture2DMSArray*: D3D12_TEX2DMS_ARRAY_DSV
+    data*: D3D12_DEPTH_STENCIL_VIEW_DESC_union
 
   D3D12_SAMPLER_DESC* = object
     Filter*: uint32
@@ -2728,18 +2798,7 @@ type
 
   D3D12_INDIRECT_ARGUMENT_DESC* = object
     typ*: uint32
-    Slot*: uint32
-    VertexBuffer*: pointer
-    RootParameterIndex*: uint32
-    DestOffsetIn32BitValues*: uint32
-    Num32BitValuesToSet*: uint32
-    Constant*: pointer
-    RootParameterIndex2*: uint32
-    ConstantBufferView*: pointer
-    RootParameterIndex3*: uint32
-    ShaderResourceView*: pointer
-    RootParameterIndex4*: uint32
-    UnorderedAccessView*: pointer
+    data*: D3D12_INDIRECT_ARGUMENT_DESC_union
 
   D3D12_COMMAND_SIGNATURE_DESC* = object
     ByteStride*: uint32
@@ -2895,17 +2954,14 @@ type
   D3D12_RAYTRACING_GEOMETRY_DESC* = object
     typ*: uint32
     Flags*: uint32
-    Triangles*: D3D12_RAYTRACING_GEOMETRY_TRIANGLES_DESC
-    AABBs*: D3D12_RAYTRACING_GEOMETRY_AABBS_DESC
+    data*: D3D12_RAYTRACING_GEOMETRY_DESC_union
 
   D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS* = object
     typ*: uint32
     Flags*: uint32
     NumDescs*: uint32
     DescsLayout*: uint32
-    InstanceDescs*: uint64
-    pGeometryDescs*: ptr D3D12_RAYTRACING_GEOMETRY_DESC
-    ppGeometryDescs*: pointer
+    data*: D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_INPUTS_union
 
   D3D12_BUILD_RAYTRACING_ACCELERATION_STRUCTURE_DESC* = object
     DestAccelerationStructureData*: uint64
@@ -3005,10 +3061,7 @@ type
 
   D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA* = object
     Version*: uint32
-    Dred_1_0*: D3D12_DEVICE_REMOVED_EXTENDED_DATA
-    Dred_1_1*: D3D12_DEVICE_REMOVED_EXTENDED_DATA1
-    Dred_1_2*: D3D12_DEVICE_REMOVED_EXTENDED_DATA2
-    Dred_1_3*: D3D12_DEVICE_REMOVED_EXTENDED_DATA3
+    data*: D3D12_VERSIONED_DEVICE_REMOVED_EXTENDED_DATA_union
 
   D3D12_FEATURE_DATA_PROTECTED_RESOURCE_SESSION_TYPE_COUNT* = object
     NodeIndex*: uint32
@@ -3029,7 +3082,7 @@ type
 
   D3D12_RENDER_PASS_BEGINNING_ACCESS* = object
     typ*: uint32
-    Clear*: D3D12_RENDER_PASS_BEGINNING_ACCESS_CLEAR_PARAMETERS
+    data*: D3D12_RENDER_PASS_BEGINNING_ACCESS_union
 
   D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS* = object
     SrcSubresource*: uint32
@@ -3049,7 +3102,7 @@ type
 
   D3D12_RENDER_PASS_ENDING_ACCESS* = object
     typ*: uint32
-    Resolve*: D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_PARAMETERS
+    data*: D3D12_RENDER_PASS_ENDING_ACCESS_union
 
   D3D12_RENDER_PASS_RENDER_TARGET_DESC* = object
     cpuDescriptor*: D3D12_CPU_DESCRIPTOR_HANDLE
@@ -3118,9 +3171,7 @@ type
   D3D12_BARRIER_GROUP* = object
     typ*: uint32
     NumBarriers*: pointer
-    pGlobalBarriers*: ptr D3D12_GLOBAL_BARRIER
-    pTextureBarriers*: ptr D3D12_TEXTURE_BARRIER
-    pBufferBarriers*: ptr D3D12_BUFFER_BARRIER
+    data*: D3D12_BARRIER_GROUP_union
 
   D3D12_DEVICE_CONFIGURATION_DESC* = object
     Flags*: uint32

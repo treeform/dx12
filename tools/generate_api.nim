@@ -297,9 +297,28 @@ proc generateNimFile(f: IdlFile, reg: TypeRegistry, vtable: VtableInfo): string 
       lines.add &"  {name}* = ptr object"
     lines.add ""
 
-  # Structs
+  # Structs (with union support — all in one type block for forward references)
   if f.structs.len > 0:
     lines.add "type"
+    # Emit union companion types first
+    for s in f.structs:
+      if s.hasUnion and s.anonUnion.fields.len > 0:
+        let unionName = s.name & "_union"
+        lines.add &"  {unionName}* {{.union.}} = object"
+        var usedUnionNames: HashSet[string]
+        for field in s.anonUnion.fields:
+          let nimType = if field.isArray and field.arraySize.len > 0:
+            &"array[{field.arraySize}, {mapCType(field.cType, reg)}]"
+          else:
+            mapCType(field.cType, reg)
+          var safeName = sanitizeFieldName(field.name)
+          if safeName in usedUnionNames:
+            var suffix = 2
+            while (safeName & $suffix) in usedUnionNames: inc suffix
+            safeName = safeName & $suffix
+          usedUnionNames.incl safeName
+          lines.add &"    {safeName}*: {nimType}"
+        lines.add ""
     for s in f.structs:
       lines.add &"  {s.name}* = object"
       var hasBitFields = false
@@ -311,7 +330,12 @@ proc generateNimFile(f: IdlFile, reg: TypeRegistry, vtable: VtableInfo): string 
         lines.add "    data*: array[64, uint8]  # contains bit fields"
       else:
         var usedNames: HashSet[string]
-        for field in s.fields:
+        let insertIdx = if s.hasUnion: s.unionInsertIdx else: -1
+        for fi, field in s.fields:
+          # Insert union data field at the correct position
+          if fi == insertIdx and s.hasUnion and s.anonUnion.fields.len > 0:
+            let unionName = s.name & "_union"
+            lines.add &"    data*: {unionName}"
           let nimType = if field.isArray and field.arraySize.len > 0:
             &"array[{field.arraySize}, {mapCType(field.cType, reg)}]"
           else:
@@ -323,6 +347,10 @@ proc generateNimFile(f: IdlFile, reg: TypeRegistry, vtable: VtableInfo): string 
             safeName = safeName & $suffix
           usedNames.incl safeName
           lines.add &"    {safeName}*: {nimType}"
+        # If union goes at the end (or after all fields)
+        if s.hasUnion and s.anonUnion.fields.len > 0 and insertIdx >= s.fields.len:
+          let unionName = s.name & "_union"
+          lines.add &"    data*: {unionName}"
       lines.add ""
 
   # (COM interface stubs already emitted above, before structs)

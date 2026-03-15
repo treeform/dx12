@@ -40,9 +40,15 @@ type
     isArray*: bool
     arraySize*: string
 
+  IdlUnion* = object
+    fields*: seq[IdlField]
+
   IdlStruct* = object
     name*: string
     fields*: seq[IdlField]
+    anonUnion*: IdlUnion
+    hasUnion*: bool
+    unionInsertIdx*: int  ## field index where the union should be inserted
 
   IdlConst* = object
     name*: string
@@ -209,10 +215,33 @@ proc parseEnumBody(body: string): seq[IdlEnumMember] =
         result.add IdlEnumMember(name: name, value: $autoValue)
         inc autoValue
 
-proc parseStructBody(body: string): seq[IdlField] =
+proc parseStructBodyRaw(body: string): tuple[fields: seq[IdlField], unionFields: seq[IdlField], hasUnion: bool, unionInsertIdx: int] =
+  var inUnion = false
+  var unionDepth = 0
+  result.unionInsertIdx = -1
   for rawLine in body.splitLines():
     var line = rawLine.strip()
     if line.len == 0 or line.startsWith("//"): continue
+
+    if line == "union" or line.startsWith("union {") or line.startsWith("union{"):
+      inUnion = true
+      if '{' in line: unionDepth = 1
+      result.hasUnion = true
+      if result.unionInsertIdx == -1:
+        result.unionInsertIdx = result.fields.len
+      continue
+    if inUnion and line == "{":
+      inc unionDepth
+      continue
+    if inUnion and (line == "};" or line == "}"):
+      dec unionDepth
+      if unionDepth <= 0:
+        inUnion = false
+      continue
+    if inUnion and '{' in line:
+      inc unionDepth
+      continue
+
     if line.endsWith(";"): line = line[0..^2].strip()
     if line.len == 0: continue
 
@@ -221,7 +250,6 @@ proc parseStructBody(body: string): seq[IdlField] =
     var isArray = false
     var arraySize = ""
 
-    # Handle array: "TYPE name[SIZE]"
     let bracketIdx = line.find('[')
     if bracketIdx != -1:
       isArray = true
@@ -230,7 +258,6 @@ proc parseStructBody(body: string): seq[IdlField] =
         arraySize = line[bracketIdx+1..<closeBracket]
       line = line[0..<bracketIdx].strip()
 
-    # Last word is the name, everything before is the type
     var tokens = line.splitWhitespace()
     if tokens.len < 2:
       continue
@@ -241,7 +268,11 @@ proc parseStructBody(body: string): seq[IdlField] =
     fieldType = tokens[0..^2].join(" ")
 
     if fieldName.len > 0:
-      result.add IdlField(name: fieldName, cType: fieldType, isArray: isArray, arraySize: arraySize)
+      let field = IdlField(name: fieldName, cType: fieldType, isArray: isArray, arraySize: arraySize)
+      if inUnion:
+        result.unionFields.add field
+      else:
+        result.fields.add field
 
 proc parseMethodParams(paramStr: string): seq[IdlParam] =
   let trimmed = paramStr.strip()
@@ -430,7 +461,11 @@ proc parseTypedef(s: string, pos: var int, result_file: var IdlFile) =
       skipCommentsAndWhitespace(s, pos)
       if pos < s.len and s[pos] == ';': inc pos
       var st = IdlStruct(name: structName)
-      st.fields = parseStructBody(body)
+      let parsed = parseStructBodyRaw(body)
+      st.fields = parsed.fields
+      st.anonUnion = IdlUnion(fields: parsed.unionFields)
+      st.hasUnion = parsed.hasUnion
+      st.unionInsertIdx = parsed.unionInsertIdx
       result_file.structs.add st
     else:
       # "typedef struct NAME *ALIAS;" — pointer typedef, skip
