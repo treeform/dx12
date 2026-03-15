@@ -211,11 +211,13 @@ proc uploadVertexBuffer(ctx: var D3D12Context, renderer: var CubeRenderer) =
   var barrier = D3D12_RESOURCE_BARRIER(
     typ: D3D12_RESOURCE_BARRIER_TYPE_TRANSITION,
     Flags: D3D12_RESOURCE_BARRIER_FLAG_NONE,
-    Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
-      pResource: renderer.vertexBuffer,
-      Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
-      StateBefore: D3D12_RESOURCE_STATE_COPY_DEST,
-      StateAfter: D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER
+    data: D3D12_RESOURCE_BARRIER_union(
+      Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
+        pResource: renderer.vertexBuffer,
+        Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
+        StateBefore: D3D12_RESOURCE_STATE_COPY_DEST,
+        StateAfter: D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER
+      )
     )
   )
   ctx.commandList.resourceBarrier(1, addr barrier)
@@ -387,14 +389,14 @@ proc uploadTexture(ctx: var D3D12Context, renderer: var CubeRenderer) =
     var dstLocation = D3D12_TEXTURE_COPY_LOCATION(
       pResource: renderer.texture,
       typ: D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX,
-      data: D3D12_TEXTURE_COPY_LOCATION_UNION(
+      data: D3D12_TEXTURE_COPY_LOCATION_union(
         SubresourceIndex: uint32(i)
       )
     )
     var srcLocation = D3D12_TEXTURE_COPY_LOCATION(
       pResource: uploadBuffer,
       typ: D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT,
-      data: D3D12_TEXTURE_COPY_LOCATION_UNION(
+      data: D3D12_TEXTURE_COPY_LOCATION_union(
         PlacedFootprint: footprints[i]
       )
     )
@@ -410,11 +412,13 @@ proc uploadTexture(ctx: var D3D12Context, renderer: var CubeRenderer) =
   var barrier = D3D12_RESOURCE_BARRIER(
     typ: D3D12_RESOURCE_BARRIER_TYPE_TRANSITION,
     Flags: D3D12_RESOURCE_BARRIER_FLAG_NONE,
-    Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
-      pResource: renderer.texture,
-      Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
-      StateBefore: D3D12_RESOURCE_STATE_COPY_DEST,
-      StateAfter: D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE
+    data: D3D12_RESOURCE_BARRIER_union(
+      Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
+        pResource: renderer.texture,
+        Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
+        StateBefore: D3D12_RESOURCE_STATE_COPY_DEST,
+        StateAfter: D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE
+      )
     )
   )
   ctx.commandList.resourceBarrier(1, addr barrier)
@@ -619,7 +623,7 @@ float4 PSMain(PSInput input) : SV_TARGET {
   var rootParams = [
     D3D12_ROOT_PARAMETER(
       ParameterType: D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS,
-      data: D3D12_ROOT_PARAMETER_UNION(
+      data: D3D12_ROOT_PARAMETER_union(
         Constants: D3D12_ROOT_CONSTANTS(
           ShaderRegister: 0,
           RegisterSpace: 0,
@@ -630,7 +634,7 @@ float4 PSMain(PSInput input) : SV_TARGET {
     ),
     D3D12_ROOT_PARAMETER(
       ParameterType: D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE,
-      data: D3D12_ROOT_PARAMETER_UNION(
+      data: D3D12_ROOT_PARAMETER_union(
         DescriptorTable: D3D12_ROOT_DESCRIPTOR_TABLE(
           NumDescriptorRanges: 1,
           pDescriptorRanges: addr range
@@ -786,11 +790,13 @@ proc recordCube(
   var barrier = D3D12_RESOURCE_BARRIER(
     typ: D3D12_RESOURCE_BARRIER_TYPE_TRANSITION,
     Flags: D3D12_RESOURCE_BARRIER_FLAG_NONE,
-    Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
-      pResource: ctx.renderTargets[ctx.currentFrame],
-      Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
-      StateBefore: D3D12_RESOURCE_STATE_PRESENT,
-      StateAfter: D3D12_RESOURCE_STATE_RESOLVE_DEST
+    data: D3D12_RESOURCE_BARRIER_union(
+      Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
+        pResource: ctx.renderTargets[ctx.currentFrame],
+        Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
+        StateBefore: D3D12_RESOURCE_STATE_PRESENT,
+        StateAfter: D3D12_RESOURCE_STATE_RESOLVE_DEST
+      )
     )
   )
   ctx.commandList.resourceBarrier(1, addr barrier)
@@ -833,11 +839,13 @@ proc recordCube(
   var resolveBarrier = D3D12_RESOURCE_BARRIER(
     typ: D3D12_RESOURCE_BARRIER_TYPE_TRANSITION,
     Flags: D3D12_RESOURCE_BARRIER_FLAG_NONE,
-    Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
-      pResource: renderer.colorBuffer,
-      Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
-      StateBefore: D3D12_RESOURCE_STATE_RENDER_TARGET,
-      StateAfter: D3D12_RESOURCE_STATE_RESOLVE_SOURCE
+    data: D3D12_RESOURCE_BARRIER_union(
+      Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
+        pResource: renderer.colorBuffer,
+        Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
+        StateBefore: D3D12_RESOURCE_STATE_RENDER_TARGET,
+        StateAfter: D3D12_RESOURCE_STATE_RESOLVE_SOURCE
+      )
     )
   )
   ctx.commandList.resourceBarrier(1, addr resolveBarrier)
@@ -848,12 +856,12 @@ proc recordCube(
     0,
     DXGI_FORMAT_R8G8B8A8_UNORM
   )
-  resolveBarrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RESOLVE_SOURCE
-  resolveBarrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET
+  resolveBarrier.data.Transition.StateBefore = D3D12_RESOURCE_STATE_RESOLVE_SOURCE
+  resolveBarrier.data.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET
   ctx.commandList.resourceBarrier(1, addr resolveBarrier)
 
-  barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RESOLVE_DEST
-  barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT
+  barrier.data.Transition.StateBefore = D3D12_RESOURCE_STATE_RESOLVE_DEST
+  barrier.data.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT
   ctx.commandList.resourceBarrier(1, addr barrier)
   ctx.commandList.close()
 

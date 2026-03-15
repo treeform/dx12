@@ -95,11 +95,13 @@ proc createVertexBuffer(ctx: var D3D12Context, renderer: var TriangleRenderer) =
   var barrier = D3D12_RESOURCE_BARRIER(
     typ: D3D12_RESOURCE_BARRIER_TYPE_TRANSITION,
     Flags: D3D12_RESOURCE_BARRIER_FLAG_NONE,
-    Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
-      pResource: renderer.vertexBuffer,
-      Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
-      StateBefore: D3D12_RESOURCE_STATE_COPY_DEST,
-      StateAfter: D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER
+    data: D3D12_RESOURCE_BARRIER_union(
+      Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
+        pResource: renderer.vertexBuffer,
+        Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
+        StateBefore: D3D12_RESOURCE_STATE_COPY_DEST,
+        StateAfter: D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER
+      )
     )
   )
   ctx.commandList.resourceBarrier(1, addr barrier)
@@ -261,11 +263,13 @@ proc recordTriangle(ctx: var D3D12Context, renderer: TriangleRenderer, clearColo
   var barrier = D3D12_RESOURCE_BARRIER(
     typ: D3D12_RESOURCE_BARRIER_TYPE_TRANSITION,
     Flags: D3D12_RESOURCE_BARRIER_FLAG_NONE,
-    Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
-      pResource: ctx.renderTargets[ctx.currentFrame],
-      Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
-      StateBefore: D3D12_RESOURCE_STATE_PRESENT,
-      StateAfter: D3D12_RESOURCE_STATE_RENDER_TARGET
+    data: D3D12_RESOURCE_BARRIER_union(
+      Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
+        pResource: ctx.renderTargets[ctx.currentFrame],
+        Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
+        StateBefore: D3D12_RESOURCE_STATE_PRESENT,
+        StateAfter: D3D12_RESOURCE_STATE_RENDER_TARGET
+      )
     )
   )
   ctx.commandList.resourceBarrier(1, addr barrier)
@@ -278,8 +282,8 @@ proc recordTriangle(ctx: var D3D12Context, renderer: TriangleRenderer, clearColo
   ctx.commandList.iaSetVertexBuffers(0, 1, unsafeAddr renderer.vertexBufferView)
   ctx.commandList.drawInstanced(3, 1, 0, 0)
 
-  barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET
-  barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT
+  barrier.data.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET
+  barrier.data.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT
   ctx.commandList.resourceBarrier(1, addr barrier)
 
   ctx.commandList.close()

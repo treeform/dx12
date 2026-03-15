@@ -1,6 +1,5 @@
-import
-  windy/platforms/win32/windefs,
-  dx12
+import windy/platforms/win32/windefs
+import extras, dxgicommon, dxgiformat, dxgi, dxgi1_2, dxgi1_4, dxgi1_5, d3d12_api
 
 # --- Helper types and context management ---
 type
@@ -78,8 +77,8 @@ proc initDevice*(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   ctx.device = d3d12CreateDevice(nil, D3D_FEATURE_LEVEL_11_0)
 
   var queueDesc: D3D12_COMMAND_QUEUE_DESC
-  queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT
-  queueDesc.Priority = D3D12_COMMAND_QUEUE_PRIORITY_NORMAL
+  queueDesc.typ = D3D12_COMMAND_LIST_TYPE_DIRECT
+  queueDesc.Priority = int32(D3D12_COMMAND_QUEUE_PRIORITY_NORMAL)
   queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE
   queueDesc.NodeMask = 0
   ctx.commandQueue = ctx.device.createCommandQueue(addr queueDesc)
@@ -145,16 +144,15 @@ proc waitForGpu*(ctx: var D3D12Context) =
   ctx.commandQueue.signal(ctx.fence, fenceToWait)
   inc ctx.fenceValue
   if ctx.fence.getCompletedValue() < fenceToWait:
-    ctx.fence.setEventOnCompletion(fenceToWait, ctx.fenceEvent)
+    ctx.fence.setEventOnCompletion(fenceToWait, cast[pointer](ctx.fenceEvent))
     discard WaitForSingleObject(ctx.fenceEvent, WAIT_INFINITE)
 
 proc moveToNextFrame*(ctx: var D3D12Context) =
-  ## Advances to the next frame, waiting when the back buffer is still in use.
   let currentFence = ctx.fenceValue
   ctx.commandQueue.signal(ctx.fence, currentFence)
   inc ctx.fenceValue
   if ctx.fence.getCompletedValue() < currentFence:
-    ctx.fence.setEventOnCompletion(currentFence, ctx.fenceEvent)
+    ctx.fence.setEventOnCompletion(currentFence, cast[pointer](ctx.fenceEvent))
     discard WaitForSingleObject(ctx.fenceEvent, WAIT_INFINITE)
   ctx.currentFrame = int(ctx.swapChain.getCurrentBackBufferIndex())
 
@@ -165,11 +163,13 @@ proc recordCommandList*(ctx: var D3D12Context, color: array[4, FLOAT]) =
   var barrier = D3D12_RESOURCE_BARRIER(
     typ: D3D12_RESOURCE_BARRIER_TYPE_TRANSITION,
     Flags: D3D12_RESOURCE_BARRIER_FLAG_NONE,
-    Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
-      pResource: ctx.renderTargets[ctx.currentFrame],
-      Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
-      StateBefore: D3D12_RESOURCE_STATE_PRESENT,
-      StateAfter: D3D12_RESOURCE_STATE_RENDER_TARGET
+    data: D3D12_RESOURCE_BARRIER_union(
+      Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
+        pResource: ctx.renderTargets[ctx.currentFrame],
+        Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
+        StateBefore: D3D12_RESOURCE_STATE_PRESENT,
+        StateAfter: D3D12_RESOURCE_STATE_RENDER_TARGET
+      )
     )
   )
   ctx.commandList.resourceBarrier(1, addr barrier)
@@ -178,8 +178,8 @@ proc recordCommandList*(ctx: var D3D12Context, color: array[4, FLOAT]) =
   ctx.commandList.omSetRenderTargets(1, addr ctx.rtvHandles[ctx.currentFrame], 1, nil)
   ctx.commandList.clearRenderTargetView(ctx.rtvHandles[ctx.currentFrame], unsafeAddr color[0], 0, nil)
 
-  barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET
-  barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT
+  barrier.data.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET
+  barrier.data.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT
   ctx.commandList.resourceBarrier(1, addr barrier)
 
   ctx.commandList.close()

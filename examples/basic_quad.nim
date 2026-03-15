@@ -121,11 +121,13 @@ proc createVertexBuffer(ctx: var D3D12Context, renderer: var QuadRenderer) =
   var barrier = D3D12_RESOURCE_BARRIER(
     typ: D3D12_RESOURCE_BARRIER_TYPE_TRANSITION,
     Flags: D3D12_RESOURCE_BARRIER_FLAG_NONE,
-    Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
-      pResource: renderer.vertexBuffer,
-      Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
-      StateBefore: D3D12_RESOURCE_STATE_COPY_DEST,
-      StateAfter: D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER
+    data: D3D12_RESOURCE_BARRIER_union(
+      Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
+        pResource: renderer.vertexBuffer,
+        Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
+        StateBefore: D3D12_RESOURCE_STATE_COPY_DEST,
+        StateAfter: D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER
+      )
     )
   )
   ctx.commandList.resourceBarrier(1, addr barrier)
@@ -277,14 +279,14 @@ proc uploadTexture(ctx: var D3D12Context, renderer: var QuadRenderer) =
   var dstLocation = D3D12_TEXTURE_COPY_LOCATION(
     pResource: renderer.texture,
     typ: D3D12_TEXTURE_COPY_TYPE_SUBRESOURCE_INDEX,
-    data: D3D12_TEXTURE_COPY_LOCATION_UNION(
+    data: D3D12_TEXTURE_COPY_LOCATION_union(
       SubresourceIndex: 0
     )
   )
   var srcLocation = D3D12_TEXTURE_COPY_LOCATION(
     pResource: uploadBuffer,
     typ: D3D12_TEXTURE_COPY_TYPE_PLACED_FOOTPRINT,
-    data: D3D12_TEXTURE_COPY_LOCATION_UNION(
+    data: D3D12_TEXTURE_COPY_LOCATION_union(
       PlacedFootprint: footprint
     )
   )
@@ -303,11 +305,13 @@ proc uploadTexture(ctx: var D3D12Context, renderer: var QuadRenderer) =
   var barrier = D3D12_RESOURCE_BARRIER(
     typ: D3D12_RESOURCE_BARRIER_TYPE_TRANSITION,
     Flags: D3D12_RESOURCE_BARRIER_FLAG_NONE,
-    Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
-      pResource: renderer.texture,
-      Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
-      StateBefore: D3D12_RESOURCE_STATE_COPY_DEST,
-      StateAfter: D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE
+    data: D3D12_RESOURCE_BARRIER_union(
+      Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
+        pResource: renderer.texture,
+        Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
+        StateBefore: D3D12_RESOURCE_STATE_COPY_DEST,
+        StateAfter: D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE
+      )
     )
   )
   ctx.commandList.resourceBarrier(1, addr barrier)
@@ -551,11 +555,13 @@ proc recordQuad(
   var barrier = D3D12_RESOURCE_BARRIER(
     typ: D3D12_RESOURCE_BARRIER_TYPE_TRANSITION,
     Flags: D3D12_RESOURCE_BARRIER_FLAG_NONE,
-    Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
-      pResource: ctx.renderTargets[ctx.currentFrame],
-      Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
-      StateBefore: D3D12_RESOURCE_STATE_PRESENT,
-      StateAfter: D3D12_RESOURCE_STATE_RENDER_TARGET
+    data: D3D12_RESOURCE_BARRIER_union(
+      Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
+        pResource: ctx.renderTargets[ctx.currentFrame],
+        Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
+        StateBefore: D3D12_RESOURCE_STATE_PRESENT,
+        StateAfter: D3D12_RESOURCE_STATE_RENDER_TARGET
+      )
     )
   )
   ctx.commandList.resourceBarrier(1, addr barrier)
@@ -581,8 +587,8 @@ proc recordQuad(
   ctx.commandList.iaSetVertexBuffers(0, 1, unsafeAddr renderer.vertexBufferView)
   ctx.commandList.drawInstanced(UINT(QuadVertices.len), 1, 0, 0)
 
-  barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET
-  barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT
+  barrier.data.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET
+  barrier.data.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT
   ctx.commandList.resourceBarrier(1, addr barrier)
 
   ctx.commandList.close()
