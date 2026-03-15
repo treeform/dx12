@@ -35,47 +35,47 @@ type
 
 const
   CubeVertices = [
-    CubeVertex(position: [-1.0'f32, 1.0'f32, 1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [1.0'f32, -1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
-    CubeVertex(position: [1.0'f32, 1.0'f32, 1.0'f32], uv: [1.0'f32, 0.0'f32]),
-    CubeVertex(position: [-1.0'f32, 1.0'f32, 1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [-1.0'f32, -1.0'f32, 1.0'f32], uv: [0.0'f32, 1.0'f32]),
-    CubeVertex(position: [1.0'f32, -1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
+    CubeVertex(position: [-1.0'f, 1.0'f, 1.0'f], uv: [0.0'f, 0.0'f]),
+    CubeVertex(position: [1.0'f, -1.0'f, 1.0'f], uv: [1.0'f, 1.0'f]),
+    CubeVertex(position: [1.0'f, 1.0'f, 1.0'f], uv: [1.0'f, 0.0'f]),
+    CubeVertex(position: [-1.0'f, 1.0'f, 1.0'f], uv: [0.0'f, 0.0'f]),
+    CubeVertex(position: [-1.0'f, -1.0'f, 1.0'f], uv: [0.0'f, 1.0'f]),
+    CubeVertex(position: [1.0'f, -1.0'f, 1.0'f], uv: [1.0'f, 1.0'f]),
 
-    CubeVertex(position: [1.0'f32, 1.0'f32, -1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [-1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32]),
-    CubeVertex(position: [-1.0'f32, 1.0'f32, -1.0'f32], uv: [1.0'f32, 0.0'f32]),
-    CubeVertex(position: [1.0'f32, 1.0'f32, -1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [1.0'f32, -1.0'f32, -1.0'f32], uv: [0.0'f32, 1.0'f32]),
-    CubeVertex(position: [-1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32]),
+    CubeVertex(position: [1.0'f, 1.0'f, -1.0'f], uv: [0.0'f, 0.0'f]),
+    CubeVertex(position: [-1.0'f, -1.0'f, -1.0'f], uv: [1.0'f, 1.0'f]),
+    CubeVertex(position: [-1.0'f, 1.0'f, -1.0'f], uv: [1.0'f, 0.0'f]),
+    CubeVertex(position: [1.0'f, 1.0'f, -1.0'f], uv: [0.0'f, 0.0'f]),
+    CubeVertex(position: [1.0'f, -1.0'f, -1.0'f], uv: [0.0'f, 1.0'f]),
+    CubeVertex(position: [-1.0'f, -1.0'f, -1.0'f], uv: [1.0'f, 1.0'f]),
 
-    CubeVertex(position: [-1.0'f32, 1.0'f32, -1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [-1.0'f32, -1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
-    CubeVertex(position: [-1.0'f32, 1.0'f32, 1.0'f32], uv: [1.0'f32, 0.0'f32]),
-    CubeVertex(position: [-1.0'f32, 1.0'f32, -1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [-1.0'f32, -1.0'f32, -1.0'f32], uv: [0.0'f32, 1.0'f32]),
-    CubeVertex(position: [-1.0'f32, -1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
+    CubeVertex(position: [-1.0'f, 1.0'f, -1.0'f], uv: [0.0'f, 0.0'f]),
+    CubeVertex(position: [-1.0'f, -1.0'f, 1.0'f], uv: [1.0'f, 1.0'f]),
+    CubeVertex(position: [-1.0'f, 1.0'f, 1.0'f], uv: [1.0'f, 0.0'f]),
+    CubeVertex(position: [-1.0'f, 1.0'f, -1.0'f], uv: [0.0'f, 0.0'f]),
+    CubeVertex(position: [-1.0'f, -1.0'f, -1.0'f], uv: [0.0'f, 1.0'f]),
+    CubeVertex(position: [-1.0'f, -1.0'f, 1.0'f], uv: [1.0'f, 1.0'f]),
 
-    CubeVertex(position: [1.0'f32, 1.0'f32, 1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32]),
-    CubeVertex(position: [1.0'f32, 1.0'f32, -1.0'f32], uv: [1.0'f32, 0.0'f32]),
-    CubeVertex(position: [1.0'f32, 1.0'f32, 1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [1.0'f32, -1.0'f32, 1.0'f32], uv: [0.0'f32, 1.0'f32]),
-    CubeVertex(position: [1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32]),
+    CubeVertex(position: [1.0'f, 1.0'f, 1.0'f], uv: [0.0'f, 0.0'f]),
+    CubeVertex(position: [1.0'f, -1.0'f, -1.0'f], uv: [1.0'f, 1.0'f]),
+    CubeVertex(position: [1.0'f, 1.0'f, -1.0'f], uv: [1.0'f, 0.0'f]),
+    CubeVertex(position: [1.0'f, 1.0'f, 1.0'f], uv: [0.0'f, 0.0'f]),
+    CubeVertex(position: [1.0'f, -1.0'f, 1.0'f], uv: [0.0'f, 1.0'f]),
+    CubeVertex(position: [1.0'f, -1.0'f, -1.0'f], uv: [1.0'f, 1.0'f]),
 
-    CubeVertex(position: [-1.0'f32, 1.0'f32, -1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [1.0'f32, 1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
-    CubeVertex(position: [1.0'f32, 1.0'f32, -1.0'f32], uv: [1.0'f32, 0.0'f32]),
-    CubeVertex(position: [-1.0'f32, 1.0'f32, -1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [-1.0'f32, 1.0'f32, 1.0'f32], uv: [0.0'f32, 1.0'f32]),
-    CubeVertex(position: [1.0'f32, 1.0'f32, 1.0'f32], uv: [1.0'f32, 1.0'f32]),
+    CubeVertex(position: [-1.0'f, 1.0'f, -1.0'f], uv: [0.0'f, 0.0'f]),
+    CubeVertex(position: [1.0'f, 1.0'f, 1.0'f], uv: [1.0'f, 1.0'f]),
+    CubeVertex(position: [1.0'f, 1.0'f, -1.0'f], uv: [1.0'f, 0.0'f]),
+    CubeVertex(position: [-1.0'f, 1.0'f, -1.0'f], uv: [0.0'f, 0.0'f]),
+    CubeVertex(position: [-1.0'f, 1.0'f, 1.0'f], uv: [0.0'f, 1.0'f]),
+    CubeVertex(position: [1.0'f, 1.0'f, 1.0'f], uv: [1.0'f, 1.0'f]),
 
-    CubeVertex(position: [-1.0'f32, -1.0'f32, 1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32]),
-    CubeVertex(position: [1.0'f32, -1.0'f32, 1.0'f32], uv: [1.0'f32, 0.0'f32]),
-    CubeVertex(position: [-1.0'f32, -1.0'f32, 1.0'f32], uv: [0.0'f32, 0.0'f32]),
-    CubeVertex(position: [-1.0'f32, -1.0'f32, -1.0'f32], uv: [0.0'f32, 1.0'f32]),
-    CubeVertex(position: [1.0'f32, -1.0'f32, -1.0'f32], uv: [1.0'f32, 1.0'f32])
+    CubeVertex(position: [-1.0'f, -1.0'f, 1.0'f], uv: [0.0'f, 0.0'f]),
+    CubeVertex(position: [1.0'f, -1.0'f, -1.0'f], uv: [1.0'f, 1.0'f]),
+    CubeVertex(position: [1.0'f, -1.0'f, 1.0'f], uv: [1.0'f, 0.0'f]),
+    CubeVertex(position: [-1.0'f, -1.0'f, 1.0'f], uv: [0.0'f, 0.0'f]),
+    CubeVertex(position: [-1.0'f, -1.0'f, -1.0'f], uv: [0.0'f, 1.0'f]),
+    CubeVertex(position: [1.0'f, -1.0'f, -1.0'f], uv: [1.0'f, 1.0'f])
   ]
 
 proc texturePath(): string =
@@ -99,7 +99,7 @@ proc perspectiveDx(
   ): Mat4 =
   ## Returns a DirectX clip-space projection matrix.
   let
-    h = 1.0'f32 / tan(fovY * 0.5'f32)
+    h = 1.0'f / tan(fovY * 0.5'f)
     w = h / aspect
     depth = farPlane - nearPlane
   result[0, 0] = w
@@ -134,13 +134,13 @@ proc updateTransform(
   ) =
   ## Updates the MVP matrix for the current frame.
   let
-    time = frame.float32 / 60.0'f32
+    time = frame.float32 / 60.0'f
     model =
-      translate(vec3(0.0'f32, 0.0'f32, 5.0'f32)) *
-      rotateY(time * 0.7'f32) *
-      rotateX(time * 0.35'f32)
+      translate(vec3(0.0'f, 0.0'f, 5.0'f)) *
+      rotateY(time * 0.7'f) *
+      rotateX(time * 0.35'f)
     view = identityMatrix()
-    proj = perspectiveDx(60.0'f32.toRadians, aspect, 0.1'f32, 100.0'f32)
+    proj = perspectiveDx(60.0'f.toRadians, aspect, 0.1'f, 100.0'f)
     mvp = proj * view * model
   renderer.transform = mat4ToArray(mvp)
 
@@ -318,10 +318,11 @@ proc uploadTexture(ctx: var D3D12Context, renderer: var CubeRenderer) =
     nil
   )
 
-  var footprints = newSeq[D3D12_PLACED_SUBRESOURCE_FOOTPRINT](mipCount)
-  var numRows = newSeq[UINT](mipCount)
-  var rowSizes = newSeq[UINT64](mipCount)
-  var totalBytes: UINT64
+  var
+    footprints = newSeq[D3D12_PLACED_SUBRESOURCE_FOOTPRINT](mipCount)
+    numRows = newSeq[UINT](mipCount)
+    rowSizes = newSeq[UINT64](mipCount)
+    totalBytes: UINT64
   ctx.device.getCopyableFootprints(
     addr texDesc,
     UINT(0),
@@ -549,7 +550,7 @@ proc createDepthBuffer(ctx: var D3D12Context, renderer: var CubeRenderer) =
     Format: DXGI_FORMAT_D32_FLOAT,
     data: D3D12_CLEAR_VALUE_UNION(
       DepthStencil: D3D12_DEPTH_STENCIL_VALUE(
-        Depth: 1.0'f32,
+        Depth: 1.0'f,
         Stencil: 0
       )
     )
@@ -817,7 +818,7 @@ proc recordCube(
   ctx.commandList.clearDepthStencilView(
     renderer.dsvHandle,
     D3D12_CLEAR_FLAG_DEPTH,
-    1.0'f32,
+    1.0'f,
     0,
     0,
     nil

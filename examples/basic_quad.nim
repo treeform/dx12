@@ -24,34 +24,34 @@ const
   TextureSize = 128
   QuadVertices = [
     QuadVertex(
-      position: [-0.5'f32, 0.5'f32, 0.0'f32],
-      color: [1.0'f32, 0.0'f32, 0.0'f32],
-      uv: [0.0'f32, 0.0'f32]
+      position: [-0.5'f, 0.5'f, 0.0'f],
+      color: [1.0'f, 0.0'f, 0.0'f],
+      uv: [0.0'f, 0.0'f]
     ),
     QuadVertex(
-      position: [0.5'f32, 0.5'f32, 0.0'f32],
-      color: [0.0'f32, 1.0'f32, 0.0'f32],
-      uv: [1.0'f32, 0.0'f32]
+      position: [0.5'f, 0.5'f, 0.0'f],
+      color: [0.0'f, 1.0'f, 0.0'f],
+      uv: [1.0'f, 0.0'f]
     ),
     QuadVertex(
-      position: [0.5'f32, -0.5'f32, 0.0'f32],
-      color: [0.0'f32, 0.0'f32, 1.0'f32],
-      uv: [1.0'f32, 1.0'f32]
+      position: [0.5'f, -0.5'f, 0.0'f],
+      color: [0.0'f, 0.0'f, 1.0'f],
+      uv: [1.0'f, 1.0'f]
     ),
     QuadVertex(
-      position: [-0.5'f32, 0.5'f32, 0.0'f32],
-      color: [1.0'f32, 0.0'f32, 0.0'f32],
-      uv: [0.0'f32, 0.0'f32]
+      position: [-0.5'f, 0.5'f, 0.0'f],
+      color: [1.0'f, 0.0'f, 0.0'f],
+      uv: [0.0'f, 0.0'f]
     ),
     QuadVertex(
-      position: [0.5'f32, -0.5'f32, 0.0'f32],
-      color: [0.0'f32, 0.0'f32, 1.0'f32],
-      uv: [1.0'f32, 1.0'f32]
+      position: [0.5'f, -0.5'f, 0.0'f],
+      color: [0.0'f, 0.0'f, 1.0'f],
+      uv: [1.0'f, 1.0'f]
     ),
     QuadVertex(
-      position: [-0.5'f32, -0.5'f32, 0.0'f32],
-      color: [1.0'f32, 1.0'f32, 0.0'f32],
-      uv: [0.0'f32, 1.0'f32]
+      position: [-0.5'f, -0.5'f, 0.0'f],
+      color: [1.0'f, 1.0'f, 0.0'f],
+      uv: [0.0'f, 1.0'f]
     )
   ]
 
@@ -216,10 +216,11 @@ proc uploadTexture(ctx: var D3D12Context, renderer: var QuadRenderer) =
     nil
   )
 
-  var footprint: D3D12_PLACED_SUBRESOURCE_FOOTPRINT
-  var numRows: UINT
-  var rowSizeInBytes: UINT64
-  var totalBytes: UINT64
+  var
+    footprint: D3D12_PLACED_SUBRESOURCE_FOOTPRINT
+    numRows: UINT
+    rowSizeInBytes: UINT64
+    totalBytes: UINT64
   ctx.device.getCopyableFootprints(
     addr texDesc,
     UINT(0),

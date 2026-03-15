@@ -7,12 +7,12 @@ import
 const
   Width = 1280
   Height = 800
-  RotateScale = 0.01'f32
-  ZoomScale = 0.2'f32
-  MinDistance = 1.0'f32
-  MaxDistance = 8.0'f32
-  MinPitch = -1.45'f32
-  MaxPitch = 1.45'f32
+  RotateScale = 0.01'f
+  ZoomScale = 0.2'f
+  MinDistance = 1.0'f
+  MaxDistance = 8.0'f
+  MinPitch = -1.45'f
+  MaxPitch = 1.45'f
 
 type
   ViewerObjError = object of CatchableError
@@ -61,7 +61,7 @@ proc perspectiveDx(
   ): Mat4 =
   ## Returns a DirectX clip-space projection matrix.
   let
-    h = 1.0'f32 / tan(fovY * 0.5'f32)
+    h = 1.0'f / tan(fovY * 0.5'f)
     w = h / aspect
     depth = farPlane - nearPlane
   result[0, 0] = w
@@ -146,7 +146,7 @@ proc parseFaceVertex(token: string, vertexCount: int): int =
 
 proc normalizeSafe(v, fallback: Vec3): Vec3 =
   ## Normalizes a vector or returns a fallback when degenerate.
-  if v.length() <= 0.000001'f32:
+  if v.length() <= 0.000001'f:
     fallback
   else:
     v.normalize()
@@ -206,13 +206,13 @@ proc loadObjMesh(path: string): ObjMesh =
     maxPos.z = max(maxPos.z, p.z)
 
   let
-    center = (minPos + maxPos) * 0.5'f32
+    center = (minPos + maxPos) * 0.5'f
     size = maxPos - minPos
     maxExtent = max(size.x, max(size.y, size.z))
-  if maxExtent <= 0.0'f32:
+  if maxExtent <= 0.0'f:
     raise newException(ViewerObjError, "OBJ bounds are degenerate")
 
-  let uniformScale = 2.0'f32 / maxExtent
+  let uniformScale = 2.0'f / maxExtent
   var normalizedPositions = newSeq[Vec3](positions.len)
   for i, p in positions:
     normalizedPositions[i] = (p - center) * uniformScale
@@ -223,7 +223,7 @@ proc loadObjMesh(path: string): ObjMesh =
       a = normalizedPositions[tri[0]]
       b = normalizedPositions[tri[1]]
       c = normalizedPositions[tri[2]]
-      faceNormal = normalizeSafe((b - a).cross(c - a), vec3(0.0'f32, 1.0'f32, 0.0'f32))
+      faceNormal = normalizeSafe((b - a).cross(c - a), vec3(0.0'f, 1.0'f, 0.0'f))
     smoothedNormals[tri[0]] += faceNormal
     smoothedNormals[tri[1]] += faceNormal
     smoothedNormals[tri[2]] += faceNormal
@@ -236,7 +236,7 @@ proc loadObjMesh(path: string): ObjMesh =
         position: normalizedPositions[idx].toFloatArray(),
         normal: normalizeSafe(
           smoothedNormals[idx],
-          vec3(0.0'f32, 1.0'f32, 0.0'f32)
+          vec3(0.0'f, 1.0'f, 0.0'f)
         ).toFloatArray()
       )
       inc vertexIndex
@@ -379,7 +379,7 @@ proc createDepthBuffer(ctx: var D3D12Context, renderer: var ObjRenderer) =
     Format: DXGI_FORMAT_D32_FLOAT,
     data: D3D12_CLEAR_VALUE_UNION(
       DepthStencil: D3D12_DEPTH_STENCIL_VALUE(
-        Depth: 1.0'f32,
+        Depth: 1.0'f,
         Stencil: 0
       )
     )
@@ -585,7 +585,7 @@ proc updateCamera(camera: var CameraState, window: Window) =
     )
 
   let scroll = window.scrollDelta
-  if scroll.y != 0.0'f32:
+  if scroll.y != 0.0'f:
     camera.distance = clamp(
       camera.distance - scroll.y.float32 * ZoomScale,
       MinDistance,
@@ -605,11 +605,11 @@ proc updateTransform(
       sin(camera.pitch) * camera.distance,
       cos(camera.yaw) * cosPitch * camera.distance
     )
-    target = vec3(0.0'f32, 0.0'f32, 0.0'f32)
+    target = vec3(0.0'f, 0.0'f, 0.0'f)
     model = identityMatrix()
     cameraAngles = toAngles(eye, target)
     view = inverse(translate(eye) * fromAngles(cameraAngles))
-    proj = perspectiveDx(60.0'f32.toRadians, aspect, 0.1'f32, 100.0'f32)
+    proj = perspectiveDx(60.0'f.toRadians, aspect, 0.1'f, 100.0'f)
     mvp = proj * view * model
   renderer.transform = packTransforms(mvp, model)
 
@@ -654,7 +654,7 @@ proc recordModel(
   ctx.commandList.clearDepthStencilView(
     renderer.dsvHandle,
     D3D12_CLEAR_FLAG_DEPTH,
-    1.0'f32,
+    1.0'f,
     0,
     0,
     nil
@@ -715,9 +715,9 @@ when isMainModule:
     aspect = Width.float32 / Height.float32
     clearColor = [0.05.FLOAT, 0.05.FLOAT, 0.08.FLOAT, 1.0.FLOAT]
   var camera = CameraState(
-    yaw: 0.0'f32,
-    pitch: 0.15'f32,
-    distance: 2.8'f32
+    yaw: 0.0'f,
+    pitch: 0.15'f,
+    distance: 2.8'f
   )
 
   try:

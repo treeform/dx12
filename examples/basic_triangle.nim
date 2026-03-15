@@ -16,16 +16,16 @@ type
 const
   TriangleVertices = [
     TriangleVertex(
-      position: [0.0'f32, 0.5'f32, 0.0'f32],
-      color: [1.0'f32, 0.0'f32, 0.0'f32]
+      position: [0.0'f, 0.5'f, 0.0'f],
+      color: [1.0'f, 0.0'f, 0.0'f]
     ),
     TriangleVertex(
-      position: [0.5'f32, -0.5'f32, 0.0'f32],
-      color: [0.0'f32, 1.0'f32, 0.0'f32]
+      position: [0.5'f, -0.5'f, 0.0'f],
+      color: [0.0'f, 1.0'f, 0.0'f]
     ),
     TriangleVertex(
-      position: [-0.5'f32, -0.5'f32, 0.0'f32],
-      color: [0.0'f32, 0.0'f32, 1.0'f32]
+      position: [-0.5'f, -0.5'f, 0.0'f],
+      color: [0.0'f, 0.0'f, 1.0'f]
     )
   ]
 
@@ -145,8 +145,9 @@ float4 PSMain(PSInput input) : SV_TARGET {
 }
 """
 
-  let vsBlob = compileShader(vertexShaderSrc, "VSMain", "vs_5_0")
-  let psBlob = compileShader(pixelShaderSrc, "PSMain", "ps_5_0")
+  let
+    vsBlob = compileShader(vertexShaderSrc, "VSMain", "vs_5_0")
+    psBlob = compileShader(pixelShaderSrc, "PSMain", "ps_5_0")
 
   var rootDesc = D3D12_ROOT_SIGNATURE_DESC(
     NumParameters: 0,
@@ -300,18 +301,18 @@ proc shutdown(renderer: var TriangleRenderer) =
     renderer.rootSignature = nil
 
 const
-  width = 1280
-  height = 800
+  Width = 1280
+  Height = 800
 
 when isMainModule:
-  let window = newWindow("DirectX 12 Basic Triangle", ivec2(width.int32, height.int32))
+  let window = newWindow("DirectX 12 Basic Triangle", ivec2(Width.int32, Height.int32))
 
   var hwnd: HWND = window.getHWND()
   if hwnd == 0:
     raise newException(Exception, "Failed to acquire HWND from window")
 
   var ctx: D3D12Context
-  ctx.initDevice(hwnd, width, height)
+  ctx.initDevice(hwnd, Width, Height)
 
   var renderer: TriangleRenderer
   initRenderer(ctx, renderer)

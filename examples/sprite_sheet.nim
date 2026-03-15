@@ -9,8 +9,8 @@ const
   InitialWidth = 1280
   InitialHeight = 800
   SheetCells = 8
-  SpriteDrawSize = 24.0'f32
-  SpriteDensity = 850.0'f32
+  SpriteDrawSize = 24.0'f
+  SpriteDensity = 850.0'f
   MinSpriteCount = 96
   TextureMaxAnisotropy = 8'u32
 
@@ -64,7 +64,7 @@ proc hash32(value: uint32): uint32 =
 
 proc random01(seed: uint32): float32 =
   ## Returns a deterministic float in the 0 to 1 range.
-  (hash32(seed) and 0x00ff_ffff'u32).float32 / 16_777_215.0'f32
+  (hash32(seed) and 0x00ff_ffff'u32).float32 / 16_777_215.0'f
 
 proc randomInt(seed: uint32, limit: int): int =
   ## Returns a deterministic integer in the 0 to limit range.
@@ -83,11 +83,11 @@ proc clipArray(p: Vec2): array[2, float32] =
 proc screenToClip(drawer: SpriteDrawer, pos: Vec2): Vec2 =
   ## Converts a pixel-space position into clip space.
   let
-    width = max(1.0'f32, drawer.viewportSize.x.float32)
-    height = max(1.0'f32, drawer.viewportSize.y.float32)
+    width = max(1.0'f, drawer.viewportSize.x.float32)
+    height = max(1.0'f, drawer.viewportSize.y.float32)
   vec2(
-    (pos.x / width) * 2.0'f32 - 1.0'f32,
-    1.0'f32 - (pos.y / height) * 2.0'f32
+    (pos.x / width) * 2.0'f - 1.0'f,
+    1.0'f - (pos.y / height) * 2.0'f
   )
 
 proc beginDraw(drawer: var SpriteDrawer, viewportSize: IVec2) =
@@ -127,7 +127,7 @@ proc drawIcon(drawer: var SpriteDrawer, icon: IVec2, pos: Vec2) =
   ## Draws one icon from the 8x8 sprite sheet at a pixel position.
   let
     iconSize = vec2(SpriteDrawSize, SpriteDrawSize)
-    cellSize = 1.0'f32 / SheetCells.float32
+    cellSize = 1.0'f / SheetCells.float32
     uvMin = vec2(
       icon.x.float32 * cellSize,
       icon.y.float32 * cellSize
@@ -135,9 +135,9 @@ proc drawIcon(drawer: var SpriteDrawer, icon: IVec2, pos: Vec2) =
     uvMax = uvMin + vec2(cellSize, cellSize)
     positions = [
       pos,
-      pos + vec2(iconSize.x, 0.0'f32),
+      pos + vec2(iconSize.x, 0.0'f),
       pos + iconSize,
-      pos + vec2(0.0'f32, iconSize.y)
+      pos + vec2(0.0'f, iconSize.y)
     ]
     uvs = [
       uvMin,
@@ -258,10 +258,11 @@ proc uploadTexture(ctx: var D3D12Context, renderer: var SpriteRenderer) =
     nil
   )
 
-  var footprints = newSeq[D3D12_PLACED_SUBRESOURCE_FOOTPRINT](mipCount)
-  var numRows = newSeq[UINT](mipCount)
-  var rowSizes = newSeq[UINT64](mipCount)
-  var totalBytes: UINT64
+  var
+    footprints = newSeq[D3D12_PLACED_SUBRESOURCE_FOOTPRINT](mipCount)
+    numRows = newSeq[UINT](mipCount)
+    rowSizes = newSeq[UINT64](mipCount)
+    totalBytes: UINT64
   ctx.device.getCopyableFootprints(
     addr texDesc,
     UINT(0),
@@ -733,8 +734,8 @@ when isMainModule:
       drawer.beginDraw(renderSize)
       let
         spriteCount = spriteCountForSize(renderSize)
-        maxX = max(0.0'f32, renderSize.x.float32 - SpriteDrawSize)
-        maxY = max(0.0'f32, renderSize.y.float32 - SpriteDrawSize)
+        maxX = max(0.0'f, renderSize.x.float32 - SpriteDrawSize)
+        maxY = max(0.0'f, renderSize.y.float32 - SpriteDrawSize)
         baseSeed =
           uint32(renderSize.x) xor
           (uint32(renderSize.y) shl 16) xor
