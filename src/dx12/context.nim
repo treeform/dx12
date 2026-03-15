@@ -1,6 +1,5 @@
-import
-  windy/platforms/win32/windefs,
-  dx12
+import windy/platforms/win32/windefs
+import extras, dxgicommon, dxgiformat, dxgi, dxgi1_2, dxgi1_4, dxgi1_5, d3d12_api
 
 # --- Helper types and context management ---
 type
@@ -78,8 +77,8 @@ proc initDevice*(ctx: var D3D12Context, hwnd: HWND, width, height: int) =
   ctx.device = d3d12CreateDevice(nil, D3D_FEATURE_LEVEL_11_0)
 
   var queueDesc: D3D12_COMMAND_QUEUE_DESC
-  queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT
-  queueDesc.Priority = D3D12_COMMAND_QUEUE_PRIORITY_NORMAL
+  queueDesc.typ = D3D12_COMMAND_LIST_TYPE_DIRECT
+  queueDesc.Priority = int32(D3D12_COMMAND_QUEUE_PRIORITY_NORMAL)
   queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE
   queueDesc.NodeMask = 0
   ctx.commandQueue = ctx.device.createCommandQueue(addr queueDesc)
@@ -145,16 +144,15 @@ proc waitForGpu*(ctx: var D3D12Context) =
   ctx.commandQueue.signal(ctx.fence, fenceToWait)
   inc ctx.fenceValue
   if ctx.fence.getCompletedValue() < fenceToWait:
-    ctx.fence.setEventOnCompletion(fenceToWait, ctx.fenceEvent)
+    ctx.fence.setEventOnCompletion(fenceToWait, cast[pointer](ctx.fenceEvent))
     discard WaitForSingleObject(ctx.fenceEvent, WAIT_INFINITE)
 
 proc moveToNextFrame*(ctx: var D3D12Context) =
-  ## Advances to the next frame, waiting when the back buffer is still in use.
   let currentFence = ctx.fenceValue
   ctx.commandQueue.signal(ctx.fence, currentFence)
   inc ctx.fenceValue
   if ctx.fence.getCompletedValue() < currentFence:
-    ctx.fence.setEventOnCompletion(currentFence, ctx.fenceEvent)
+    ctx.fence.setEventOnCompletion(currentFence, cast[pointer](ctx.fenceEvent))
     discard WaitForSingleObject(ctx.fenceEvent, WAIT_INFINITE)
   ctx.currentFrame = int(ctx.swapChain.getCurrentBackBufferIndex())
 
