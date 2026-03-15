@@ -319,11 +319,13 @@ proc uploadVertexBuffer(
   var barrier = D3D12_RESOURCE_BARRIER(
     typ: D3D12_RESOURCE_BARRIER_TYPE_TRANSITION,
     Flags: D3D12_RESOURCE_BARRIER_FLAG_NONE,
-    Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
-      pResource: renderer.vertexBuffer,
-      Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
-      StateBefore: D3D12_RESOURCE_STATE_COPY_DEST,
-      StateAfter: D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER
+    data: D3D12_RESOURCE_BARRIER_union(
+      Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
+        pResource: renderer.vertexBuffer,
+        Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
+        StateBefore: D3D12_RESOURCE_STATE_COPY_DEST,
+        StateAfter: D3D12_RESOURCE_STATE_VERTEX_AND_CONSTANT_BUFFER
+      )
     )
   )
   ctx.commandList.resourceBarrier(1, addr barrier)
@@ -449,7 +451,7 @@ float4 PSMain(PSInput input) : SV_TARGET {
   var rootParams = [
     D3D12_ROOT_PARAMETER(
       ParameterType: D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS,
-      data: D3D12_ROOT_PARAMETER_UNION(
+      data: D3D12_ROOT_PARAMETER_union(
         Constants: D3D12_ROOT_CONSTANTS(
           ShaderRegister: 0,
           RegisterSpace: 0,
@@ -625,11 +627,13 @@ proc recordModel(
   var barrier = D3D12_RESOURCE_BARRIER(
     typ: D3D12_RESOURCE_BARRIER_TYPE_TRANSITION,
     Flags: D3D12_RESOURCE_BARRIER_FLAG_NONE,
-    Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
-      pResource: ctx.renderTargets[ctx.currentFrame],
-      Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
-      StateBefore: D3D12_RESOURCE_STATE_PRESENT,
-      StateAfter: D3D12_RESOURCE_STATE_RENDER_TARGET
+    data: D3D12_RESOURCE_BARRIER_union(
+      Transition: D3D12_RESOURCE_TRANSITION_BARRIER(
+        pResource: ctx.renderTargets[ctx.currentFrame],
+        Subresource: D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES,
+        StateBefore: D3D12_RESOURCE_STATE_PRESENT,
+        StateAfter: D3D12_RESOURCE_STATE_RENDER_TARGET
+      )
     )
   )
   ctx.commandList.resourceBarrier(1, addr barrier)
@@ -666,8 +670,8 @@ proc recordModel(
   ctx.commandList.iaSetVertexBuffers(0, 1, unsafeAddr renderer.vertexBufferView)
   ctx.commandList.drawInstanced(renderer.vertexCount, 1, 0, 0)
 
-  barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET
-  barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT
+  barrier.data.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET
+  barrier.data.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT
   ctx.commandList.resourceBarrier(1, addr barrier)
   ctx.commandList.close()
 
