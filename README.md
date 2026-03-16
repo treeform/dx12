@@ -27,6 +27,8 @@ The library package itself depends on `windy` for Win32 handle types. Some
 examples also depend on sibling graphics libraries such as `pixie` and `vmath`,
 which are not required to import the core `dx12` module.
 
+> **AI disclaimer: Much of this library was AI generated.**
+
 ## Documentation
 
 API docs are generated from `src/dx12.nim` by `.github/workflows/docs.yml`.
