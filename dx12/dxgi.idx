@@ -1,0 +1,131 @@
+nimTitle	dxgi	dx12/dxgi.html	module src/dx12/dxgi		0
+nim	DXGI_CPU_ACCESS_NONE	dx12/dxgi.html#DXGI_CPU_ACCESS_NONE	const DXGI_CPU_ACCESS_NONE		8
+nim	DXGI_CPU_ACCESS_DYNAMIC	dx12/dxgi.html#DXGI_CPU_ACCESS_DYNAMIC	const DXGI_CPU_ACCESS_DYNAMIC		9
+nim	DXGI_CPU_ACCESS_READ_WRITE	dx12/dxgi.html#DXGI_CPU_ACCESS_READ_WRITE	const DXGI_CPU_ACCESS_READ_WRITE		10
+nim	DXGI_CPU_ACCESS_SCRATCH	dx12/dxgi.html#DXGI_CPU_ACCESS_SCRATCH	const DXGI_CPU_ACCESS_SCRATCH		11
+nim	DXGI_CPU_ACCESS_FIELD	dx12/dxgi.html#DXGI_CPU_ACCESS_FIELD	const DXGI_CPU_ACCESS_FIELD		12
+nim	DXGI_USAGE_SHADER_INPUT	dx12/dxgi.html#DXGI_USAGE_SHADER_INPUT	const DXGI_USAGE_SHADER_INPUT		13
+nim	DXGI_USAGE_RENDER_TARGET_OUTPUT	dx12/dxgi.html#DXGI_USAGE_RENDER_TARGET_OUTPUT	const DXGI_USAGE_RENDER_TARGET_OUTPUT		14
+nim	DXGI_USAGE_BACK_BUFFER	dx12/dxgi.html#DXGI_USAGE_BACK_BUFFER	const DXGI_USAGE_BACK_BUFFER		15
+nim	DXGI_USAGE_SHARED	dx12/dxgi.html#DXGI_USAGE_SHARED	const DXGI_USAGE_SHARED		16
+nim	DXGI_USAGE_READ_ONLY	dx12/dxgi.html#DXGI_USAGE_READ_ONLY	const DXGI_USAGE_READ_ONLY		17
+nim	DXGI_USAGE_DISCARD_ON_PRESENT	dx12/dxgi.html#DXGI_USAGE_DISCARD_ON_PRESENT	const DXGI_USAGE_DISCARD_ON_PRESENT		18
+nim	DXGI_USAGE_UNORDERED_ACCESS	dx12/dxgi.html#DXGI_USAGE_UNORDERED_ACCESS	const DXGI_USAGE_UNORDERED_ACCESS		19
+nim	DXGI_ENUM_MODES_INTERLACED	dx12/dxgi.html#DXGI_ENUM_MODES_INTERLACED	const DXGI_ENUM_MODES_INTERLACED		20
+nim	DXGI_ENUM_MODES_SCALING	dx12/dxgi.html#DXGI_ENUM_MODES_SCALING	const DXGI_ENUM_MODES_SCALING		21
+nim	DXGI_RESOURCE_PRIORITY_MINIMUM	dx12/dxgi.html#DXGI_RESOURCE_PRIORITY_MINIMUM	const DXGI_RESOURCE_PRIORITY_MINIMUM		22
+nim	DXGI_RESOURCE_PRIORITY_LOW	dx12/dxgi.html#DXGI_RESOURCE_PRIORITY_LOW	const DXGI_RESOURCE_PRIORITY_LOW		23
+nim	DXGI_RESOURCE_PRIORITY_NORMAL	dx12/dxgi.html#DXGI_RESOURCE_PRIORITY_NORMAL	const DXGI_RESOURCE_PRIORITY_NORMAL		24
+nim	DXGI_RESOURCE_PRIORITY_HIGH	dx12/dxgi.html#DXGI_RESOURCE_PRIORITY_HIGH	const DXGI_RESOURCE_PRIORITY_HIGH		25
+nim	DXGI_RESOURCE_PRIORITY_MAXIMUM	dx12/dxgi.html#DXGI_RESOURCE_PRIORITY_MAXIMUM	const DXGI_RESOURCE_PRIORITY_MAXIMUM		26
+nim	DXGI_MAP_READ	dx12/dxgi.html#DXGI_MAP_READ	const DXGI_MAP_READ		27
+nim	DXGI_MAP_WRITE	dx12/dxgi.html#DXGI_MAP_WRITE	const DXGI_MAP_WRITE		28
+nim	DXGI_MAP_DISCARD	dx12/dxgi.html#DXGI_MAP_DISCARD	const DXGI_MAP_DISCARD		29
+nim	DXGI_SWAP_EFFECT_DISCARD	dx12/dxgi.html#DXGI_SWAP_EFFECT_DISCARD	const DXGI_SWAP_EFFECT_DISCARD		33
+nim	DXGI_SWAP_EFFECT_SEQUENTIAL	dx12/dxgi.html#DXGI_SWAP_EFFECT_SEQUENTIAL	const DXGI_SWAP_EFFECT_SEQUENTIAL		34
+nim	DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL	dx12/dxgi.html#DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL	const DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL		35
+nim	DXGI_SWAP_EFFECT_FLIP_DISCARD	dx12/dxgi.html#DXGI_SWAP_EFFECT_FLIP_DISCARD	const DXGI_SWAP_EFFECT_FLIP_DISCARD		36
+nim	DXGI_RESIDENCY_FULLY_RESIDENT	dx12/dxgi.html#DXGI_RESIDENCY_FULLY_RESIDENT	const DXGI_RESIDENCY_FULLY_RESIDENT		40
+nim	DXGI_RESIDENCY_RESIDENT_IN_SHARED_MEMORY	dx12/dxgi.html#DXGI_RESIDENCY_RESIDENT_IN_SHARED_MEMORY	const DXGI_RESIDENCY_RESIDENT_IN_SHARED_MEMORY		41
+nim	DXGI_RESIDENCY_EVICTED_TO_DISK	dx12/dxgi.html#DXGI_RESIDENCY_EVICTED_TO_DISK	const DXGI_RESIDENCY_EVICTED_TO_DISK		42
+nim	DXGI_SWAP_CHAIN_FLAG_NONPREROTATED	dx12/dxgi.html#DXGI_SWAP_CHAIN_FLAG_NONPREROTATED	const DXGI_SWAP_CHAIN_FLAG_NONPREROTATED		46
+nim	DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH	dx12/dxgi.html#DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH	const DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH		47
+nim	DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE	dx12/dxgi.html#DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE	const DXGI_SWAP_CHAIN_FLAG_GDI_COMPATIBLE		48
+nim	DXGI_SWAP_CHAIN_FLAG_RESTRICTED_CONTENT	dx12/dxgi.html#DXGI_SWAP_CHAIN_FLAG_RESTRICTED_CONTENT	const DXGI_SWAP_CHAIN_FLAG_RESTRICTED_CONTENT		49
+nim	DXGI_SWAP_CHAIN_FLAG_RESTRICT_SHARED_RESOURCE_DRIVER	dx12/dxgi.html#DXGI_SWAP_CHAIN_FLAG_RESTRICT_SHARED_RESOURCE_DRIVER	const DXGI_SWAP_CHAIN_FLAG_RESTRICT_SHARED_RESOURCE_DRIVER		50
+nim	DXGI_SWAP_CHAIN_FLAG_DISPLAY_ONLY	dx12/dxgi.html#DXGI_SWAP_CHAIN_FLAG_DISPLAY_ONLY	const DXGI_SWAP_CHAIN_FLAG_DISPLAY_ONLY		51
+nim	DXGI_SWAP_CHAIN_FLAG_FRAME_LATENCY_WAITABLE_OBJECT	dx12/dxgi.html#DXGI_SWAP_CHAIN_FLAG_FRAME_LATENCY_WAITABLE_OBJECT	const DXGI_SWAP_CHAIN_FLAG_FRAME_LATENCY_WAITABLE_OBJECT		52
+nim	DXGI_SWAP_CHAIN_FLAG_FOREGROUND_LAYER	dx12/dxgi.html#DXGI_SWAP_CHAIN_FLAG_FOREGROUND_LAYER	const DXGI_SWAP_CHAIN_FLAG_FOREGROUND_LAYER		53
+nim	DXGI_SWAP_CHAIN_FLAG_FULLSCREEN_VIDEO	dx12/dxgi.html#DXGI_SWAP_CHAIN_FLAG_FULLSCREEN_VIDEO	const DXGI_SWAP_CHAIN_FLAG_FULLSCREEN_VIDEO		54
+nim	DXGI_SWAP_CHAIN_FLAG_YUV_VIDEO	dx12/dxgi.html#DXGI_SWAP_CHAIN_FLAG_YUV_VIDEO	const DXGI_SWAP_CHAIN_FLAG_YUV_VIDEO		55
+nim	DXGI_SWAP_CHAIN_FLAG_HW_PROTECTED	dx12/dxgi.html#DXGI_SWAP_CHAIN_FLAG_HW_PROTECTED	const DXGI_SWAP_CHAIN_FLAG_HW_PROTECTED		56
+nim	DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING	dx12/dxgi.html#DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING	const DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING		57
+nim	DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS	dx12/dxgi.html#DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS	const DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS		58
+nim	DXGI_ADAPTER_FLAG_NONE	dx12/dxgi.html#DXGI_ADAPTER_FLAG_NONE	const DXGI_ADAPTER_FLAG_NONE		62
+nim	DXGI_ADAPTER_FLAG_REMOTE	dx12/dxgi.html#DXGI_ADAPTER_FLAG_REMOTE	const DXGI_ADAPTER_FLAG_REMOTE		63
+nim	DXGI_ADAPTER_FLAG_SOFTWARE	dx12/dxgi.html#DXGI_ADAPTER_FLAG_SOFTWARE	const DXGI_ADAPTER_FLAG_SOFTWARE		64
+nim	DXGI_ADAPTER_FLAG_FORCE_DWORD	dx12/dxgi.html#DXGI_ADAPTER_FLAG_FORCE_DWORD	const DXGI_ADAPTER_FLAG_FORCE_DWORD		65
+nim	IDXGIObject	dx12/dxgi.html#IDXGIObject	type IDXGIObject		68
+nim	IDXGIDeviceSubObject	dx12/dxgi.html#IDXGIDeviceSubObject	type IDXGIDeviceSubObject		69
+nim	IDXGIResource	dx12/dxgi.html#IDXGIResource	type IDXGIResource		70
+nim	IDXGIKeyedMutex	dx12/dxgi.html#IDXGIKeyedMutex	type IDXGIKeyedMutex		71
+nim	IDXGISurface	dx12/dxgi.html#IDXGISurface	type IDXGISurface		72
+nim	IDXGISurface1	dx12/dxgi.html#IDXGISurface1	type IDXGISurface1		73
+nim	IDXGIOutput	dx12/dxgi.html#IDXGIOutput	type IDXGIOutput		74
+nim	IDXGIAdapter	dx12/dxgi.html#IDXGIAdapter	type IDXGIAdapter		75
+nim	IDXGISwapChain	dx12/dxgi.html#IDXGISwapChain	type IDXGISwapChain		76
+nim	IDXGIFactory	dx12/dxgi.html#IDXGIFactory	type IDXGIFactory		77
+nim	IDXGIDevice	dx12/dxgi.html#IDXGIDevice	type IDXGIDevice		78
+nim	IDXGIAdapter1	dx12/dxgi.html#IDXGIAdapter1	type IDXGIAdapter1		79
+nim	IDXGIDevice1	dx12/dxgi.html#IDXGIDevice1	type IDXGIDevice1		80
+nim	IDXGIFactory1	dx12/dxgi.html#IDXGIFactory1	type IDXGIFactory1		81
+nim	LUID	dx12/dxgi.html#LUID	object LUID		84
+nim	DXGI_SURFACE_DESC	dx12/dxgi.html#DXGI_SURFACE_DESC	object DXGI_SURFACE_DESC		88
+nim	DXGI_MAPPED_RECT	dx12/dxgi.html#DXGI_MAPPED_RECT	object DXGI_MAPPED_RECT		94
+nim	DXGI_OUTPUT_DESC	dx12/dxgi.html#DXGI_OUTPUT_DESC	object DXGI_OUTPUT_DESC		98
+nim	DXGI_FRAME_STATISTICS	dx12/dxgi.html#DXGI_FRAME_STATISTICS	object DXGI_FRAME_STATISTICS		105
+nim	DXGI_ADAPTER_DESC	dx12/dxgi.html#DXGI_ADAPTER_DESC	object DXGI_ADAPTER_DESC		112
+nim	DXGI_SWAP_CHAIN_DESC	dx12/dxgi.html#DXGI_SWAP_CHAIN_DESC	object DXGI_SWAP_CHAIN_DESC		123
+nim	DXGI_SHARED_RESOURCE	dx12/dxgi.html#DXGI_SHARED_RESOURCE	object DXGI_SHARED_RESOURCE		133
+nim	DXGI_ADAPTER_DESC1	dx12/dxgi.html#DXGI_ADAPTER_DESC1	object DXGI_ADAPTER_DESC1		136
+nim	DXGI_DISPLAY_COLOR_SPACE	dx12/dxgi.html#DXGI_DISPLAY_COLOR_SPACE	object DXGI_DISPLAY_COLOR_SPACE		148
+nim	HMONITOR	dx12/dxgi.html#HMONITOR	type HMONITOR		152
+nim	DXGI_USAGE	dx12/dxgi.html#DXGI_USAGE	type DXGI_USAGE		153
+nim	setPrivateData	dx12/dxgi.html#setPrivateData,IDXGIObject,pointer,uint32,pointer	proc setPrivateData(self: IDXGIObject; guid: pointer; data_size: uint32;\n               data: pointer)		157
+nim	setPrivateDataInterface	dx12/dxgi.html#setPrivateDataInterface,IDXGIObject,pointer,pointer	proc setPrivateDataInterface(self: IDXGIObject; guid: pointer; objectField: pointer)		161
+nim	getPrivateData	dx12/dxgi.html#getPrivateData,IDXGIObject,pointer,ptr.uint32,pointer	proc getPrivateData(self: IDXGIObject; guid: pointer; data_size: ptr uint32;\n               data: pointer)		165
+nim	getParent	dx12/dxgi.html#getParent,IDXGIObject,pointer,pointer	proc getParent(self: IDXGIObject; riid: pointer; parent: pointer)		169
+nim	getDevice	dx12/dxgi.html#getDevice,IDXGIDeviceSubObject,pointer,pointer	proc getDevice(self: IDXGIDeviceSubObject; riid: pointer; device: pointer)		175
+nim	getSharedHandle	dx12/dxgi.html#getSharedHandle,IDXGIResource,ptr.pointer	proc getSharedHandle(self: IDXGIResource; pSharedHandle: ptr pointer)		181
+nim	getUsage	dx12/dxgi.html#getUsage,IDXGIResource,pointer	proc getUsage(self: IDXGIResource; pUsage: pointer)		185
+nim	setEvictionPriority	dx12/dxgi.html#setEvictionPriority,IDXGIResource,uint32	proc setEvictionPriority(self: IDXGIResource; EvictionPriority: uint32)		189
+nim	getEvictionPriority	dx12/dxgi.html#getEvictionPriority,IDXGIResource,ptr.uint32	proc getEvictionPriority(self: IDXGIResource; pEvictionPriority: ptr uint32)		193
+nim	acquireSync	dx12/dxgi.html#acquireSync,IDXGIKeyedMutex,uint64,uint32	proc acquireSync(self: IDXGIKeyedMutex; Key: uint64; dwMilliseconds: uint32)		199
+nim	releaseSync	dx12/dxgi.html#releaseSync,IDXGIKeyedMutex,uint64	proc releaseSync(self: IDXGIKeyedMutex; Key: uint64)		203
+nim	getDesc	dx12/dxgi.html#getDesc,IDXGISurface,ptr.DXGI_SURFACE_DESC	proc getDesc(self: IDXGISurface; desc: ptr DXGI_SURFACE_DESC)		209
+nim	map	dx12/dxgi.html#map,IDXGISurface,ptr.DXGI_MAPPED_RECT,uint32	proc map(self: IDXGISurface; mapped_rect: ptr DXGI_MAPPED_RECT; flags: uint32)		213
+nim	unmap	dx12/dxgi.html#unmap,IDXGISurface	proc unmap(self: IDXGISurface)		217
+nim	getDC	dx12/dxgi.html#getDC,IDXGISurface1,int32,ptr.pointer	proc getDC(self: IDXGISurface1; discardField: int32; hdc: ptr pointer)		223
+nim	releaseDC	dx12/dxgi.html#releaseDC,IDXGISurface1,pointer	proc releaseDC(self: IDXGISurface1; dirty_rect: pointer)		227
+nim	getDesc	dx12/dxgi.html#getDesc,IDXGIOutput,ptr.DXGI_OUTPUT_DESC	proc getDesc(self: IDXGIOutput; desc: ptr DXGI_OUTPUT_DESC)		233
+nim	getDisplayModeList	dx12/dxgi.html#getDisplayModeList,IDXGIOutput,uint32,uint32,ptr.uint32,ptr.DXGI_MODE_DESC	proc getDisplayModeList(self: IDXGIOutput; format: uint32; flags: uint32;\n                   mode_count: ptr uint32; desc: ptr DXGI_MODE_DESC)		237
+nim	findClosestMatchingMode	dx12/dxgi.html#findClosestMatchingMode,IDXGIOutput,ptr.DXGI_MODE_DESC,ptr.DXGI_MODE_DESC,pointer	proc findClosestMatchingMode(self: IDXGIOutput; mode: ptr DXGI_MODE_DESC;\n                        closest_match: ptr DXGI_MODE_DESC; device: pointer)		241
+nim	waitForVBlank	dx12/dxgi.html#waitForVBlank,IDXGIOutput	proc waitForVBlank(self: IDXGIOutput)		245
+nim	takeOwnership	dx12/dxgi.html#takeOwnership,IDXGIOutput,pointer,int32	proc takeOwnership(self: IDXGIOutput; device: pointer; exclusive: int32)		249
+nim	releaseOwnership	dx12/dxgi.html#releaseOwnership,IDXGIOutput	proc releaseOwnership(self: IDXGIOutput)		253
+nim	getGammaControlCapabilities	dx12/dxgi.html#getGammaControlCapabilities,IDXGIOutput,ptr.DXGI_GAMMA_CONTROL_CAPABILITIES	proc getGammaControlCapabilities(self: IDXGIOutput;\n                            gamma_caps: ptr DXGI_GAMMA_CONTROL_CAPABILITIES)		257
+nim	setGammaControl	dx12/dxgi.html#setGammaControl,IDXGIOutput,ptr.DXGI_GAMMA_CONTROL	proc setGammaControl(self: IDXGIOutput; gamma_control: ptr DXGI_GAMMA_CONTROL)		261
+nim	getGammaControl	dx12/dxgi.html#getGammaControl,IDXGIOutput,ptr.DXGI_GAMMA_CONTROL	proc getGammaControl(self: IDXGIOutput; gamma_control: ptr DXGI_GAMMA_CONTROL)		265
+nim	setDisplaySurface	dx12/dxgi.html#setDisplaySurface,IDXGIOutput,IDXGISurface	proc setDisplaySurface(self: IDXGIOutput; surface: IDXGISurface)		269
+nim	getDisplaySurfaceData	dx12/dxgi.html#getDisplaySurfaceData,IDXGIOutput,IDXGISurface	proc getDisplaySurfaceData(self: IDXGIOutput; surface: IDXGISurface)		273
+nim	getFrameStatistics	dx12/dxgi.html#getFrameStatistics,IDXGIOutput,ptr.DXGI_FRAME_STATISTICS	proc getFrameStatistics(self: IDXGIOutput; stats: ptr DXGI_FRAME_STATISTICS)		277
+nim	enumOutputs	dx12/dxgi.html#enumOutputs,IDXGIAdapter,uint32,pointer	proc enumOutputs(self: IDXGIAdapter; output_idx: uint32; output: pointer)		283
+nim	getDesc	dx12/dxgi.html#getDesc,IDXGIAdapter,ptr.DXGI_ADAPTER_DESC	proc getDesc(self: IDXGIAdapter; desc: ptr DXGI_ADAPTER_DESC)		287
+nim	checkInterfaceSupport	dx12/dxgi.html#checkInterfaceSupport,IDXGIAdapter,pointer,ptr.int64	proc checkInterfaceSupport(self: IDXGIAdapter; guid: pointer; umd_version: ptr int64)		291
+nim	present	dx12/dxgi.html#present,IDXGISwapChain,uint32,uint32	proc present(self: IDXGISwapChain; sync_interval: uint32; flags: uint32)		297
+nim	getBuffer	dx12/dxgi.html#getBuffer,IDXGISwapChain,uint32,pointer,pointer	proc getBuffer(self: IDXGISwapChain; buffer_idx: uint32; riid: pointer;\n          surface: pointer)		301
+nim	setFullscreenState	dx12/dxgi.html#setFullscreenState,IDXGISwapChain,int32,IDXGIOutput	proc setFullscreenState(self: IDXGISwapChain; fullscreen: int32; target: IDXGIOutput)		305
+nim	getFullscreenState	dx12/dxgi.html#getFullscreenState,IDXGISwapChain,ptr.int32,pointer	proc getFullscreenState(self: IDXGISwapChain; fullscreen: ptr int32; target: pointer)		309
+nim	getDesc	dx12/dxgi.html#getDesc,IDXGISwapChain,ptr.DXGI_SWAP_CHAIN_DESC	proc getDesc(self: IDXGISwapChain; desc: ptr DXGI_SWAP_CHAIN_DESC)		313
+nim	resizeBuffers	dx12/dxgi.html#resizeBuffers,IDXGISwapChain,uint32,uint32,uint32,uint32,uint32	proc resizeBuffers(self: IDXGISwapChain; buffer_count: uint32; width: uint32;\n              height: uint32; format: uint32; flags: uint32)		317
+nim	resizeTarget	dx12/dxgi.html#resizeTarget,IDXGISwapChain,ptr.DXGI_MODE_DESC	proc resizeTarget(self: IDXGISwapChain; target_mode_desc: ptr DXGI_MODE_DESC)		321
+nim	getContainingOutput	dx12/dxgi.html#getContainingOutput,IDXGISwapChain,pointer	proc getContainingOutput(self: IDXGISwapChain; output: pointer)		325
+nim	getFrameStatistics	dx12/dxgi.html#getFrameStatistics,IDXGISwapChain,ptr.DXGI_FRAME_STATISTICS	proc getFrameStatistics(self: IDXGISwapChain; stats: ptr DXGI_FRAME_STATISTICS)		329
+nim	getLastPresentCount	dx12/dxgi.html#getLastPresentCount,IDXGISwapChain,ptr.uint32	proc getLastPresentCount(self: IDXGISwapChain; last_present_count: ptr uint32)		333
+nim	enumAdapters	dx12/dxgi.html#enumAdapters,IDXGIFactory,uint32,pointer	proc enumAdapters(self: IDXGIFactory; adapter_idx: uint32; adapter: pointer)		339
+nim	makeWindowAssociation	dx12/dxgi.html#makeWindowAssociation,IDXGIFactory,pointer,uint32	proc makeWindowAssociation(self: IDXGIFactory; window: pointer; flags: uint32)		343
+nim	getWindowAssociation	dx12/dxgi.html#getWindowAssociation,IDXGIFactory,ptr.pointer	proc getWindowAssociation(self: IDXGIFactory; window: ptr pointer)		347
+nim	createSwapChain	dx12/dxgi.html#createSwapChain,IDXGIFactory,pointer,ptr.DXGI_SWAP_CHAIN_DESC,pointer	proc createSwapChain(self: IDXGIFactory; device: pointer;\n                desc: ptr DXGI_SWAP_CHAIN_DESC; swapchain: pointer)		351
+nim	createSoftwareAdapter	dx12/dxgi.html#createSoftwareAdapter,IDXGIFactory,pointer,pointer	proc createSoftwareAdapter(self: IDXGIFactory; swrast: pointer; adapter: pointer)		355
+nim	getAdapter	dx12/dxgi.html#getAdapter,IDXGIDevice,pointer	proc getAdapter(self: IDXGIDevice; adapter: pointer)		361
+nim	createSurface	dx12/dxgi.html#createSurface,IDXGIDevice,ptr.DXGI_SURFACE_DESC,uint32,uint32,ptr.DXGI_SHARED_RESOURCE,pointer	proc createSurface(self: IDXGIDevice; desc: ptr DXGI_SURFACE_DESC;\n              surface_count: uint32; usage: uint32;\n              shared_resource: ptr DXGI_SHARED_RESOURCE; surface: pointer)		365
+nim	queryResourceResidency	dx12/dxgi.html#queryResourceResidency,IDXGIDevice,pointer,pointer,uint32	proc queryResourceResidency(self: IDXGIDevice; resources: pointer;\n                       residency: pointer; resource_count: uint32)		369
+nim	setGPUThreadPriority	dx12/dxgi.html#setGPUThreadPriority,IDXGIDevice,int32	proc setGPUThreadPriority(self: IDXGIDevice; priority: int32)		373
+nim	getGPUThreadPriority	dx12/dxgi.html#getGPUThreadPriority,IDXGIDevice,ptr.int32	proc getGPUThreadPriority(self: IDXGIDevice; priority: ptr int32)		377
+nim	getDesc1	dx12/dxgi.html#getDesc1,IDXGIAdapter1,ptr.DXGI_ADAPTER_DESC1	proc getDesc1(self: IDXGIAdapter1; pDesc: ptr DXGI_ADAPTER_DESC1)		383
+nim	setMaximumFrameLatency	dx12/dxgi.html#setMaximumFrameLatency,IDXGIDevice1,uint32	proc setMaximumFrameLatency(self: IDXGIDevice1; MaxLatency: uint32)		389
+nim	getMaximumFrameLatency	dx12/dxgi.html#getMaximumFrameLatency,IDXGIDevice1,ptr.uint32	proc getMaximumFrameLatency(self: IDXGIDevice1; pMaxLatency: ptr uint32)		393
+nim	enumAdapters1	dx12/dxgi.html#enumAdapters1,IDXGIFactory1,uint32,pointer	proc enumAdapters1(self: IDXGIFactory1; Adapter: uint32; ppAdapter: pointer)		399
+nim	isCurrent	dx12/dxgi.html#isCurrent,IDXGIFactory1	proc isCurrent(self: IDXGIFactory1): int32		403
+nimgrp	getdesc	dx12/dxgi.html#getDesc-procs-all	proc		209
+nimgrp	getframestatistics	dx12/dxgi.html#getFrameStatistics-procs-all	proc		277

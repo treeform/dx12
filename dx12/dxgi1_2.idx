@@ -1,0 +1,91 @@
+nimTitle	dxgi1_2	dx12/dxgi1_2.html	module src/dx12/dxgi1_2		0
+nim	DXGI_ENUM_MODES_STEREO	dx12/dxgi1_2.html#DXGI_ENUM_MODES_STEREO	const DXGI_ENUM_MODES_STEREO		8
+nim	DXGI_ENUM_MODES_DISABLED_STEREO	dx12/dxgi1_2.html#DXGI_ENUM_MODES_DISABLED_STEREO	const DXGI_ENUM_MODES_DISABLED_STEREO		9
+nim	DXGI_SHARED_RESOURCE_READ	dx12/dxgi1_2.html#DXGI_SHARED_RESOURCE_READ	const DXGI_SHARED_RESOURCE_READ		10
+nim	DXGI_SHARED_RESOURCE_WRITE	dx12/dxgi1_2.html#DXGI_SHARED_RESOURCE_WRITE	const DXGI_SHARED_RESOURCE_WRITE		11
+nim	DXGI_OFFER_RESOURCE_PRIORITY_LOW	dx12/dxgi1_2.html#DXGI_OFFER_RESOURCE_PRIORITY_LOW	const DXGI_OFFER_RESOURCE_PRIORITY_LOW		15
+nim	DXGI_OFFER_RESOURCE_PRIORITY_NORMAL	dx12/dxgi1_2.html#DXGI_OFFER_RESOURCE_PRIORITY_NORMAL	const DXGI_OFFER_RESOURCE_PRIORITY_NORMAL		16
+nim	DXGI_OFFER_RESOURCE_PRIORITY_HIGH	dx12/dxgi1_2.html#DXGI_OFFER_RESOURCE_PRIORITY_HIGH	const DXGI_OFFER_RESOURCE_PRIORITY_HIGH		17
+nim	DXGI_ALPHA_MODE_UNSPECIFIED	dx12/dxgi1_2.html#DXGI_ALPHA_MODE_UNSPECIFIED	const DXGI_ALPHA_MODE_UNSPECIFIED		21
+nim	DXGI_ALPHA_MODE_PREMULTIPLIED	dx12/dxgi1_2.html#DXGI_ALPHA_MODE_PREMULTIPLIED	const DXGI_ALPHA_MODE_PREMULTIPLIED		22
+nim	DXGI_ALPHA_MODE_STRAIGHT	dx12/dxgi1_2.html#DXGI_ALPHA_MODE_STRAIGHT	const DXGI_ALPHA_MODE_STRAIGHT		23
+nim	DXGI_ALPHA_MODE_IGNORE	dx12/dxgi1_2.html#DXGI_ALPHA_MODE_IGNORE	const DXGI_ALPHA_MODE_IGNORE		24
+nim	DXGI_ALPHA_MODE_FORCE_DWORD	dx12/dxgi1_2.html#DXGI_ALPHA_MODE_FORCE_DWORD	const DXGI_ALPHA_MODE_FORCE_DWORD		25
+nim	DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MONOCHROME	dx12/dxgi1_2.html#DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MONOCHROME	const DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MONOCHROME		29
+nim	DXGI_OUTDUPL_POINTER_SHAPE_TYPE_COLOR	dx12/dxgi1_2.html#DXGI_OUTDUPL_POINTER_SHAPE_TYPE_COLOR	const DXGI_OUTDUPL_POINTER_SHAPE_TYPE_COLOR		30
+nim	DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MASKED_COLOR	dx12/dxgi1_2.html#DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MASKED_COLOR	const DXGI_OUTDUPL_POINTER_SHAPE_TYPE_MASKED_COLOR		31
+nim	DXGI_SCALING_STRETCH	dx12/dxgi1_2.html#DXGI_SCALING_STRETCH	const DXGI_SCALING_STRETCH		35
+nim	DXGI_SCALING_NONE	dx12/dxgi1_2.html#DXGI_SCALING_NONE	const DXGI_SCALING_NONE		36
+nim	DXGI_SCALING_ASPECT_RATIO_STRETCH	dx12/dxgi1_2.html#DXGI_SCALING_ASPECT_RATIO_STRETCH	const DXGI_SCALING_ASPECT_RATIO_STRETCH		37
+nim	DXGI_GRAPHICS_PREEMPTION_DMA_BUFFER_BOUNDARY	dx12/dxgi1_2.html#DXGI_GRAPHICS_PREEMPTION_DMA_BUFFER_BOUNDARY	const DXGI_GRAPHICS_PREEMPTION_DMA_BUFFER_BOUNDARY		41
+nim	DXGI_GRAPHICS_PREEMPTION_PRIMITIVE_BOUNDARY	dx12/dxgi1_2.html#DXGI_GRAPHICS_PREEMPTION_PRIMITIVE_BOUNDARY	const DXGI_GRAPHICS_PREEMPTION_PRIMITIVE_BOUNDARY		42
+nim	DXGI_GRAPHICS_PREEMPTION_TRIANGLE_BOUNDARY	dx12/dxgi1_2.html#DXGI_GRAPHICS_PREEMPTION_TRIANGLE_BOUNDARY	const DXGI_GRAPHICS_PREEMPTION_TRIANGLE_BOUNDARY		43
+nim	DXGI_GRAPHICS_PREEMPTION_PIXEL_BOUNDARY	dx12/dxgi1_2.html#DXGI_GRAPHICS_PREEMPTION_PIXEL_BOUNDARY	const DXGI_GRAPHICS_PREEMPTION_PIXEL_BOUNDARY		44
+nim	DXGI_GRAPHICS_PREEMPTION_INSTRUCTION_BOUNDARY	dx12/dxgi1_2.html#DXGI_GRAPHICS_PREEMPTION_INSTRUCTION_BOUNDARY	const DXGI_GRAPHICS_PREEMPTION_INSTRUCTION_BOUNDARY		45
+nim	DXGI_COMPUTE_PREEMPTION_DMA_BUFFER_BOUNDARY	dx12/dxgi1_2.html#DXGI_COMPUTE_PREEMPTION_DMA_BUFFER_BOUNDARY	const DXGI_COMPUTE_PREEMPTION_DMA_BUFFER_BOUNDARY		49
+nim	DXGI_COMPUTE_PREEMPTION_DISPATCH_BOUNDARY	dx12/dxgi1_2.html#DXGI_COMPUTE_PREEMPTION_DISPATCH_BOUNDARY	const DXGI_COMPUTE_PREEMPTION_DISPATCH_BOUNDARY		50
+nim	DXGI_COMPUTE_PREEMPTION_THREAD_GROUP_BOUNDARY	dx12/dxgi1_2.html#DXGI_COMPUTE_PREEMPTION_THREAD_GROUP_BOUNDARY	const DXGI_COMPUTE_PREEMPTION_THREAD_GROUP_BOUNDARY		51
+nim	DXGI_COMPUTE_PREEMPTION_THREAD_BOUNDARY	dx12/dxgi1_2.html#DXGI_COMPUTE_PREEMPTION_THREAD_BOUNDARY	const DXGI_COMPUTE_PREEMPTION_THREAD_BOUNDARY		52
+nim	DXGI_COMPUTE_PREEMPTION_INSTRUCTION_BOUNDARY	dx12/dxgi1_2.html#DXGI_COMPUTE_PREEMPTION_INSTRUCTION_BOUNDARY	const DXGI_COMPUTE_PREEMPTION_INSTRUCTION_BOUNDARY		53
+nim	IDXGIOutputDuplication	dx12/dxgi1_2.html#IDXGIOutputDuplication	type IDXGIOutputDuplication		56
+nim	IDXGISurface2	dx12/dxgi1_2.html#IDXGISurface2	type IDXGISurface2		57
+nim	IDXGIResource1	dx12/dxgi1_2.html#IDXGIResource1	type IDXGIResource1		58
+nim	IDXGIDisplayControl	dx12/dxgi1_2.html#IDXGIDisplayControl	type IDXGIDisplayControl		59
+nim	IDXGIDevice2	dx12/dxgi1_2.html#IDXGIDevice2	type IDXGIDevice2		60
+nim	IDXGISwapChain1	dx12/dxgi1_2.html#IDXGISwapChain1	type IDXGISwapChain1		61
+nim	IDXGIFactory2	dx12/dxgi1_2.html#IDXGIFactory2	type IDXGIFactory2		62
+nim	IDXGIAdapter2	dx12/dxgi1_2.html#IDXGIAdapter2	type IDXGIAdapter2		63
+nim	IDXGIOutput1	dx12/dxgi1_2.html#IDXGIOutput1	type IDXGIOutput1		64
+nim	DXGI_OUTDUPL_MOVE_RECT	dx12/dxgi1_2.html#DXGI_OUTDUPL_MOVE_RECT	object DXGI_OUTDUPL_MOVE_RECT		67
+nim	DXGI_OUTDUPL_DESC	dx12/dxgi1_2.html#DXGI_OUTDUPL_DESC	object DXGI_OUTDUPL_DESC		71
+nim	DXGI_OUTDUPL_POINTER_POSITION	dx12/dxgi1_2.html#DXGI_OUTDUPL_POINTER_POSITION	object DXGI_OUTDUPL_POINTER_POSITION		76
+nim	DXGI_OUTDUPL_POINTER_SHAPE_INFO	dx12/dxgi1_2.html#DXGI_OUTDUPL_POINTER_SHAPE_INFO	object DXGI_OUTDUPL_POINTER_SHAPE_INFO		80
+nim	DXGI_OUTDUPL_FRAME_INFO	dx12/dxgi1_2.html#DXGI_OUTDUPL_FRAME_INFO	object DXGI_OUTDUPL_FRAME_INFO		87
+nim	DXGI_MODE_DESC1	dx12/dxgi1_2.html#DXGI_MODE_DESC1	object DXGI_MODE_DESC1		97
+nim	DXGI_SWAP_CHAIN_DESC1	dx12/dxgi1_2.html#DXGI_SWAP_CHAIN_DESC1	object DXGI_SWAP_CHAIN_DESC1		106
+nim	DXGI_SWAP_CHAIN_FULLSCREEN_DESC	dx12/dxgi1_2.html#DXGI_SWAP_CHAIN_FULLSCREEN_DESC	object DXGI_SWAP_CHAIN_FULLSCREEN_DESC		119
+nim	DXGI_PRESENT_PARAMETERS	dx12/dxgi1_2.html#DXGI_PRESENT_PARAMETERS	object DXGI_PRESENT_PARAMETERS		125
+nim	DXGI_ADAPTER_DESC2	dx12/dxgi1_2.html#DXGI_ADAPTER_DESC2	object DXGI_ADAPTER_DESC2		131
+nim	getDesc	dx12/dxgi1_2.html#getDesc,IDXGIOutputDuplication,ptr.DXGI_OUTDUPL_DESC	proc getDesc(self: IDXGIOutputDuplication; desc: ptr DXGI_OUTDUPL_DESC)		147
+nim	acquireNextFrame	dx12/dxgi1_2.html#acquireNextFrame,IDXGIOutputDuplication,uint32,ptr.DXGI_OUTDUPL_FRAME_INFO,pointer	proc acquireNextFrame(self: IDXGIOutputDuplication; timeout_in_milliseconds: uint32;\n                 frame_info: ptr DXGI_OUTDUPL_FRAME_INFO;\n                 desktop_resource: pointer)		151
+nim	getFrameDirtyRects	dx12/dxgi1_2.html#getFrameDirtyRects,IDXGIOutputDuplication,uint32,pointer,ptr.uint32	proc getFrameDirtyRects(self: IDXGIOutputDuplication;\n                   dirty_rects_buffer_size: uint32; dirty_rects_buffer: pointer;\n                   dirty_rects_buffer_size_required: ptr uint32)		155
+nim	getFrameMoveRects	dx12/dxgi1_2.html#getFrameMoveRects,IDXGIOutputDuplication,uint32,ptr.DXGI_OUTDUPL_MOVE_RECT,ptr.uint32	proc getFrameMoveRects(self: IDXGIOutputDuplication; move_rects_buffer_size: uint32;\n                  move_rect_buffer: ptr DXGI_OUTDUPL_MOVE_RECT;\n                  move_rects_buffer_size_required: ptr uint32)		159
+nim	getFramePointerShape	dx12/dxgi1_2.html#getFramePointerShape,IDXGIOutputDuplication,uint32,pointer,ptr.uint32,ptr.DXGI_OUTDUPL_POINTER_SHAPE_INFO	proc getFramePointerShape(self: IDXGIOutputDuplication;\n                     pointer_shape_buffer_size: uint32;\n                     pointer_shape_buffer: pointer;\n                     pointer_shape_buffer_size_required: ptr uint32;\n                     pointer_shape_info: ptr DXGI_OUTDUPL_POINTER_SHAPE_INFO)		163
+nim	mapDesktopSurface	dx12/dxgi1_2.html#mapDesktopSurface,IDXGIOutputDuplication,ptr.DXGI_MAPPED_RECT	proc mapDesktopSurface(self: IDXGIOutputDuplication;\n                  locked_rect: ptr DXGI_MAPPED_RECT)		167
+nim	unMapDesktopSurface	dx12/dxgi1_2.html#unMapDesktopSurface,IDXGIOutputDuplication	proc unMapDesktopSurface(self: IDXGIOutputDuplication)		171
+nim	releaseFrame	dx12/dxgi1_2.html#releaseFrame,IDXGIOutputDuplication	proc releaseFrame(self: IDXGIOutputDuplication)		175
+nim	getResource	dx12/dxgi1_2.html#getResource,IDXGISurface2,pointer,pointer,ptr.uint32	proc getResource(self: IDXGISurface2; iid: pointer; parent_resource: pointer;\n            subresource_idx: ptr uint32)		181
+nim	createSubresourceSurface	dx12/dxgi1_2.html#createSubresourceSurface,IDXGIResource1,uint32,pointer	proc createSubresourceSurface(self: IDXGIResource1; index: uint32; surface: pointer)		187
+nim	createSharedHandle	dx12/dxgi1_2.html#createSharedHandle,IDXGIResource1,ptr.pointer,uint32,pointer,ptr.pointer	proc createSharedHandle(self: IDXGIResource1; attributes: ptr pointer;\n                   access: uint32; name: pointer; handle: ptr pointer)		191
+nim	isStereoEnabled	dx12/dxgi1_2.html#isStereoEnabled,IDXGIDisplayControl	proc isStereoEnabled(self: IDXGIDisplayControl): int32		197
+nim	setStereoEnabled	dx12/dxgi1_2.html#setStereoEnabled,IDXGIDisplayControl,int32	proc setStereoEnabled(self: IDXGIDisplayControl; enabled: int32)		201
+nim	offerResources	dx12/dxgi1_2.html#offerResources,IDXGIDevice2,uint32,ptr.IDXGIResource,uint32	proc offerResources(self: IDXGIDevice2; NumResources: uint32;\n               ppResources: ptr IDXGIResource; Priority: uint32)		207
+nim	reclaimResources	dx12/dxgi1_2.html#reclaimResources,IDXGIDevice2,uint32,ptr.IDXGIResource,ptr.int32	proc reclaimResources(self: IDXGIDevice2; NumResources: uint32;\n                 ppResources: ptr IDXGIResource; pDiscarded: ptr int32)		211
+nim	enqueueSetEvent	dx12/dxgi1_2.html#enqueueSetEvent,IDXGIDevice2,pointer	proc enqueueSetEvent(self: IDXGIDevice2; hEvent: pointer)		215
+nim	getDesc1	dx12/dxgi1_2.html#getDesc1,IDXGISwapChain1,ptr.DXGI_SWAP_CHAIN_DESC1	proc getDesc1(self: IDXGISwapChain1; pDesc: ptr DXGI_SWAP_CHAIN_DESC1)		221
+nim	getFullscreenDesc	dx12/dxgi1_2.html#getFullscreenDesc,IDXGISwapChain1,ptr.DXGI_SWAP_CHAIN_FULLSCREEN_DESC	proc getFullscreenDesc(self: IDXGISwapChain1;\n                  pDesc: ptr DXGI_SWAP_CHAIN_FULLSCREEN_DESC)		225
+nim	getHwnd	dx12/dxgi1_2.html#getHwnd,IDXGISwapChain1,ptr.pointer	proc getHwnd(self: IDXGISwapChain1; pHwnd: ptr pointer)		229
+nim	getCoreWindow	dx12/dxgi1_2.html#getCoreWindow,IDXGISwapChain1,pointer,pointer	proc getCoreWindow(self: IDXGISwapChain1; refiid: pointer; ppUnk: pointer)		233
+nim	present1	dx12/dxgi1_2.html#present1,IDXGISwapChain1,uint32,uint32,ptr.DXGI_PRESENT_PARAMETERS	proc present1(self: IDXGISwapChain1; SyncInterval: uint32; PresentFlags: uint32;\n         pPresentParameters: ptr DXGI_PRESENT_PARAMETERS)		237
+nim	isTemporaryMonoSupported	dx12/dxgi1_2.html#isTemporaryMonoSupported,IDXGISwapChain1	proc isTemporaryMonoSupported(self: IDXGISwapChain1): int32		241
+nim	getRestrictToOutput	dx12/dxgi1_2.html#getRestrictToOutput,IDXGISwapChain1,pointer	proc getRestrictToOutput(self: IDXGISwapChain1; ppRestrictToOutput: pointer)		245
+nim	setBackgroundColor	dx12/dxgi1_2.html#setBackgroundColor,IDXGISwapChain1,pointer	proc setBackgroundColor(self: IDXGISwapChain1; pColor: pointer)		249
+nim	getBackgroundColor	dx12/dxgi1_2.html#getBackgroundColor,IDXGISwapChain1,pointer	proc getBackgroundColor(self: IDXGISwapChain1; pColor: pointer)		253
+nim	setRotation	dx12/dxgi1_2.html#setRotation,IDXGISwapChain1,uint32	proc setRotation(self: IDXGISwapChain1; Rotation: uint32)		257
+nim	getRotation	dx12/dxgi1_2.html#getRotation,IDXGISwapChain1,pointer	proc getRotation(self: IDXGISwapChain1; pRotation: pointer)		261
+nim	isWindowedStereoEnabled	dx12/dxgi1_2.html#isWindowedStereoEnabled,IDXGIFactory2	proc isWindowedStereoEnabled(self: IDXGIFactory2): int32		267
+nim	createSwapChainForHwnd	dx12/dxgi1_2.html#createSwapChainForHwnd,IDXGIFactory2,pointer,pointer,ptr.DXGI_SWAP_CHAIN_DESC1,ptr.DXGI_SWAP_CHAIN_FULLSCREEN_DESC,IDXGIOutput,pointer	proc createSwapChainForHwnd(self: IDXGIFactory2; pDevice: pointer; hWnd: pointer;\n                       pDesc: ptr DXGI_SWAP_CHAIN_DESC1;\n                       pFullscreenDesc: ptr DXGI_SWAP_CHAIN_FULLSCREEN_DESC;\n                       pRestrictToOutput: IDXGIOutput; ppSwapChain: pointer)		271
+nim	createSwapChainForCoreWindow	dx12/dxgi1_2.html#createSwapChainForCoreWindow,IDXGIFactory2,pointer,pointer,ptr.DXGI_SWAP_CHAIN_DESC1,IDXGIOutput,pointer	proc createSwapChainForCoreWindow(self: IDXGIFactory2; pDevice: pointer;\n                             pWindow: pointer; pDesc: ptr DXGI_SWAP_CHAIN_DESC1;\n                             pRestrictToOutput: IDXGIOutput;\n                             ppSwapChain: pointer)		275
+nim	getSharedResourceAdapterLuid	dx12/dxgi1_2.html#getSharedResourceAdapterLuid,IDXGIFactory2,pointer,ptr.LUID	proc getSharedResourceAdapterLuid(self: IDXGIFactory2; hResource: pointer;\n                             pLuid: ptr LUID)		279
+nim	registerStereoStatusWindow	dx12/dxgi1_2.html#registerStereoStatusWindow,IDXGIFactory2,pointer,uint32,ptr.uint32	proc registerStereoStatusWindow(self: IDXGIFactory2; WindowHandle: pointer;\n                           wMsg: uint32; pdwCookie: ptr uint32)		283
+nim	registerStereoStatusEvent	dx12/dxgi1_2.html#registerStereoStatusEvent,IDXGIFactory2,pointer,ptr.uint32	proc registerStereoStatusEvent(self: IDXGIFactory2; hEvent: pointer;\n                          pdwCookie: ptr uint32)		287
+nim	unregisterStereoStatus	dx12/dxgi1_2.html#unregisterStereoStatus,IDXGIFactory2,uint32	proc unregisterStereoStatus(self: IDXGIFactory2; dwCookie: uint32)		291
+nim	registerOcclusionStatusWindow	dx12/dxgi1_2.html#registerOcclusionStatusWindow,IDXGIFactory2,pointer,uint32,ptr.uint32	proc registerOcclusionStatusWindow(self: IDXGIFactory2; WindowHandle: pointer;\n                              wMsg: uint32; pdwCookie: ptr uint32)		295
+nim	registerOcclusionStatusEvent	dx12/dxgi1_2.html#registerOcclusionStatusEvent,IDXGIFactory2,pointer,ptr.uint32	proc registerOcclusionStatusEvent(self: IDXGIFactory2; hEvent: pointer;\n                             pdwCookie: ptr uint32)		299
+nim	unregisterOcclusionStatus	dx12/dxgi1_2.html#unregisterOcclusionStatus,IDXGIFactory2,uint32	proc unregisterOcclusionStatus(self: IDXGIFactory2; dwCookie: uint32)		303
+nim	createSwapChainForComposition	dx12/dxgi1_2.html#createSwapChainForComposition,IDXGIFactory2,pointer,ptr.DXGI_SWAP_CHAIN_DESC1,IDXGIOutput,pointer	proc createSwapChainForComposition(self: IDXGIFactory2; pDevice: pointer;\n                              pDesc: ptr DXGI_SWAP_CHAIN_DESC1;\n                              pRestrictToOutput: IDXGIOutput;\n                              ppSwapChain: pointer)		307
+nim	getDesc2	dx12/dxgi1_2.html#getDesc2,IDXGIAdapter2,ptr.DXGI_ADAPTER_DESC2	proc getDesc2(self: IDXGIAdapter2; pDesc: ptr DXGI_ADAPTER_DESC2)		313
+nim	getDisplayModeList1	dx12/dxgi1_2.html#getDisplayModeList1,IDXGIOutput1,uint32,uint32,ptr.uint32,ptr.DXGI_MODE_DESC1	proc getDisplayModeList1(self: IDXGIOutput1; enum_format: uint32; flags: uint32;\n                    num_modes: ptr uint32; desc: ptr DXGI_MODE_DESC1)		319
+nim	findClosestMatchingMode1	dx12/dxgi1_2.html#findClosestMatchingMode1,IDXGIOutput1,ptr.DXGI_MODE_DESC1,ptr.DXGI_MODE_DESC1,pointer	proc findClosestMatchingMode1(self: IDXGIOutput1; mode_to_match: ptr DXGI_MODE_DESC1;\n                         closest_match: ptr DXGI_MODE_DESC1;\n                         concerned_device: pointer)		323
+nim	getDisplaySurfaceData1	dx12/dxgi1_2.html#getDisplaySurfaceData1,IDXGIOutput1,IDXGIResource	proc getDisplaySurfaceData1(self: IDXGIOutput1; destination: IDXGIResource)		327
+nim	duplicateOutput	dx12/dxgi1_2.html#duplicateOutput,IDXGIOutput1,pointer,pointer	proc duplicateOutput(self: IDXGIOutput1; device: pointer; output_duplication: pointer)		331

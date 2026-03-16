@@ -1,0 +1,21 @@
+nimTitle	dxgi1_5	dx12/dxgi1_5.html	module src/dx12/dxgi1_5		0
+nim	DXGI_OUTDUPL_COMPOSITED_UI_CAPTURE_ONLY	dx12/dxgi1_5.html#DXGI_OUTDUPL_COMPOSITED_UI_CAPTURE_ONLY	const DXGI_OUTDUPL_COMPOSITED_UI_CAPTURE_ONLY		9
+nim	DXGI_HDR_METADATA_TYPE_NONE	dx12/dxgi1_5.html#DXGI_HDR_METADATA_TYPE_NONE	const DXGI_HDR_METADATA_TYPE_NONE		13
+nim	DXGI_HDR_METADATA_TYPE_HDR10	dx12/dxgi1_5.html#DXGI_HDR_METADATA_TYPE_HDR10	const DXGI_HDR_METADATA_TYPE_HDR10		14
+nim	DXGI_HDR_METADATA_TYPE_HDR10PLUS	dx12/dxgi1_5.html#DXGI_HDR_METADATA_TYPE_HDR10PLUS	const DXGI_HDR_METADATA_TYPE_HDR10PLUS		15
+nim	DXGI_OFFER_RESOURCE_FLAG_ALLOW_DECOMMIT	dx12/dxgi1_5.html#DXGI_OFFER_RESOURCE_FLAG_ALLOW_DECOMMIT	const DXGI_OFFER_RESOURCE_FLAG_ALLOW_DECOMMIT		19
+nim	DXGI_RECLAIM_RESOURCE_RESULT_OK	dx12/dxgi1_5.html#DXGI_RECLAIM_RESOURCE_RESULT_OK	const DXGI_RECLAIM_RESOURCE_RESULT_OK		23
+nim	DXGI_RECLAIM_RESOURCE_RESULT_DISCARDED	dx12/dxgi1_5.html#DXGI_RECLAIM_RESOURCE_RESULT_DISCARDED	const DXGI_RECLAIM_RESOURCE_RESULT_DISCARDED		24
+nim	DXGI_RECLAIM_RESOURCE_RESULT_NOT_COMMITTED	dx12/dxgi1_5.html#DXGI_RECLAIM_RESOURCE_RESULT_NOT_COMMITTED	const DXGI_RECLAIM_RESOURCE_RESULT_NOT_COMMITTED		25
+nim	DXGI_FEATURE_PRESENT_ALLOW_TEARING	dx12/dxgi1_5.html#DXGI_FEATURE_PRESENT_ALLOW_TEARING	const DXGI_FEATURE_PRESENT_ALLOW_TEARING		29
+nim	IDXGIOutput5	dx12/dxgi1_5.html#IDXGIOutput5	type IDXGIOutput5		32
+nim	IDXGISwapChain4	dx12/dxgi1_5.html#IDXGISwapChain4	type IDXGISwapChain4		33
+nim	IDXGIDevice4	dx12/dxgi1_5.html#IDXGIDevice4	type IDXGIDevice4		34
+nim	IDXGIFactory5	dx12/dxgi1_5.html#IDXGIFactory5	type IDXGIFactory5		35
+nim	DXGI_HDR_METADATA_HDR10	dx12/dxgi1_5.html#DXGI_HDR_METADATA_HDR10	object DXGI_HDR_METADATA_HDR10		38
+nim	DXGI_HDR_METADATA_HDR10PLUS	dx12/dxgi1_5.html#DXGI_HDR_METADATA_HDR10PLUS	object DXGI_HDR_METADATA_HDR10PLUS		48
+nim	duplicateOutput1	dx12/dxgi1_5.html#duplicateOutput1,IDXGIOutput5,pointer,uint32,uint32,pointer,pointer	proc duplicateOutput1(self: IDXGIOutput5; device: pointer; flags: uint32;\n                 format_count: uint32; formats: pointer; duplication: pointer)		53
+nim	setHDRMetaData	dx12/dxgi1_5.html#setHDRMetaData,IDXGISwapChain4,uint32,uint32,pointer	proc setHDRMetaData(self: IDXGISwapChain4; typ: uint32; size: uint32;\n               metadata: pointer)		59
+nim	offerResources1	dx12/dxgi1_5.html#offerResources1,IDXGIDevice4,uint32,ptr.IDXGIResource,uint32,uint32	proc offerResources1(self: IDXGIDevice4; resource_count: uint32;\n                resources: ptr IDXGIResource; priority: uint32; flags: uint32)		65
+nim	reclaimResources1	dx12/dxgi1_5.html#reclaimResources1,IDXGIDevice4,uint32,ptr.IDXGIResource,pointer	proc reclaimResources1(self: IDXGIDevice4; resource_count: uint32;\n                  resources: ptr IDXGIResource; results: pointer)		69
+nim	checkFeatureSupport	dx12/dxgi1_5.html#checkFeatureSupport,IDXGIFactory5,uint32,pointer,uint32	proc checkFeatureSupport(self: IDXGIFactory5; feature: uint32; support_data: pointer;\n                    support_data_size: uint32)		75

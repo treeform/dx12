@@ -1,0 +1,5 @@
+nimTitle	vtable	dx12/vtable.html	module src/dx12/vtable		0
+nim	callVtbl0	dx12/vtable.html#callVtbl0.t,pointer,int,typedesc	template callVtbl0(iface: pointer; index: int; typ: typedesc): untyped		3
+nim	callVtbl	dx12/vtable.html#callVtbl.t,pointer,int,typedesc,varargs[untyped]	template callVtbl(iface: pointer; index: int; typ: typedesc; args: varargs[untyped]): untyped		9
+nim	callVtbl0Err	dx12/vtable.html#callVtbl0Err.t,pointer,int,typedesc,string	template callVtbl0Err(iface: pointer; index: int; typ: typedesc; msg: string): untyped		15
+nim	callVtblErr	dx12/vtable.html#callVtblErr.t,pointer,int,typedesc,string,varargs[untyped]	template callVtblErr(iface: pointer; index: int; typ: typedesc; msg: string;\n            args: varargs[untyped]): untyped		23

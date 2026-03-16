@@ -1,0 +1,24 @@
+nimTitle	dxgi1_4	dx12/dxgi1_4.html	module src/dx12/dxgi1_4		0
+nim	DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_PRESENT	dx12/dxgi1_4.html#DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_PRESENT	const DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_PRESENT		9
+nim	DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_OVERLAY_PRESENT	dx12/dxgi1_4.html#DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_OVERLAY_PRESENT	const DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_OVERLAY_PRESENT		10
+nim	DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG_PRESENT	dx12/dxgi1_4.html#DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG_PRESENT	const DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG_PRESENT		14
+nim	DXGI_MEMORY_SEGMENT_GROUP_LOCAL	dx12/dxgi1_4.html#DXGI_MEMORY_SEGMENT_GROUP_LOCAL	const DXGI_MEMORY_SEGMENT_GROUP_LOCAL		18
+nim	DXGI_MEMORY_SEGMENT_GROUP_NON_LOCAL	dx12/dxgi1_4.html#DXGI_MEMORY_SEGMENT_GROUP_NON_LOCAL	const DXGI_MEMORY_SEGMENT_GROUP_NON_LOCAL		19
+nim	IDXGISwapChain3	dx12/dxgi1_4.html#IDXGISwapChain3	type IDXGISwapChain3		22
+nim	IDXGIOutput4	dx12/dxgi1_4.html#IDXGIOutput4	type IDXGIOutput4		23
+nim	IDXGIFactory4	dx12/dxgi1_4.html#IDXGIFactory4	type IDXGIFactory4		24
+nim	IDXGIAdapter3	dx12/dxgi1_4.html#IDXGIAdapter3	type IDXGIAdapter3		25
+nim	DXGI_QUERY_VIDEO_MEMORY_INFO	dx12/dxgi1_4.html#DXGI_QUERY_VIDEO_MEMORY_INFO	object DXGI_QUERY_VIDEO_MEMORY_INFO		28
+nim	getCurrentBackBufferIndex	dx12/dxgi1_4.html#getCurrentBackBufferIndex,IDXGISwapChain3	proc getCurrentBackBufferIndex(self: IDXGISwapChain3): uint32		36
+nim	checkColorSpaceSupport	dx12/dxgi1_4.html#checkColorSpaceSupport,IDXGISwapChain3,uint32,ptr.uint32	proc checkColorSpaceSupport(self: IDXGISwapChain3; colour_space: uint32;\n                       colour_space_support: ptr uint32)		40
+nim	setColorSpace1	dx12/dxgi1_4.html#setColorSpace1,IDXGISwapChain3,uint32	proc setColorSpace1(self: IDXGISwapChain3; colour_space: uint32)		44
+nim	resizeBuffers1	dx12/dxgi1_4.html#resizeBuffers1,IDXGISwapChain3,uint32,uint32,uint32,uint32,uint32,ptr.uint32,pointer	proc resizeBuffers1(self: IDXGISwapChain3; buffer_count: uint32; width: uint32;\n               height: uint32; format: uint32; flags: uint32;\n               node_mask: ptr uint32; present_queue: pointer)		48
+nim	checkOverlayColorSpaceSupport	dx12/dxgi1_4.html#checkOverlayColorSpaceSupport,IDXGIOutput4,uint32,uint32,pointer,ptr.uint32	proc checkOverlayColorSpaceSupport(self: IDXGIOutput4; format: uint32;\n                              colour_space: uint32; device: pointer;\n                              flags: ptr uint32)		54
+nim	enumAdapterByLuid	dx12/dxgi1_4.html#enumAdapterByLuid,IDXGIFactory4,uint64,pointer,pointer	proc enumAdapterByLuid(self: IDXGIFactory4; luid: uint64; iid: pointer;\n                  adapter: pointer)		60
+nim	enumWarpAdapter	dx12/dxgi1_4.html#enumWarpAdapter,IDXGIFactory4,pointer,pointer	proc enumWarpAdapter(self: IDXGIFactory4; iid: pointer; adapter: pointer)		64
+nim	registerHardwareContentProtectionTeardownStatusEvent	dx12/dxgi1_4.html#registerHardwareContentProtectionTeardownStatusEvent,IDXGIAdapter3,pointer,ptr.uint32	proc registerHardwareContentProtectionTeardownStatusEvent(self: IDXGIAdapter3;\n    event: pointer; cookie: ptr uint32)		70
+nim	unregisterHardwareContentProtectionTeardownStatus	dx12/dxgi1_4.html#unregisterHardwareContentProtectionTeardownStatus,IDXGIAdapter3,uint32	proc unregisterHardwareContentProtectionTeardownStatus(self: IDXGIAdapter3;\n    cookie: uint32)		74
+nim	queryVideoMemoryInfo	dx12/dxgi1_4.html#queryVideoMemoryInfo,IDXGIAdapter3,uint32,uint32,ptr.DXGI_QUERY_VIDEO_MEMORY_INFO	proc queryVideoMemoryInfo(self: IDXGIAdapter3; node_index: uint32;\n                     segment_group: uint32;\n                     memory_info: ptr DXGI_QUERY_VIDEO_MEMORY_INFO)		78
+nim	setVideoMemoryReservation	dx12/dxgi1_4.html#setVideoMemoryReservation,IDXGIAdapter3,uint32,uint32,uint64	proc setVideoMemoryReservation(self: IDXGIAdapter3; node_index: uint32;\n                          segment_group: uint32; reservation: uint64)		82
+nim	registerVideoMemoryBudgetChangeNotificationEvent	dx12/dxgi1_4.html#registerVideoMemoryBudgetChangeNotificationEvent,IDXGIAdapter3,pointer,ptr.uint32	proc registerVideoMemoryBudgetChangeNotificationEvent(self: IDXGIAdapter3;\n    event: pointer; cookie: ptr uint32)		86
+nim	unregisterVideoMemoryBudgetChangeNotification	dx12/dxgi1_4.html#unregisterVideoMemoryBudgetChangeNotification,IDXGIAdapter3,uint32	proc unregisterVideoMemoryBudgetChangeNotification(self: IDXGIAdapter3;\n    cookie: uint32)		90

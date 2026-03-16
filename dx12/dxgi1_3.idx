@@ -1,0 +1,47 @@
+nimTitle	dxgi1_3	dx12/dxgi1_3.html	module src/dx12/dxgi1_3		0
+nim	DXGI_CREATE_FACTORY_DEBUG	dx12/dxgi1_3.html#DXGI_CREATE_FACTORY_DEBUG	const DXGI_CREATE_FACTORY_DEBUG		8
+nim	DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_NOMINAL_RANGE	dx12/dxgi1_3.html#DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_NOMINAL_RANGE	const DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_NOMINAL_RANGE		12
+nim	DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_BT709	dx12/dxgi1_3.html#DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_BT709	const DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_BT709		13
+nim	DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_xvYCC	dx12/dxgi1_3.html#DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_xvYCC	const DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_xvYCC		14
+nim	DXGI_FRAME_PRESENTATION_MODE_COMPOSED	dx12/dxgi1_3.html#DXGI_FRAME_PRESENTATION_MODE_COMPOSED	const DXGI_FRAME_PRESENTATION_MODE_COMPOSED		18
+nim	DXGI_FRAME_PRESENTATION_MODE_OVERLAY	dx12/dxgi1_3.html#DXGI_FRAME_PRESENTATION_MODE_OVERLAY	const DXGI_FRAME_PRESENTATION_MODE_OVERLAY		19
+nim	DXGI_FRAME_PRESENTATION_MODE_NONE	dx12/dxgi1_3.html#DXGI_FRAME_PRESENTATION_MODE_NONE	const DXGI_FRAME_PRESENTATION_MODE_NONE		20
+nim	DXGI_FRAME_PRESENTATION_MODE_COMPOSITION_FAILURE	dx12/dxgi1_3.html#DXGI_FRAME_PRESENTATION_MODE_COMPOSITION_FAILURE	const DXGI_FRAME_PRESENTATION_MODE_COMPOSITION_FAILURE		21
+nim	DXGI_OVERLAY_SUPPORT_FLAG_DIRECT	dx12/dxgi1_3.html#DXGI_OVERLAY_SUPPORT_FLAG_DIRECT	const DXGI_OVERLAY_SUPPORT_FLAG_DIRECT		25
+nim	DXGI_OVERLAY_SUPPORT_FLAG_SCALING	dx12/dxgi1_3.html#DXGI_OVERLAY_SUPPORT_FLAG_SCALING	const DXGI_OVERLAY_SUPPORT_FLAG_SCALING		26
+nim	IDXGIDevice3	dx12/dxgi1_3.html#IDXGIDevice3	type IDXGIDevice3		29
+nim	IDXGISwapChain2	dx12/dxgi1_3.html#IDXGISwapChain2	type IDXGISwapChain2		30
+nim	IDXGIOutput2	dx12/dxgi1_3.html#IDXGIOutput2	type IDXGIOutput2		31
+nim	IDXGIFactory3	dx12/dxgi1_3.html#IDXGIFactory3	type IDXGIFactory3		32
+nim	IDXGIDecodeSwapChain	dx12/dxgi1_3.html#IDXGIDecodeSwapChain	type IDXGIDecodeSwapChain		33
+nim	IDXGIFactoryMedia	dx12/dxgi1_3.html#IDXGIFactoryMedia	type IDXGIFactoryMedia		34
+nim	IDXGISwapChainMedia	dx12/dxgi1_3.html#IDXGISwapChainMedia	type IDXGISwapChainMedia		35
+nim	IDXGIOutput3	dx12/dxgi1_3.html#IDXGIOutput3	type IDXGIOutput3		36
+nim	DXGI_MATRIX_3X2_F	dx12/dxgi1_3.html#DXGI_MATRIX_3X2_F	object DXGI_MATRIX_3X2_F		39
+nim	DXGI_DECODE_SWAP_CHAIN_DESC	dx12/dxgi1_3.html#DXGI_DECODE_SWAP_CHAIN_DESC	object DXGI_DECODE_SWAP_CHAIN_DESC		47
+nim	DXGI_FRAME_STATISTICS_MEDIA	dx12/dxgi1_3.html#DXGI_FRAME_STATISTICS_MEDIA	object DXGI_FRAME_STATISTICS_MEDIA		50
+nim	trim	dx12/dxgi1_3.html#trim,IDXGIDevice3	proc trim(self: IDXGIDevice3)		61
+nim	setSourceSize	dx12/dxgi1_3.html#setSourceSize,IDXGISwapChain2,uint32,uint32	proc setSourceSize(self: IDXGISwapChain2; width: uint32; height: uint32)		67
+nim	getSourceSize	dx12/dxgi1_3.html#getSourceSize,IDXGISwapChain2,ptr.uint32,ptr.uint32	proc getSourceSize(self: IDXGISwapChain2; width: ptr uint32; height: ptr uint32)		71
+nim	setMaximumFrameLatency	dx12/dxgi1_3.html#setMaximumFrameLatency,IDXGISwapChain2,uint32	proc setMaximumFrameLatency(self: IDXGISwapChain2; max_latency: uint32)		75
+nim	getMaximumFrameLatency	dx12/dxgi1_3.html#getMaximumFrameLatency,IDXGISwapChain2,ptr.uint32	proc getMaximumFrameLatency(self: IDXGISwapChain2; max_latency: ptr uint32)		79
+nim	getFrameLatencyWaitableObject	dx12/dxgi1_3.html#getFrameLatencyWaitableObject,IDXGISwapChain2	proc getFrameLatencyWaitableObject(self: IDXGISwapChain2): pointer		83
+nim	setMatrixTransform	dx12/dxgi1_3.html#setMatrixTransform,IDXGISwapChain2,ptr.DXGI_MATRIX_3X2_F	proc setMatrixTransform(self: IDXGISwapChain2; matrix: ptr DXGI_MATRIX_3X2_F)		87
+nim	getMatrixTransform	dx12/dxgi1_3.html#getMatrixTransform,IDXGISwapChain2,ptr.DXGI_MATRIX_3X2_F	proc getMatrixTransform(self: IDXGISwapChain2; matrix: ptr DXGI_MATRIX_3X2_F)		91
+nim	supportsOverlays	dx12/dxgi1_3.html#supportsOverlays,IDXGIOutput2	proc supportsOverlays(self: IDXGIOutput2): int32		97
+nim	getCreationFlags	dx12/dxgi1_3.html#getCreationFlags,IDXGIFactory3	proc getCreationFlags(self: IDXGIFactory3): uint32		103
+nim	presentBuffer	dx12/dxgi1_3.html#presentBuffer,IDXGIDecodeSwapChain,uint32,uint32,uint32	proc presentBuffer(self: IDXGIDecodeSwapChain; buffer_to_present: uint32;\n              sync_interval: uint32; flags: uint32)		109
+nim	setSourceRect	dx12/dxgi1_3.html#setSourceRect,IDXGIDecodeSwapChain,pointer	proc setSourceRect(self: IDXGIDecodeSwapChain; rect: pointer)		113
+nim	setTargetRect	dx12/dxgi1_3.html#setTargetRect,IDXGIDecodeSwapChain,pointer	proc setTargetRect(self: IDXGIDecodeSwapChain; rect: pointer)		117
+nim	setDestSize	dx12/dxgi1_3.html#setDestSize,IDXGIDecodeSwapChain,uint32,uint32	proc setDestSize(self: IDXGIDecodeSwapChain; width: uint32; height: uint32)		121
+nim	getSourceRect	dx12/dxgi1_3.html#getSourceRect,IDXGIDecodeSwapChain,pointer	proc getSourceRect(self: IDXGIDecodeSwapChain; rect: pointer)		125
+nim	getTargetRect	dx12/dxgi1_3.html#getTargetRect,IDXGIDecodeSwapChain,pointer	proc getTargetRect(self: IDXGIDecodeSwapChain; rect: pointer)		129
+nim	getDestSize	dx12/dxgi1_3.html#getDestSize,IDXGIDecodeSwapChain,ptr.uint32,ptr.uint32	proc getDestSize(self: IDXGIDecodeSwapChain; width: ptr uint32; height: ptr uint32)		133
+nim	setColorSpace	dx12/dxgi1_3.html#setColorSpace,IDXGIDecodeSwapChain,uint32	proc setColorSpace(self: IDXGIDecodeSwapChain; colorspace: uint32)		137
+nim	getColorSpace	dx12/dxgi1_3.html#getColorSpace,IDXGIDecodeSwapChain	proc getColorSpace(self: IDXGIDecodeSwapChain): uint32		141
+nim	createSwapChainForCompositionSurfaceHandle	dx12/dxgi1_3.html#createSwapChainForCompositionSurfaceHandle,IDXGIFactoryMedia,pointer,pointer,ptr.DXGI_SWAP_CHAIN_DESC1,IDXGIOutput,pointer	proc createSwapChainForCompositionSurfaceHandle(self: IDXGIFactoryMedia;\n    device: pointer; surface: pointer; desc: ptr DXGI_SWAP_CHAIN_DESC1;\n    restrict_to_output: IDXGIOutput; swapchain: pointer)		147
+nim	createDecodeSwapChainForCompositionSurfaceHandle	dx12/dxgi1_3.html#createDecodeSwapChainForCompositionSurfaceHandle,IDXGIFactoryMedia,pointer,pointer,ptr.DXGI_DECODE_SWAP_CHAIN_DESC,IDXGIResource,IDXGIOutput,pointer	proc createDecodeSwapChainForCompositionSurfaceHandle(self: IDXGIFactoryMedia;\n    device: pointer; surface: pointer; desc: ptr DXGI_DECODE_SWAP_CHAIN_DESC;\n    yuv_decode_buffers: IDXGIResource; restrict_to_output: IDXGIOutput;\n    swapchain: pointer)		151
+nim	getFrameStatisticsMedia	dx12/dxgi1_3.html#getFrameStatisticsMedia,IDXGISwapChainMedia,ptr.DXGI_FRAME_STATISTICS_MEDIA	proc getFrameStatisticsMedia(self: IDXGISwapChainMedia;\n                        stats: ptr DXGI_FRAME_STATISTICS_MEDIA)		157
+nim	setPresentDuration	dx12/dxgi1_3.html#setPresentDuration,IDXGISwapChainMedia,uint32	proc setPresentDuration(self: IDXGISwapChainMedia; duration: uint32)		161
+nim	checkPresentDurationSupport	dx12/dxgi1_3.html#checkPresentDurationSupport,IDXGISwapChainMedia,uint32,ptr.uint32,ptr.uint32	proc checkPresentDurationSupport(self: IDXGISwapChainMedia;\n                            desired_present_duration: uint32;\n                            closest_smaller_present_duration: ptr uint32;\n                            closest_larger_present_duration: ptr uint32)		165
+nim	checkOverlaySupport	dx12/dxgi1_3.html#checkOverlaySupport,IDXGIOutput3,uint32,pointer,ptr.uint32	proc checkOverlaySupport(self: IDXGIOutput3; enum_format: uint32;\n                    concerned_device: pointer; flags: ptr uint32)		171

@@ -1,0 +1,56 @@
+nimTitle	d3d12shader	dx12/d3d12shader.html	module src/dx12/d3d12shader		0
+nim	D3D12_SHVER_PIXEL_SHADER	dx12/d3d12shader.html#D3D12_SHVER_PIXEL_SHADER	const D3D12_SHVER_PIXEL_SHADER		9
+nim	D3D12_SHVER_VERTEX_SHADER	dx12/d3d12shader.html#D3D12_SHVER_VERTEX_SHADER	const D3D12_SHVER_VERTEX_SHADER		10
+nim	D3D12_SHVER_GEOMETRY_SHADER	dx12/d3d12shader.html#D3D12_SHVER_GEOMETRY_SHADER	const D3D12_SHVER_GEOMETRY_SHADER		11
+nim	D3D12_SHVER_HULL_SHADER	dx12/d3d12shader.html#D3D12_SHVER_HULL_SHADER	const D3D12_SHVER_HULL_SHADER		12
+nim	D3D12_SHVER_DOMAIN_SHADER	dx12/d3d12shader.html#D3D12_SHVER_DOMAIN_SHADER	const D3D12_SHVER_DOMAIN_SHADER		13
+nim	D3D12_SHVER_COMPUTE_SHADER	dx12/d3d12shader.html#D3D12_SHVER_COMPUTE_SHADER	const D3D12_SHVER_COMPUTE_SHADER		14
+nim	D3D12_SHVER_RESERVED0	dx12/d3d12shader.html#D3D12_SHVER_RESERVED0	const D3D12_SHVER_RESERVED0		15
+nim	ID3D12ShaderReflectionConstantBuffer	dx12/d3d12shader.html#ID3D12ShaderReflectionConstantBuffer	type ID3D12ShaderReflectionConstantBuffer		18
+nim	ID3D12ShaderReflectionType	dx12/d3d12shader.html#ID3D12ShaderReflectionType	type ID3D12ShaderReflectionType		19
+nim	ID3D12ShaderReflectionVariable	dx12/d3d12shader.html#ID3D12ShaderReflectionVariable	type ID3D12ShaderReflectionVariable		20
+nim	ID3D12ShaderReflection	dx12/d3d12shader.html#ID3D12ShaderReflection	type ID3D12ShaderReflection		21
+nim	ID3D12FunctionParameterReflection	dx12/d3d12shader.html#ID3D12FunctionParameterReflection	type ID3D12FunctionParameterReflection		22
+nim	ID3D12FunctionReflection	dx12/d3d12shader.html#ID3D12FunctionReflection	type ID3D12FunctionReflection		23
+nim	ID3D12LibraryReflection	dx12/d3d12shader.html#ID3D12LibraryReflection	type ID3D12LibraryReflection		24
+nim	D3D12_SHADER_DESC	dx12/d3d12shader.html#D3D12_SHADER_DESC	object D3D12_SHADER_DESC		27
+nim	D3D12_SHADER_VARIABLE_DESC	dx12/d3d12shader.html#D3D12_SHADER_VARIABLE_DESC	object D3D12_SHADER_VARIABLE_DESC		67
+nim	D3D12_SHADER_TYPE_DESC	dx12/d3d12shader.html#D3D12_SHADER_TYPE_DESC	object D3D12_SHADER_TYPE_DESC		78
+nim	D3D12_SHADER_BUFFER_DESC	dx12/d3d12shader.html#D3D12_SHADER_BUFFER_DESC	object D3D12_SHADER_BUFFER_DESC		88
+nim	D3D12_SHADER_INPUT_BIND_DESC	dx12/d3d12shader.html#D3D12_SHADER_INPUT_BIND_DESC	object D3D12_SHADER_INPUT_BIND_DESC		95
+nim	D3D12_SIGNATURE_PARAMETER_DESC	dx12/d3d12shader.html#D3D12_SIGNATURE_PARAMETER_DESC	object D3D12_SIGNATURE_PARAMETER_DESC		107
+nim	D3D12_PARAMETER_DESC	dx12/d3d12shader.html#D3D12_PARAMETER_DESC	object D3D12_PARAMETER_DESC		118
+nim	D3D12_FUNCTION_DESC	dx12/d3d12shader.html#D3D12_FUNCTION_DESC	object D3D12_FUNCTION_DESC		132
+nim	D3D12_LIBRARY_DESC	dx12/d3d12shader.html#D3D12_LIBRARY_DESC	object D3D12_LIBRARY_DESC		167
+nim	getDesc	dx12/d3d12shader.html#getDesc,ID3D12ShaderReflectionType,ptr.D3D12_SHADER_TYPE_DESC	proc getDesc(self: ID3D12ShaderReflectionType; desc: ptr D3D12_SHADER_TYPE_DESC)		174
+nim	isEqual	dx12/d3d12shader.html#isEqual,ID3D12ShaderReflectionType,ID3D12ShaderReflectionType	proc isEqual(self: ID3D12ShaderReflectionType; typ: ID3D12ShaderReflectionType)		178
+nim	getNumInterfaces	dx12/d3d12shader.html#getNumInterfaces,ID3D12ShaderReflectionType	proc getNumInterfaces(self: ID3D12ShaderReflectionType): uint32		182
+nim	isOfType	dx12/d3d12shader.html#isOfType,ID3D12ShaderReflectionType,ID3D12ShaderReflectionType	proc isOfType(self: ID3D12ShaderReflectionType; typ: ID3D12ShaderReflectionType)		186
+nim	implementsInterface	dx12/d3d12shader.html#implementsInterface,ID3D12ShaderReflectionType,ID3D12ShaderReflectionType	proc implementsInterface(self: ID3D12ShaderReflectionType;\n                    base: ID3D12ShaderReflectionType)		190
+nim	getDesc	dx12/d3d12shader.html#getDesc,ID3D12ShaderReflectionVariable,ptr.D3D12_SHADER_VARIABLE_DESC	proc getDesc(self: ID3D12ShaderReflectionVariable;\n        desc: ptr D3D12_SHADER_VARIABLE_DESC)		196
+nim	getInterfaceSlot	dx12/d3d12shader.html#getInterfaceSlot,ID3D12ShaderReflectionVariable,uint32	proc getInterfaceSlot(self: ID3D12ShaderReflectionVariable; index: uint32): uint32		200
+nim	getDesc	dx12/d3d12shader.html#getDesc,ID3D12ShaderReflectionConstantBuffer,ptr.D3D12_SHADER_BUFFER_DESC	proc getDesc(self: ID3D12ShaderReflectionConstantBuffer;\n        desc: ptr D3D12_SHADER_BUFFER_DESC)		206
+nim	getDesc	dx12/d3d12shader.html#getDesc,ID3D12ShaderReflection,ptr.D3D12_SHADER_DESC	proc getDesc(self: ID3D12ShaderReflection; desc: ptr D3D12_SHADER_DESC)		212
+nim	getResourceBindingDesc	dx12/d3d12shader.html#getResourceBindingDesc,ID3D12ShaderReflection,uint32,ptr.D3D12_SHADER_INPUT_BIND_DESC	proc getResourceBindingDesc(self: ID3D12ShaderReflection; index: uint32;\n                       desc: ptr D3D12_SHADER_INPUT_BIND_DESC)		216
+nim	getInputParameterDesc	dx12/d3d12shader.html#getInputParameterDesc,ID3D12ShaderReflection,uint32,ptr.D3D12_SIGNATURE_PARAMETER_DESC	proc getInputParameterDesc(self: ID3D12ShaderReflection; index: uint32;\n                      desc: ptr D3D12_SIGNATURE_PARAMETER_DESC)		220
+nim	getOutputParameterDesc	dx12/d3d12shader.html#getOutputParameterDesc,ID3D12ShaderReflection,uint32,ptr.D3D12_SIGNATURE_PARAMETER_DESC	proc getOutputParameterDesc(self: ID3D12ShaderReflection; index: uint32;\n                       desc: ptr D3D12_SIGNATURE_PARAMETER_DESC)		224
+nim	getPatchConstantParameterDesc	dx12/d3d12shader.html#getPatchConstantParameterDesc,ID3D12ShaderReflection,uint32,ptr.D3D12_SIGNATURE_PARAMETER_DESC	proc getPatchConstantParameterDesc(self: ID3D12ShaderReflection; index: uint32;\n                              desc: ptr D3D12_SIGNATURE_PARAMETER_DESC)		228
+nim	getResourceBindingDescByName	dx12/d3d12shader.html#getResourceBindingDescByName,ID3D12ShaderReflection,cstring,ptr.D3D12_SHADER_INPUT_BIND_DESC	proc getResourceBindingDescByName(self: ID3D12ShaderReflection; name: cstring;\n                             desc: ptr D3D12_SHADER_INPUT_BIND_DESC)		232
+nim	getMovInstructionCount	dx12/d3d12shader.html#getMovInstructionCount,ID3D12ShaderReflection	proc getMovInstructionCount(self: ID3D12ShaderReflection): uint32		236
+nim	getMovcInstructionCount	dx12/d3d12shader.html#getMovcInstructionCount,ID3D12ShaderReflection	proc getMovcInstructionCount(self: ID3D12ShaderReflection): uint32		240
+nim	getConversionInstructionCount	dx12/d3d12shader.html#getConversionInstructionCount,ID3D12ShaderReflection	proc getConversionInstructionCount(self: ID3D12ShaderReflection): uint32		244
+nim	getBitwiseInstructionCount	dx12/d3d12shader.html#getBitwiseInstructionCount,ID3D12ShaderReflection	proc getBitwiseInstructionCount(self: ID3D12ShaderReflection): uint32		248
+nim	getGSInputPrimitive	dx12/d3d12shader.html#getGSInputPrimitive,ID3D12ShaderReflection	proc getGSInputPrimitive(self: ID3D12ShaderReflection): uint32		252
+nim	isSampleFrequencyShader	dx12/d3d12shader.html#isSampleFrequencyShader,ID3D12ShaderReflection	proc isSampleFrequencyShader(self: ID3D12ShaderReflection): int32		256
+nim	getNumInterfaceSlots	dx12/d3d12shader.html#getNumInterfaceSlots,ID3D12ShaderReflection	proc getNumInterfaceSlots(self: ID3D12ShaderReflection): uint32		260
+nim	getMinFeatureLevel	dx12/d3d12shader.html#getMinFeatureLevel,ID3D12ShaderReflection,pointer	proc getMinFeatureLevel(self: ID3D12ShaderReflection; level: pointer)		264
+nim	getThreadGroupSize	dx12/d3d12shader.html#getThreadGroupSize,ID3D12ShaderReflection,ptr.uint32,ptr.uint32,ptr.uint32	proc getThreadGroupSize(self: ID3D12ShaderReflection; sizex: ptr uint32;\n                   sizey: ptr uint32; sizez: ptr uint32): uint32		268
+nim	getRequiresFlags	dx12/d3d12shader.html#getRequiresFlags,ID3D12ShaderReflection	proc getRequiresFlags(self: ID3D12ShaderReflection): uint64		272
+nim	getDesc	dx12/d3d12shader.html#getDesc,ID3D12FunctionParameterReflection,ptr.D3D12_PARAMETER_DESC	proc getDesc(self: ID3D12FunctionParameterReflection; desc: ptr D3D12_PARAMETER_DESC)		278
+nim	getDesc	dx12/d3d12shader.html#getDesc,ID3D12FunctionReflection,ptr.D3D12_FUNCTION_DESC	proc getDesc(self: ID3D12FunctionReflection; desc: ptr D3D12_FUNCTION_DESC)		284
+nim	getResourceBindingDesc	dx12/d3d12shader.html#getResourceBindingDesc,ID3D12FunctionReflection,uint32,ptr.D3D12_SHADER_INPUT_BIND_DESC	proc getResourceBindingDesc(self: ID3D12FunctionReflection; index: uint32;\n                       desc: ptr D3D12_SHADER_INPUT_BIND_DESC)		288
+nim	getResourceBindingDescByName	dx12/d3d12shader.html#getResourceBindingDescByName,ID3D12FunctionReflection,cstring,ptr.D3D12_SHADER_INPUT_BIND_DESC	proc getResourceBindingDescByName(self: ID3D12FunctionReflection; name: cstring;\n                             desc: ptr D3D12_SHADER_INPUT_BIND_DESC)		292
+nim	getDesc	dx12/d3d12shader.html#getDesc,ID3D12LibraryReflection,ptr.D3D12_LIBRARY_DESC	proc getDesc(self: ID3D12LibraryReflection; desc: ptr D3D12_LIBRARY_DESC)		298
+nimgrp	getresourcebindingdescbyname	dx12/d3d12shader.html#getResourceBindingDescByName-procs-all	proc		232
+nimgrp	getdesc	dx12/d3d12shader.html#getDesc-procs-all	proc		174
+nimgrp	getresourcebindingdesc	dx12/d3d12shader.html#getResourceBindingDesc-procs-all	proc		216

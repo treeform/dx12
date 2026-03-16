@@ -1,0 +1,3 @@
+nimTitle	codes	dx12/codes.html	module src/dx12/codes		0
+nim	messageHr	dx12/codes.html#messageHr,int32,string	proc messageHr(hr: int32; msg: string): string		73
+nim	checkHr	dx12/codes.html#checkHr,int32,string	proc checkHr(hr: int32; msg: string)		87
