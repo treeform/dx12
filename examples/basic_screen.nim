@@ -1,5 +1,5 @@
 import std/math
-import windy, windy/platforms/win32/windefs
+import windy
 import dx12, dx12/context
 
 const

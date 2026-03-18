@@ -1,5 +1,4 @@
-import windy/platforms/win32/windefs
-import extras, dxgicommon, dxgiformat, dxgi, dxgi1_2, dxgi1_4, dxgi1_5, d3d12_api
+import win32defs, extras, dxgicommon, dxgiformat, dxgi, dxgi1_2, dxgi1_4, dxgi1_5, d3d12_api
 
 # --- Helper types and context management ---
 type

@@ -1,5 +1,5 @@
 import
-  windy, windy/platforms/win32/windefs,
+  windy,
   dx12, dx12/context
 
 type
