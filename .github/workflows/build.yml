@@ -18,7 +18,9 @@ jobs:
       - run: nimby install -g
       - run: nim check src/dx12.nim
       - run: nim r tests/tests.nim
-      - run: nimby install -g windy pixie vmath
+      - run: nimby install -g windy
+      - run: nimby install -g pixie
+      - run: nimby install -g vmath
       - run: nim c examples/basic_screen.nim
       - run: nim c examples/basic_triangle.nim
       - run: nim c examples/shader_triangle.nim
