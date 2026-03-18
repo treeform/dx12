@@ -23,9 +23,12 @@ source files** obtained from the Wine project. This ensures that the Nim API
 stays accurate to the official COM interface definitions rather than relying on
 hand-written translations.
 
-The library package itself depends on `windy` for Win32 handle types. Some
-examples also depend on sibling graphics libraries such as `pixie` and `vmath`,
-which are not required to import the core `dx12` module.
+The core library has **zero external dependencies**. A minimal `win32defs.nim`
+provides the handful of Win32 types and kernel32 functions needed internally.
+The examples use `windy` for window creation, `pixie` for texture loading, and
+`vmath` for math, but none of these are required to use the library. You can
+use `dx12` with any windowing library of your choice -- just pass an HWND to
+the context helper.
 
 > **AI disclaimer: Much of this library was AI generated.**
 
