@@ -25,7 +25,7 @@
   <div class="document" id="documentId">
     <div class="container">
       <h1 class="title">Index</h1>
-      Modules: <a href="dx12.html">dx12</a>, <a href="dx12/codes.html">dx12/codes</a>, <a href="dx12/d3d12_api.html">dx12/d3d12_api</a>, <a href="dx12/d3d12shader.html">dx12/d3d12shader</a>, <a href="dx12/d3dcommon.html">dx12/d3dcommon</a>, <a href="dx12/dxgi.html">dx12/dxgi</a>, <a href="dx12/dxgi1_2.html">dx12/dxgi1_2</a>, <a href="dx12/dxgi1_3.html">dx12/dxgi1_3</a>, <a href="dx12/dxgi1_4.html">dx12/dxgi1_4</a>, <a href="dx12/dxgi1_5.html">dx12/dxgi1_5</a>, <a href="dx12/dxgi1_6.html">dx12/dxgi1_6</a>, <a href="dx12/dxgicommon.html">dx12/dxgicommon</a>, <a href="dx12/dxgiformat.html">dx12/dxgiformat</a>, <a href="dx12/dxgitype.html">dx12/dxgitype</a>, <a href="dx12/vtable.html">dx12/vtable</a>.<br/><p /><h2>API symbols</h2>
+      Modules: <a href="dx12.html">dx12</a>, <a href="dx12/codes.html">dx12/codes</a>, <a href="dx12/d3d12_api.html">dx12/d3d12_api</a>, <a href="dx12/d3d12shader.html">dx12/d3d12shader</a>, <a href="dx12/d3dcommon.html">dx12/d3dcommon</a>, <a href="dx12/dxgi.html">dx12/dxgi</a>, <a href="dx12/dxgi1_2.html">dx12/dxgi1_2</a>, <a href="dx12/dxgi1_3.html">dx12/dxgi1_3</a>, <a href="dx12/dxgi1_4.html">dx12/dxgi1_4</a>, <a href="dx12/dxgi1_5.html">dx12/dxgi1_5</a>, <a href="dx12/dxgi1_6.html">dx12/dxgi1_6</a>, <a href="dx12/dxgicommon.html">dx12/dxgicommon</a>, <a href="dx12/dxgiformat.html">dx12/dxgiformat</a>, <a href="dx12/dxgitype.html">dx12/dxgitype</a>, <a href="dx12/vtable.html">dx12/vtable</a>, <a href="dx12/win32defs.html">dx12/win32defs</a>.<br/><p /><h2>API symbols</h2>
 <dl><dt><a name="acquireNextFrame" href="#acquireNextFrame"><span>acquireNextFrame:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="dxgi1_2: proc acquireNextFrame(self: IDXGIOutputDuplication; timeout_in_milliseconds: uint32;
@@ -109,6 +109,10 @@
                 render_targets: ptr D3D12_RENDER_PASS_RENDER_TARGET_DESC;
                 depth_stencil: ptr D3D12_RENDER_PASS_DEPTH_STENCIL_DESC;
                 flags: uint32)</a></li>
+          </ul></dd>
+<dt><a name="BOOL" href="#BOOL"><span>BOOL:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="win32defs: type BOOL" href="dx12/win32defs.html#BOOL">win32defs: type BOOL</a></li>
           </ul></dd>
 <dt><a name="buildRaytracingAccelerationStructure" href="#buildRaytracingAccelerationStructure"><span>buildRaytracingAccelerationStructure:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -245,6 +249,10 @@
           data-doc-search-tag="d3d12_api: proc close(self: ID3D12GraphicsCommandList)" href="dx12/d3d12_api.html#close%2CID3D12GraphicsCommandList">d3d12_api: proc close(self: ID3D12GraphicsCommandList)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="d3dcommon: proc close(self: ID3DInclude; data: pointer)" href="dx12/d3dcommon.html#close%2CID3DInclude%2Cpointer">d3dcommon: proc close(self: ID3DInclude; data: pointer)</a></li>
+          </ul></dd>
+<dt><a name="CloseHandle" href="#CloseHandle"><span>CloseHandle:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="win32defs: proc CloseHandle(hObject: HANDLE): BOOL" href="dx12/win32defs.html#CloseHandle%2CHANDLE">win32defs: proc CloseHandle(hObject: HANDLE): BOOL</a></li>
           </ul></dd>
 <dt><a name="copyBufferRegion" href="#copyBufferRegion"><span>copyBufferRegion:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -487,6 +495,12 @@
           data-doc-search-tag="d3d12_api: proc createDeviceFactory(self: ID3D12SDKConfiguration1; sdk_version: uint32;
                     sdk_path: cstring; riid: pointer; ppv: pointer)" href="dx12/d3d12_api.html#createDeviceFactory%2CID3D12SDKConfiguration1%2Cuint32%2Ccstring%2Cpointer%2Cpointer">d3d12_api: proc createDeviceFactory(self: ID3D12SDKConfiguration1; sdk_version: uint32;
                     sdk_path: cstring; riid: pointer; ppv: pointer)</a></li>
+          </ul></dd>
+<dt><a name="CreateEventW" href="#CreateEventW"><span>CreateEventW:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="win32defs: proc CreateEventW(lpEventAttributes: pointer; bManualReset: BOOL;
+             bInitialState: BOOL; lpName: pointer): HANDLE" href="dx12/win32defs.html#CreateEventW%2Cpointer%2CBOOL%2CBOOL%2Cpointer">win32defs: proc CreateEventW(lpEventAttributes: pointer; bManualReset: BOOL;
+             bInitialState: BOOL; lpName: pointer): HANDLE</a></li>
           </ul></dd>
 <dt><a name="createFence" href="#createFence"><span>createFence:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -9430,6 +9444,10 @@
                  format_count: uint32; formats: pointer; duplication: pointer)" href="dx12/dxgi1_5.html#duplicateOutput1%2CIDXGIOutput5%2Cpointer%2Cuint32%2Cuint32%2Cpointer%2Cpointer">dxgi1_5: proc duplicateOutput1(self: IDXGIOutput5; device: pointer; flags: uint32;
                  format_count: uint32; formats: pointer; duplication: pointer)</a></li>
           </ul></dd>
+<dt><a name="DWORD" href="#DWORD"><span>DWORD:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="win32defs: type DWORD" href="dx12/win32defs.html#DWORD">win32defs: type DWORD</a></li>
+          </ul></dd>
 <dt><a name="DXGI_ADAPTER_DESC" href="#DXGI_ADAPTER_DESC"><span>DXGI_ADAPTER_DESC:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="dxgi: object DXGI_ADAPTER_DESC" href="dx12/dxgi.html#DXGI_ADAPTER_DESC">dxgi: object DXGI_ADAPTER_DESC</a></li>
@@ -11394,9 +11412,21 @@
 <li><a class="reference external"
           data-doc-search-tag="dxgi: proc getWindowAssociation(self: IDXGIFactory; window: ptr pointer)" href="dx12/dxgi.html#getWindowAssociation%2CIDXGIFactory%2Cptr.pointer">dxgi: proc getWindowAssociation(self: IDXGIFactory; window: ptr pointer)</a></li>
           </ul></dd>
+<dt><a name="HANDLE" href="#HANDLE"><span>HANDLE:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="win32defs: type HANDLE" href="dx12/win32defs.html#HANDLE">win32defs: type HANDLE</a></li>
+          </ul></dd>
 <dt><a name="HMONITOR" href="#HMONITOR"><span>HMONITOR:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="dxgi: type HMONITOR" href="dx12/dxgi.html#HMONITOR">dxgi: type HMONITOR</a></li>
+          </ul></dd>
+<dt><a name="HRESULT" href="#HRESULT"><span>HRESULT:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="win32defs: type HRESULT" href="dx12/win32defs.html#HRESULT">win32defs: type HRESULT</a></li>
+          </ul></dd>
+<dt><a name="HWND" href="#HWND"><span>HWND:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="win32defs: type HWND" href="dx12/win32defs.html#HWND">win32defs: type HWND</a></li>
           </ul></dd>
 <dt><a name="iaSetIndexBuffer" href="#iaSetIndexBuffer"><span>iaSetIndexBuffer:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -11959,6 +11989,10 @@
              pipeline_state: pointer)" href="dx12/d3d12_api.html#loadPipeline%2CID3D12PipelineLibrary1%2Cpointer%2Cptr.D3D12_PIPELINE_STATE_STREAM_DESC%2Cpointer%2Cpointer">d3d12_api: proc loadPipeline(self: ID3D12PipelineLibrary1; name: pointer;
              desc: ptr D3D12_PIPELINE_STATE_STREAM_DESC; riid: pointer;
              pipeline_state: pointer)</a></li>
+          </ul></dd>
+<dt><a name="LONG" href="#LONG"><span>LONG:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="win32defs: type LONG" href="dx12/win32defs.html#LONG">win32defs: type LONG</a></li>
           </ul></dd>
 <dt><a name="LUID" href="#LUID"><span>LUID:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -12656,6 +12690,10 @@
 <li><a class="reference external"
           data-doc-search-tag="dxgi1_3: proc trim(self: IDXGIDevice3)" href="dx12/dxgi1_3.html#trim%2CIDXGIDevice3">dxgi1_3: proc trim(self: IDXGIDevice3)</a></li>
           </ul></dd>
+<dt><a name="UINT" href="#UINT"><span>UINT:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="win32defs: type UINT" href="dx12/win32defs.html#UINT">win32defs: type UINT</a></li>
+          </ul></dd>
 <dt><a name="unmap" href="#unmap"><span>unmap:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="d3d12_api: proc unmap(self: ID3D12Resource; sub_resource: uint32; written_range: ptr D3D12_RANGE)" href="dx12/d3d12_api.html#unmap%2CID3D12Resource%2Cuint32%2Cptr.D3D12_RANGE">d3d12_api: proc unmap(self: ID3D12Resource; sub_resource: uint32; written_range: ptr D3D12_RANGE)</a></li>
@@ -12712,6 +12750,10 @@
 <li><a class="reference external"
           data-doc-search-tag="d3d12_api: proc wait(self: ID3D12CommandQueue; fence: ID3D12Fence; value: uint64)" href="dx12/d3d12_api.html#wait%2CID3D12CommandQueue%2CID3D12Fence%2Cuint64">d3d12_api: proc wait(self: ID3D12CommandQueue; fence: ID3D12Fence; value: uint64)</a></li>
           </ul></dd>
+<dt><a name="WaitForSingleObject" href="#WaitForSingleObject"><span>WaitForSingleObject:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="win32defs: proc WaitForSingleObject(hHandle: HANDLE; dwMilliseconds: DWORD): DWORD" href="dx12/win32defs.html#WaitForSingleObject%2CHANDLE%2CDWORD">win32defs: proc WaitForSingleObject(hHandle: HANDLE; dwMilliseconds: DWORD): DWORD</a></li>
+          </ul></dd>
 <dt><a name="waitForVBlank" href="#waitForVBlank"><span>waitForVBlank:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="dxgi: proc waitForVBlank(self: IDXGIOutput)" href="dx12/dxgi.html#waitForVBlank%2CIDXGIOutput">dxgi: proc waitForVBlank(self: IDXGIOutput)</a></li>
@@ -12736,7 +12778,7 @@
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2026-03-16 15:09:34 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2026-03-18 13:19:53 UTC</small>
       </div>
     </div>
   </div>

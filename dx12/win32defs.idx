@@ -1,0 +1,11 @@
+nimTitle	win32defs	dx12/win32defs.html	module src/dx12/win32defs		0
+nim	BOOL	dx12/win32defs.html#BOOL	type BOOL		5
+nim	LONG	dx12/win32defs.html#LONG	type LONG		6
+nim	DWORD	dx12/win32defs.html#DWORD	type DWORD		7
+nim	UINT	dx12/win32defs.html#UINT	type UINT		8
+nim	HRESULT	dx12/win32defs.html#HRESULT	type HRESULT		9
+nim	HANDLE	dx12/win32defs.html#HANDLE	type HANDLE		10
+nim	HWND	dx12/win32defs.html#HWND	type HWND		11
+nim	CreateEventW	dx12/win32defs.html#CreateEventW,pointer,BOOL,BOOL,pointer	proc CreateEventW(lpEventAttributes: pointer; bManualReset: BOOL;\n             bInitialState: BOOL; lpName: pointer): HANDLE		15
+nim	WaitForSingleObject	dx12/win32defs.html#WaitForSingleObject,HANDLE,DWORD	proc WaitForSingleObject(hHandle: HANDLE; dwMilliseconds: DWORD): DWORD		22
+nim	CloseHandle	dx12/win32defs.html#CloseHandle,HANDLE	proc CloseHandle(hObject: HANDLE): BOOL		27
