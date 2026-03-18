@@ -3,8 +3,7 @@
 ## DXGuid, DLL loading, COM helpers, IID-based ergonomic wrappers.
 
 import std/dynlib
-import windy/platforms/win32/windefs
-import vtable, d3d12_api, d3dcommon, dxgi, dxgi1_2, dxgi1_4, dxgi1_5
+import vtable, win32defs, d3d12_api, d3dcommon, dxgi, dxgi1_2, dxgi1_4, dxgi1_5
 
 type
   UINT64* = uint64
@@ -244,7 +243,7 @@ proc shaderBytecode*(blob: ID3DBlob): D3D12_SHADER_BYTECODE =
 const
   FRAME_COUNT* = 2
   S_OK* = 0
-  WAIT_INFINITE* = -1'i32
+  WAIT_INFINITE* = 0xFFFFFFFF'u32
   DXGI_MWA_NO_ALT_ENTER* = 0x2'u32
   DXGI_MWA_NO_WINDOW_CHANGES* = 0x1'u32
   DXGI_MWA_NO_PRINT_SCREEN* = 0x4'u32
